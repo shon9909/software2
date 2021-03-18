@@ -35,6 +35,14 @@ header{
     color: #5394c9;
     font-size: 25px;    
 }
+#perfil{
+    margin: 0px !important;
+}
+#perfil-icon{
+    margin-top: 7px;
+    color: #5394c9;
+    font-size: 32px;    
+}
 
 /* Menu desplegable. */
 
