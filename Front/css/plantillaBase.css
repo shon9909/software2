@@ -39,6 +39,7 @@ header{
     margin: 0px !important;
 }
 #perfil-icon{
+    cursor: pointer;
     margin-top: 7px;
     color: #5394c9;
     font-size: 32px;    
