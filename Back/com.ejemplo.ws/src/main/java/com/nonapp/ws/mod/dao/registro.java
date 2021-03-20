@@ -1,4 +1,4 @@
-package com.nonapp.ws.database.conexion.modelo;
+package com.nonapp.ws.mod.dao;
 /*
  *
  * Metodo POST (llegan archivos json y se envian por inyecciones SQL)
@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.nonapp.ws.mod.conexion.conexion;
 public class registro{
 	private Connection con;
 	private PreparedStatement statement;
@@ -43,42 +45,6 @@ private Connection obtenerConexion() throws SQLException{
 /*
  * Metodos POST separados por tablas para hacer inyeccion de datos return ok si esta perfecto uwu.
  */
-public String cuidador(String email, String nombre, String password) throws SQLException{
-	
-	String seleccio=null;
-	boolean estadoOp= false;
-	/*
-	 * Se abre conexion
-	 */
-	con=obtenerConexion();
-	try {
-		con.setAutoCommit(false);
-		/*
-		 * inyeccion sql tabla cuidador
-		 * email
-		 * nombre
-		 * password (encriptada)
-		 */
-		seleccio = "INSERT INTO `cuidador` (`email`,`nombre`,`password`)VALUES (?,?,SHA1(?))";
-		statement = con.prepareStatement(seleccio);
-		statement.setString(1, email); 
-		statement.setString(2, nombre);
-		statement.setString(3, password);
-		estadoOp=statement.executeUpdate()>0;
-		/*
-		 * Se realiza el commit y se cierra conexion
-		 */
-		con.commit();
-		statement.close();
-		con.close();
-		
-	} catch (SQLException e) {
-		con.rollback();
-		e.printStackTrace();
-	}
-	
-	return "ok";	
-}
 
 public String diagnostico(String nombre, String descripcion) throws SQLException{
 	String seleccio=null;

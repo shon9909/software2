@@ -1,4 +1,4 @@
-package com.nonapp.ws.database.conexion.modelo;
+package com.nonapp.ws.mod.conexion;
 
 import java.sql.Connection;
 import java.sql.SQLException;
