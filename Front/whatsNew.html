@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Qué hay de nuevo?</title>
+    <link rel="stylesheet" href="css/plantillaBase.css">
+</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<body>
+    <!--Encabezado con el menu desplegable y el menu del perfil -->
+    <header>
+        <div class="menuDesplegable"> 
+            <div class="btn-menu">
+                <label for="btn-menu">
+                <i id="bar" class="bars icon"></i>
+                </label>
+            </div> 
+            <div id="perfil" class="ui text menu">
+                <div class="ui right dropdown item">
+                    <label id="perfil-icon" ><i class="user circle icon"></i></label>
+                    <div  class="menu" >
+                        <div class="item">Nombre_Usuario</div>
+                        <div class="item">Perfil</div>
+                        <div class="item">Cambiar adulto Mayor</div>
+                        <div class="item">Cerrar sesión</div>
+                    </div>
+                </div>
+            </div>
+            <input type="checkbox" id="btn-menu">
+            <div class="contenedor-menu">
+                <div class="contenido-menu">
+                    <nav>
+                        <a href="">Inicio</a>
+                        <a href="">Mi Progreso</a>
+                        <a href="">¿Que hay de nuevo?</a>
+                        <a href="">Perfil</a>
+                    </nav>
+                    <div class="btn-menu">
+                        <label for="btn-menu">
+                            <i id="bar" class="bars icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="segundoEncabezado">
+            <p class="textoSegundoEn" >"RECOMENDACIONES DE CUIDADO"</p>
+        </div>
+    </header>
+    <!--Actividades nuevas y actividades eliminadas-->
+    <div id="opcionesInicio">  
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="https://siemprejoven.es/Imagenes.ashx?FileName=/Imagenes/Contenidos/438/Cabecera/abuelos-con-nietos.jpg.jpg&xCrop=600&yCrop=349&xCoord=0&yCoord=26&xImage=600&yImage=400&xOrigCrop=688&yOrigCrop=400&Crop=true&Format=jpg" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="https://www.semana.com/resizer/KF20aF97_ShoUWZKTXHHb8fCTHQ=/1200x675/filters:format(jpg):quality(70)//cloudfront-us-east-1.images.arcpublishing.com/semana/CR7UPGZFTZC4HOV5NKFEA6G7L4.jpg" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="https://www.laprensa.hn/csp/mediapool/sites/dt.common.streams.StreamServer.cls?STREAMOID=2XXe3tymy__A7ghfNDRWjs$daE2N3K4ZzOUsqbU5sYuxH6H8ubRvSvUPdEVUEkPtWCsjLu883Ygn4B49Lvm9bPe2QeMKQdVeZmXF$9l$4uCZ8QDXhaHEp3rvzXRJFdy0KqPHLoMevcTLo3h8xh70Y6N_U_CryOsw6FTOdKL_jpQ-&CONTENTTYPE=image/jpeg" alt="Third slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </div>
+    </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="js/js.js"></script>
+</html>

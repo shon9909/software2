@@ -7,48 +7,49 @@
     <link rel="stylesheet" href="css/singin.css">
     <title>Inicio de sesión | NANOAPP</title>
 </head>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <body>
-    <div class="container">   
+    <div id="container">
         <div class="ui relaxed grid">
             <div class="two column row">
+                <!--Imagen-->
                 <div class="column">
-                    <div class="image">
-                        <img src="https://www.frankcrum.com/hubfs/FrankCrum_2020/Images/Retirement-Plan-1.jpg" class="img-fluid img-thumbnail" alt="Responsive image">   
-                    </div>  
+                    <img src="https://www.frankcrum.com/hubfs/FrankCrum_2020/Images/Retirement-Plan-1.jpg">
+                    <h4><i>"La depresión viene sigilosamente y muchas personas no notan que ya llegó"</i></h4>
                 </div>
+                <!--Formulario de login-->
                 <div class="column">
-                    <form>
-                        <div class="col-auto">
-                            <div class="wrapper">
-                                <div class="main-content">
-                                    <h4>Inicio de sesión</h4>
-                                    <input type="email" id="email" class="form-control input-sm chat-input" placeholder="correo electrónico" />
-                                    </br>
-                                    <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="contraseña" />
-                                    </br>
-                                    <button type="button" class="btn btn-primary btn-md">INGRESAR</button>
-                                    </br> 
-                                    </br>
-                                    <a href="https://www.google.com/?hl=es">¿Olvidaste tu contraseña?</a>
+                    <div class="row">
+                        <div class="ui segment">
+                            <form class="ui form">
+                                <div class="field">
+                                    <input type="text" name="correoElectronico" id="correoElectronico" placeholder="Correo electrónico">
                                 </div>
-                                <div class="sub-content">
-                                    <div class="s-part">
-                                        <button type="button" class="btn btn-primary btn-md">CREAR CUENTA</button>
-                                    </div>
+                                <div class="field">
+                                    <input type="text" name="contraseña" id="contraseña" placeholder="contraseña">
                                 </div>
-                            </div>
+                                <button class="ui button primary" type="submit">INGRESAR</button>
+                                <div id="enlace">
+                                <a href="#">¡Olvidaste tu contraseña?</a>
+                                </div>
+                          </form>
                         </div>
-                    </form>
+                    </div>
+                    <!--Boton para crear cuenta-->
+                    <div class="row">
+                        <div></div>
+                        <div class="ui segment">
+                            <button class="ui button primary" type="submit">CREAR CUENTA</button>
+                          </form>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
-    
 </body>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<script src="js/js.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="js/js.js"></script>
 </html>
