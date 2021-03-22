@@ -1,11 +1,12 @@
-header{
+header {
     width: 100%;
     height: 60px;
     left: 0;
     top: 0;
     background: #ffffff;
 }
-.segundoEncabezado{
+
+.segundoEncabezado {
     text-align: center;
     color: #ffffff;
     z-index: -1;
@@ -17,42 +18,50 @@ header{
     top: 0;
     background: #002345;
 }
-.textoSegundoEn{
+
+.textoSegundoEn {
     margin-top: 20px !important;
 }
+
 
 /* Estilo del icono del menu. */
 
 .menuDesplegable .btn-menu {
-    float:left;
+    float: left;
     line-height: 55px;
 }
-#bar{
-   cursor: pointer; 
+
+#bar {
+    cursor: pointer;
 }
-.btn-menu{
+
+.btn-menu {
     margin-left: 20px;
     color: #5394c9;
-    font-size: 25px;    
+    font-size: 25px;
 }
-#perfil{
+
+#perfil {
     margin: 0px !important;
 }
-#perfil-icon{
+
+#perfil-icon {
     cursor: pointer;
     margin-top: 7px;
     color: #5394c9;
-    font-size: 32px;    
+    font-size: 32px;
 }
+
 
 /* Menu desplegable. */
 
-#btn-menu{
+#btn-menu {
     display: none;
 }
-.contenedor-menu{
+
+.contenedor-menu {
     position: absolute;
-    background: rgb(0,0,0,0.5);
+    background: rgb(0, 0, 0, 0.5);
     width: 100%;
     height: 100vh;
     top: 0;
@@ -60,13 +69,15 @@ header{
     transition: all 500ms ease;
     opacity: 0;
     visibility: hidden;
-    z-index: 1 ;
+    z-index: 1;
 }
-#btn-menu:checked ~ .contenedor-menu{
+
+#btn-menu:checked~.contenedor-menu {
     opacity: 1;
     visibility: visible;
 }
-.contenido-menu{
+
+.contenido-menu {
     width: 100%;
     max-width: 250px;
     background: #faf8f8;
@@ -75,43 +86,51 @@ header{
     transition: all 500ms ease;
     transform: translateX(-100%);
 }
-#btn-menu:checked ~ .contenedor-menu .contenido-menu{
+
+#btn-menu:checked~.contenedor-menu .contenido-menu {
     transform: translateX(0%);
 }
-.contenido-menu nav{
+
+.contenido-menu nav {
     transform: translateY(15%);
 }
-.contenido-menu nav a{
+
+.contenido-menu nav a {
     display: block;
     text-decoration: none;
     padding: 20px;
     padding-top: 33px;
     color: #535353;
-    border-left:  ;
+    border-left: #5394c9;
     transition: all 400ms ease;
 }
-.contenido-menu nav a:hover{
+
+.contenido-menu nav a:hover {
     border-left: 5px solid#ffffff;
     background: #2a7aba;
     color: #ffffff;
 }
-.contenido-menu  label{
+
+.contenido-menu label {
     position: absolute;
     right: 5px;
     top: 0px;
 }
 
+
 /* estilos de las opciones de inicio */
 
-#opcionesInicio{
+#opcionesInicio {
     margin-top: 160px !important;
-    width: 800px; 
-    margin: 0 auto; 
+    width: 800px;
+    margin: 0 auto;
 }
-#car{
+
+#car {
     width: 1000px;
 }
-.imgC{
-    width: 230px !important; 
+
+.imgC {
+    width: 230px !important;
     height: 250px !important;
 }
