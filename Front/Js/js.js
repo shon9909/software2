@@ -30,5 +30,18 @@ $('.ui.form')
 $('select.dropdown')
   .dropdown()
 ;
-
+$( 'carouselExampleIndicators').ready(function(){
+    $('.carousel').carousel({
+      interval: 2000
+    })
+});
+$('.ui.rating')
+  .rating({
+    initialRating: 3,
+    maxRating: 5
+  })
+;
+$('#progeso').progress({
+  percent: 22
+})
 
