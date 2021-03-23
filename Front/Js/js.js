@@ -24,20 +24,21 @@ $('.ui.form')
         }
     });
 $('select.dropdown')
-    .dropdown();
+  .dropdown()
+;
+$( 'carouselExampleIndicators').ready(function(){
+    $('.carousel').carousel({
+      interval: 2000
+    })
+});
+$('.ui.rating')
+  .rating({
+    initialRating: 3,
+    maxRating: 5
+  })
+;
+$('#progeso').progress({
+  percent: 22
+})
 
 function registro() {
-
-    //console.log("entro¡");
-    var $accountregistro = $('#bt-registrar'),
-        $accountconfirmacion = $('#registrar');
-
-    $accountregistro.on('click', function() {
-        $accountconfirmacion[0].show();
-    });
-
-    $('#cancel').on('click', function() {
-        $accountconfirmacion[0].close();
-    });
-
-};

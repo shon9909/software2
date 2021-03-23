@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSICOTERAPIA | APP</title>
+    <link rel="stylesheet" href="css/plantillaBase.css">
+</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<body>
+    <header>
+        <div class="menuDesplegable"> 
+            <div class="btn-menu">
+                <label for="btn-menu">
+                <i id="bar" class="bars icon"></i>
+                </label>
+            </div> 
+            <div id="perfil" class="ui text menu">
+                <div class="ui right dropdown item">
+                    <label id="perfil-icon" ><i class="user circle icon"></i></label>
+                    <div  class="menu" >
+                        <div class="item">Nombre_Usuario</div>
+                        <div class="item">Perfil</div>
+                        <div class="item">Cambiar adulto Mayor</div>
+                        <div class="item">Cerrar sesión</div>
+                    </div>
+                </div>
+            </div>
+            <input type="checkbox" id="btn-menu">
+            <div class="contenedor-menu">
+                <div class="contenido-menu">
+                    <nav>
+                        <a href="">Inicio</a>
+                        <a href="">Mi Progreso</a>
+                        <a href="">¿Que hay de nuevo?</a>
+                        <a href="">Perfil</a>
+                    </nav>
+                    <div class="btn-menu">
+                        <label for="btn-menu">
+                            <i id="bar" class="bars icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="segundoEncabezado">
+            <p class="textoSegundoEn" >"RECOMENDACIONES DE CUIDADO"</p>
+        </div>
+    </header>
+    <!--Actividades estratégicas y su puntuación-->
+    <div id="opcionesInicio-C">
+        <div id="container">
+            <div class="ui relaxed grid">
+                <div class="two column row">
+                    <!--Lista de actividades actividades-->
+                    <div class="column">
+                        <div class="ui black labels">
+                            <div class="ui label">
+                              Actividades:
+                            </div>
+                        </div>
+                        <div class="ui link list">
+                            <div class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></div>
+                            <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 1</font></font></a>
+                            <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 2</font></font></a>
+                            <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 3</font></font></a>
+                        </div>
+                    </div>
+                    <!--Descripción, estatus y valoracion de las actividades-->
+                    <div class="column">
+                        <div class="row">
+                            <div class="ui black labels">
+                                <div class="ui label">
+                                  Descripción:
+                                </div>
+                            </div>
+                            <h7>
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus nobis deleniti nam doloremque explicabo amet sequi, labore dolores eum ratione velit cumque eius ipsam sapiente. Corporis reprehenderit fugit dignissimos voluptatum.
+                            </h7>
+                        <div class="row">
+                            <div class="ui black labels">
+                                <div class="ui label">
+                                  Estatus:
+                                </div>
+                            </div>
+                            <div class="ui progress" id="progeso">
+                                <div class="bar">
+                                    <div class="progress"></div>
+                                </div>
+                                <div class="label">Llevas</div>
+                            </div>
+                        </div>
+                        <!--Boton para crear cuenta-->
+                        <div class="row">
+                            <div class="ui black labels">
+                                <div class="ui label">
+                                  Valoración:
+                                </div>
+                            </div>
+                            <div class="ui star rating" data-rating="3"></div>
+                        </div>    
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="js/js.js"></script>
+</html>
