@@ -1,3 +1,8 @@
+$('document').ready(function(){   
+  //$("#login").hide();
+  $("#menu").hide();
+});
+
 $('.ui.dropdown').dropdown('hidden');
 $('.ui.form')
   .form({
@@ -25,16 +30,14 @@ $('.ui.form')
         ]
       }  
     }
-  })
-;
+  });
 $('select.dropdown')
-  .dropdown()
-;
-$( 'carouselExampleIndicators').ready(function(){
-    $('.carousel').carousel({
-      interval: 2000
-    })
-});
+  .dropdown();
+//$( 'carouselExampleIndicators').ready(function(){
+  //  $('.carousel').carousel({
+    //  interval: 2000
+    //})
+//});
 $('.ui.rating')
   .rating({
     initialRating: 3,

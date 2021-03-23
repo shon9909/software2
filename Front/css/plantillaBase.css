@@ -14,7 +14,7 @@ header{
     height: 60px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 0; 
     background: #002345;
 }
 .textoSegundoEn{
@@ -106,7 +106,7 @@ header{
     width: 800px; 
     margin: 0 auto; 
 }
-#opcionesInicio-C{
+#actividadesPsicoterapia{
     margin-top: 80px !important;
     width: 800px; 
     margin: 0 auto; 
