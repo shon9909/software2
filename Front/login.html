@@ -6,13 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/singin.css">
+    <link rel="stylesheet" href="css/plantillaBase.css">
+    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="css/semantic.min.css">
+
     <title>Inicio de sesión | NANOAPP</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<<<<<<< HEAD <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> ======= >>>>>>> origin/shon
 
-<body>
-    <div id="container">
+    <body>
+    </body>
+    <div id="login">
         <div class="ui relaxed grid">
             <div class="two column row">
                 <!--Imagen-->
@@ -34,12 +40,12 @@
                                 <div class="field">
                                     <div class="ui left icon input">
                                         <i class="lock icon"></i>
-                                        <input type="text" name="contraseña" id="contraseña" placeholder="contraseña">
+                                        <input type="text" name="contrasena" id="contrasenaLogin" placeholder="contrasena">
                                     </div>
                                 </div>
                                 <button class="ui button primary" type="submit">INGRESAR</button>
                                 <div id="enlace">
-                                    <a href="#">¡Olvidaste tu contraseña?</a>
+                                    <a href="#">¡Olvidaste tu contrasena?</a>
                                 </div>
                             </form>
                         </div>
@@ -49,16 +55,108 @@
                         <form>
                             <div></div>
                             <div class="ui segment">
-                                <button class="ui button primary" type="submit">CREAR CUENTA</button>
+                                <button class="ui button primary" type="submit" id="crearCuenta">CREAR CUENTA</button>
                             </div>
-                        </form>    
-                    </div>    
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<script src="js/js.js"></script>
+
+
+    <div id="menu">
+        <div class="menuDesplegable">
+            <div class="btn-menu">
+                <label for="btn-menu">
+                <i id="bar" class="bars icon"></i>
+                </label>
+            </div>
+            <div id="perfil" class="ui text menu">
+                <div class="ui right dropdown item">
+                    <label id="perfil-icon"><i class="user circle icon"></i></label>
+                    <div class="menu">
+                        <div class="item">Nombre_Usuario</div>
+                        <div class="item">Perfil</div>
+                        <div class="item">Cambiar adulto Mayor</div>
+                        <div class="item">Cerrar sesión</div>
+                    </div>
+                </div>
+            </div>
+            <input type="checkbox" id="btn-menu">
+            <div class="contenedor-menu">
+                <div class="contenido-menu">
+                    <nav>
+                        <a href="">Inicio</a>
+                        <a href="">Mi Progreso</a>
+                        <a href="">¿Que hay de nuevo?</a>
+                        <a href="">Perfil</a>
+                    </nav>
+                    <div class="btn-menu">
+                        <label for="btn-menu">
+                            <i id="bar" class="bars icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="segundoEncabezado">
+            <p class="textoSegundoEn">"RECOMENDACIONES DE CUIDADO"</p>
+        </div>
+    </div>
+
+    <div id="registroCuidador">
+        <div class="form">
+            <div class="form-panel">
+                <div class="form-header">
+                    <h1>Registro de usuario</h1>
+                </div>
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="usuario">Nombre</label>
+                        <input type="text" id="nombreCuidador" name="usuario" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="contraseña">contrasena</label>
+                        <input type="password" id="contrasena" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más" />
+                    </div>
+                    <div class="form-group">
+                        <label for="contraseña">Confirmacion contraseña</label>
+                        <input type="password" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="text" id="emailRegistro" name="email" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <button id="reg">Register</button>
+                    </div>
+                    <div class="form-group">
+                        <button>Inicio</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="pen-footer">
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="Js/semantic.min.js"></script>
+    <script src="Js/js.js"></script>
+    <script src="Js/peticiones.js"></script>
 
 </html>

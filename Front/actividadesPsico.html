@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 <body>
     <header>
+        <div id="menu">
         <div class="menuDesplegable"> 
             <div class="btn-menu">
                 <label for="btn-menu">
@@ -48,9 +49,10 @@
         <div class="segundoEncabezado">
             <p class="textoSegundoEn" >"RECOMENDACIONES DE CUIDADO"</p>
         </div>
+    </div>
     </header>
     <!--Actividades estratégicas y su puntuación-->
-    <div id="opcionesInicio-C">
+    <div id="actividadesPsicoterapia">
         <div id="container">
             <div class="ui relaxed grid">
                 <div class="two column row">
@@ -64,11 +66,9 @@
                         <div class="ui link list">
                             <div class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></div>
                             <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 1</font></font></a>
-                            <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 2</font></font></a>
-                            <a class="active item"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Actividad 3</font></font></a>
                         </div>
                     </div>
-                    <!--Descripción, estatus y valoracion de las actividades-->
+                    <!--Descripción de la actividades-->
                     <div class="column">
                         <div class="row">
                             <div class="ui black labels">
@@ -79,20 +79,8 @@
                             <h7>
                                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus nobis deleniti nam doloremque explicabo amet sequi, labore dolores eum ratione velit cumque eius ipsam sapiente. Corporis reprehenderit fugit dignissimos voluptatum.
                             </h7>
-                        <div class="row">
-                            <div class="ui black labels">
-                                <div class="ui label">
-                                  Estatus:
-                                </div>
-                            </div>
-                            <div class="ui progress" id="progeso">
-                                <div class="bar">
-                                    <div class="progress"></div>
-                                </div>
-                                <div class="label">Llevas</div>
-                            </div>
-                        </div>
-                        <!--Boton para crear cuenta-->
+                      
+                        <!--Valoracion y boton guardar-->
                         <div class="row">
                             <div class="ui black labels">
                                 <div class="ui label">
@@ -100,14 +88,29 @@
                                 </div>
                             </div>
                             <div class="ui star rating" data-rating="3"></div>
-                        </div>    
+                        </div>  
+                        <div>
+                            <br>
+                            <button class="ui primary button">
+                                Guardar
+                              </button>
+
+                        </div>
+                        
+
+
                     </div>
                 </div> 
             </div>
         </div>
     </div>
-    
+    </div>    
+
+
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<script src="js/js.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<script src="Js/js.js"></script>
 </html>
