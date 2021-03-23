@@ -56,6 +56,7 @@ public class DAOcuidador_has_adultomayor {
 	}
 	
 	
+	
 	/*
 	 * Metodo POST automatico
 	 * Relaciona adulto mayor recien creado con el cuidador que inicio sesion

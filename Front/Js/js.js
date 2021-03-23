@@ -11,9 +11,12 @@ $('document').ready(function(){
       $("#registroCuidador").show(); 
     });  
 
+    $("#volverRegaInicio").click(function(){
+      $("#registroCuidador").hide();
+      $("#login").show();
+    });
 
-
-    $("#reg").on("click",function (event){
+    $("#reg").on("click",function (){
       nombre=$("#nombreCuidador").val();
     correo=$("#emailRegistro").val();
     contra=$("#contrasena").val(); 
@@ -27,6 +30,8 @@ $('document').ready(function(){
     console.log(datos)
     var url = "http://localhost:8080/nonapp/services/Registro/Cuidador"; // URL a la cual enviar los datos
     enviarDatos(datos, url); // Ejecutar cuando se quiera enviar los datos
+    $("#registroCuidador").hide();
+    $("#login").show();
     });
 
 

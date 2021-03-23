@@ -3,8 +3,7 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  
+  <display-name>Archetype Created Web Application</display-name>  
   <servlet>
 		<servlet-name>ServiceJR</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -12,6 +11,11 @@
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>com.nonapp.ws.res.services</param-value>
 		</init-param>
+		
+		<init-param>
+    <param-name>com.sun.jersey.config.feature.DisableWADL</param-name>
+    <param-value>true</param-value>
+</init-param>
 		<init-param>
 
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -23,5 +27,16 @@
 		<servlet-name>ServiceJR</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 </web-app>
