@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,72 +8,26 @@
     <link rel="stylesheet" href="css/singin.css">
     <link rel="stylesheet" href="css/plantillaBase.css">
     <link rel="stylesheet" href="css/registro.css">
-  <link rel="stylesheet" href="css/semantic.min.css">
+    <link rel="stylesheet" href="css/semantic.min.css">
 
     <title>Inicio de sesión | NANOAPP</title>
 </head>
-    
-    
+
+
 <body>
-</body>
-    <div id="login">
-        <div class="ui relaxed grid">
-            <div class="two column row">
-                <!--Imagen-->
-                <div class="column">
-                    <img src="https://www.frankcrum.com/hubfs/FrankCrum_2020/Images/Retirement-Plan-1.jpg">
-                    <h4><i>"La depresión viene sigilosamente y muchas personas no notan que ya llegó"</i></h4>
-                </div>
-                <!--Formulario de login-->
-                <div class="column">
-                    <div class="row">
-                        <div class="ui segment">
-                            <form class="ui form">
-                                <div class="field">
-                                    <div class="ui left icon input">
-                                        <i class="user icon"></i>
-                                        <input type="text" name="correoElectronico" id="correoElectronico" placeholder="Correo electrónico">
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <div class="ui left icon input">
-                                        <i class="lock icon"></i>
-                                        <input type="text" name="contrasena" id="contrasenaLogin" placeholder="contrasena">
-                                    </div>
-                                </div>
-                                <button class="ui button primary" type="submit">INGRESAR</button>
-                                <div id="enlace">
-                                <a href="#">¡Olvidaste tu contrasena?</a>
-                                </div>
-                          </form>
-                        </div>
-                    </div>
-                    <!--Boton para crear cuenta-->
-                    <div class="row">
-                        <form>
-                            <div></div>
-                            <div class="ui segment">
-                                <button class="ui button primary" type="submit" id="crearCuenta">CREAR CUENTA</button>
-                            </div>
-                        </form>    
-                    </div>    
-                </div>
-            </div> 
-        </div>
-    </div>
 
-
-    <div id="menu">
-        <div class="menuDesplegable"> 
+    <!--Encabezado con el menu desplegable y el menu del perfil -->
+    <header id="menu">
+        <div class="menuDesplegable">
             <div class="btn-menu">
                 <label for="btn-menu">
-                <i id="bar" class="bars icon"></i>
+                    <i id="bar" class="bars icon"></i>
                 </label>
-            </div> 
+            </div>
             <div id="perfil" class="ui text menu">
                 <div class="ui right dropdown item">
-                    <label id="perfil-icon" ><i class="user circle icon"></i></label>
-                    <div  class="menu" >
+                    <label id="perfil-icon"><i class="user circle icon"></i></label>
+                    <div class="menu">
                         <div class="item">Nombre_Usuario</div>
                         <div class="item">Perfil</div>
                         <div class="item">Cambiar adulto Mayor</div>
@@ -98,24 +53,76 @@
             </div>
         </div>
         <div class="segundoEncabezado">
-            <p class="textoSegundoEn" >"RECOMENDACIONES DE CUIDADO"</p>
+            <p class="textoSegundoEn">"RECOMENDACIONES DE CUIDADO"</p>
+        </div>
+    </header>
+
+    <!--Login de cuidador-->
+    <div id="login">
+        <div class="ui relaxed grid">
+            <div class="two column row">
+                <!--Imagen-->
+                <div class="column">
+                    <img src="https://www.frankcrum.com/hubfs/FrankCrum_2020/Images/Retirement-Plan-1.jpg">
+                    <h4><i>"La depresión viene sigilosamente y muchas personas no notan que ya llegó"</i></h4>
+                </div>
+                <!--Formulario de login-->
+                <div class="column">
+                    <div class="row">
+                        <div class="ui segment">
+                            <div class="ui form">
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="user icon"></i>
+                                        <input type="text" name="correoElectronico" id="correoElectronico"
+                                            placeholder="Correo electrónico">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui left icon input">
+                                        <i class="lock icon"></i>
+                                        <input type="text" name="contrasena" id="contrasenaLogin"
+                                            placeholder="contrasena">
+                                    </div>
+                                </div>
+                                <button class="ui button primary" type="submit" id="loginIngresar">INGRESAR</button>
+                                <div id="enlace">
+                                    <a href="#">¡Olvidaste tu contrasena?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Boton para crear cuenta-->
+                    <div class="row">
+                        <div>
+                            <div></div>
+                            <div class="ui segment">
+                                <button class="ui button primary" type="submit" id="crearCuenta">CREAR CUENTA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-<div id="registroCuidador">
-    <div class="form">
-        <div class="form-panel">
-            <div class="form-header">
-                <h1>Registro de usuario</h1>
-            </div>
-            <div class="form-content">
+    <!--Registro de cuidador-->
+    <div id="registroCuidador">
+        <div class="form">
+            <div class="form-panel">
+                <div class="form-header">
+                    <h1>Registro de usuario</h1>
+                </div>
+                <div class="form-content">
                     <div class="form-group">
                         <label for="usuario">Nombre</label>
                         <input type="text" id="nombreCuidador" name="usuario" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="contraseña">contrasena</label>
-                        <input type="password" id="contrasena" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más" />
+                        <input type="password" id="contrasena" required="required"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más" />
                     </div>
                     <div class="form-group">
                         <label for="contraseña">Confirmacion contraseña</label>
@@ -126,34 +133,110 @@
                         <input type="text" id="emailRegistro" name="email" required="required" />
                     </div>
                     <div class="form-group">
-                        <button  id="reg">Register</button>
+                        <button id="reg">Register</button>
                     </div>
                     <div class="form-group">
                         <button id="volverRegaInicio">Inicio</button>
                     </div>
-            </div>
+                </div>
 
+            </div>
+        </div>
+        <div class="pen-footer">
+        </div>
+
+    </div>
+
+    <!--Formulario para seleccionar persona 4ta edad-->
+    <div id="selectPersonaMayor">
+        <div class="column">
+            <div class="row">
+                <div class="ui segment">
+                    <form class="ui form">
+                        <div class="ui form">
+                            <h4>¿Hoy a quién tienes a cargo?</h4>
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="seleccionar">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">SELECCIONA...</div>
+                                <div class="menu">
+                                    <div class="item" data-value="1">Value 1</div>
+                                    <div class="item" data-value="0">Valor 2</div>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div>
+                            <button class="ui button primary" type="submit" id="aceptarAdulto">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Boton para crear perfil de persona 4ta edad-->
+            <div class="row">
+                <form>
+                    <div></div>
+                    <div class="ui segment">
+                        <button class="ui button primary" type="submit">CREAR PERFIL ADULTO MAYOR</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="pen-footer">
+
+    <!--Opciones de inicio (Psicoterapia, Medicación y Descanso)-->
+    <div id="opcionesInicio">
+        <div class="ui relaxed grid">
+            <div class="three column row">
+                <div class="column">
+                    <div id="car" class="ui link cards four wide column">
+                        <div class="card ">
+                            <div class="image">
+                                <img class="imgC"
+                                    src="https://www.65ymas.com/uploads/s1/13/50/48/psiquiatra-psicolog.jpeg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Psicoterapia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div id="car" class="ui link cards four wide column">
+                        <div class="card ">
+                            <div class="image">
+                                <img class="imgC"
+                                    src="https://statics-cuidateplus.marca.com/sites/default/files/styles/natural/public/organizar-medicamentos.jpg?itok=33anNJW3">
+                            </div>
+                            <div class="content">
+                                <div class="header">Medicación</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div id="car" class="ui link cards four wide column">
+                        <div class="card ">
+                            <div class="image">
+                                <img class="imgC"
+                                    src="https://adultosmayores.es/wp-content/uploads/2019/07/fotonoticia_20180618082933_640.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Descanso</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
-
-
-
-
-   
-
-
-
-
-
+</body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="Js/semantic.min.js"></script> 
-<script src="Js/js.js"></script>
+<script src="Js/semantic.min.js"></script>
 <script src="Js/peticiones.js"></script>
+<script src="Js/js.js"></script>
 
 </html>

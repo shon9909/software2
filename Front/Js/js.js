@@ -1,58 +1,71 @@
-$('document').ready(function(){   
+$('document').ready(function () {
   $('.ui.dropdown').dropdown();
   $("#registroCuidador").hide();
   $("#menu").hide();
+  $("#opcionesInicio").hide();  
+  $("#selectPersonaMayor").hide(); 
   header("Access-Control-Allow-Origin: true");
+});
+
+$("#crearCuenta").on("click", function (event) {
+  event.preventDefault();
+  $("#login").hide();
+  $("#registroCuidador").show();
+});
+
+$("#volverRegaInicio").click(function () {
+  $("#registroCuidador").hide();
+  $("#login").show();
+});
+
+$("#loginIngresar").click(function(){
+  datos = {
+    "email": $("#correoElectronico").val(),
+    "password": $("#contrasenaLogin").val()
+  }
+  console.log(datos);
+  //validarLogin(datos);
+  $("#login").hide();
+  $("#selectPersonaMayor").show();  
+});
+
+$("#reg").on("click", function () {
+  datos = {
+    "email": $("#nombreCuidador").val(),
+    "nombre": $("#emailRegistro").val(),
+    "password": $("#contrasena").val()
+  }
+  console.log(datos);
+  registroCuidador(datos); // Ejecutar cuando se quiera enviar los datos
+  $("#registroCuidador").hide();
+  $("#login").show();
+});
+
+$("#aceptarAdulto").click(function(){
+  $("#menu").show();
+  $("#opcionesInicio").show();  
+  $("#selectPersonaMayor").hide(); 
+});
+
+
+
+/*
+function enviarDatos(datos, url) {
+  $.ajax({
+    data: datos,
+    url: url,
+    method: 'POST',
+    crossOrigin: null,
+    mode: "cors",
+    success: function (response) {
+      console.log(response); // Imprimir respuesta del archivo
+    },
+    error: function (error) {
+      console.log(error); // Imprimir respuesta de error
+    }
+
   });
 
-  $("#crearCuenta").on("click",function(event){
-      event.preventDefault();
-      $("#login").hide();
-      $("#registroCuidador").show(); 
-    });  
-
-    $("#volverRegaInicio").click(function(){
-      $("#registroCuidador").hide();
-      $("#login").show();
-    });
-
-    $("#reg").on("click",function (){
-      nombre=$("#nombreCuidador").val();
-    correo=$("#emailRegistro").val();
-    contra=$("#contrasena").val(); 
-
-    datos={
-      "email": correo,
-      "nombre": nombre,
-      "password": contra
-      
-    }
-    console.log(datos)
-    var url = "http://localhost:8080/nonapp/services/Registro/Cuidador"; // URL a la cual enviar los datos
-    enviarDatos(datos, url); // Ejecutar cuando se quiera enviar los datos
-    $("#registroCuidador").hide();
-    $("#login").show();
-    });
-
-
-
-function enviarDatos(datos, url){
-    $.ajax({
-            data: datos,
-            url: url,
-            method: 'POST',
-            crossOrigin: null,
-            mode: "cors",
-            success:  function (response) {
-                console.log(response); // Imprimir respuesta del archivo
-            },
-            error: function (error) {
-                console.log(error); // Imprimir respuesta de error
-            }
-            
-    });
-
-  /*
   console.log(JSON.stringify({"email": correo, "nombre": nombre, "password": password}))
   console.log(nombre);
   console.log(correo);
@@ -69,24 +82,11 @@ function enviarDatos(datos, url){
        error: function(rta) {   
         console.log(rta) 
       }         
-});*/
+});
 }
-    
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 /*
-
 $('.ui.form')
   .form({
     fields: {
@@ -111,10 +111,10 @@ $('.ui.form')
             prompt : 'La contraseña debe ser de minimo {ruleValue} caracteres'
           }
         ]
-      }  
+      }
     }
   });
-  
+
 $('select.dropdown')
   .dropdown();
 $( 'carouselExampleIndicators').ready(function(){
