@@ -102,11 +102,6 @@ public class DAOcuidador {
 	}
 	
 	
-	public static void main(String[] args) throws SQLException {
-		DAOcuidador p=new DAOcuidador();
-		System.out.println(p.ingresoCuidador("1", "1"));
-	}
-	
 	
 	
 }

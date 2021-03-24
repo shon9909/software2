@@ -8,17 +8,12 @@
   <name>nonapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
-
-	
 	
 	
   <dependencies>
   
-  
-  
 
-  
-  
+	
   
   
   
@@ -65,12 +60,17 @@
     <version>2.8.6</version>
 </dependency>
 
+
+
+ 
+   
+   
    
   </dependencies>
   <build>
     <finalName>nonapp</finalName>
     
-    
+   
     
     
   </build>
