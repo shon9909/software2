@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
+import com.nonapp.ws.res.VO.VOerror;
 
 public class DAOadulto_mayor {
 
@@ -26,8 +27,8 @@ public class DAOadulto_mayor {
 	 * DAOcuidador_has_adulto mayor llamada relacionAdultoCuidador para crear
 	 * relacion
 	 */
-	public String registrarAdultomayor(int id_cuidador, String nombre, String apellido, String nacimiento,
-			int diagnostico) throws SQLException {
+	public boolean registrarAdultomayor(VOadulto_mayor adult) throws SQLException {
+//int id_cuidador, String nombre, String apellido, String nacimiento,
 
 		String seleccio = null;
 		boolean estadoOp = false;
@@ -47,12 +48,13 @@ public class DAOadulto_mayor {
 			 * inyeccion sql tabla adulto_mayor nombre apellido nacimiento
 			 * diagnostico
 			 */
-			seleccio = "INSERT INTO `adulto_mayor` (`nombre`,`apellido`,`nacimiento`, `diagnostico`)VALUES (?,?,?,?)";
+			seleccio = "INSERT INTO `adulto_mayor` (`nombre`,`apellido`,`nacimiento`, `diagnostico`, `id_cuidador`)VALUES (?,?,?,?,?)";
 			statement = con.prepareStatement(seleccio);
-			statement.setString(1, nombre);
-			statement.setString(2, apellido);
-			statement.setString(3, nacimiento);
-			statement.setInt(4, diagnostico);
+			statement.setString(1, adult.getNombre());
+			statement.setString(2, adult.getApellido());
+			statement.setString(3, adult.getNacimiento());
+			statement.setInt(4, adult.getDiagnostico());
+			statement.setInt(5, adult.getId_cuidador());
 			estadoOp = statement.executeUpdate() > 0;
 			/*
 			 * Se otra consulta para obtener id_adulto_mayor anteriormente registrado
@@ -63,32 +65,68 @@ public class DAOadulto_mayor {
 
 			sql = "SELECT `id_adulto_mayor` FROM `adulto_mayor` WHERE nombre= ? AND apellido=? AND nacimiento=?";
 			statement = con.prepareStatement(sql);
-			statement.setString(1, nombre);
-			statement.setString(2, apellido);
-			statement.setString(3, nacimiento);
+			statement.setString(1, adult.getNombre());
+			statement.setString(2, adult.getApellido());
+			statement.setString(3, adult.getNacimiento());
 			resultSet = statement.executeQuery();
 			int aux = 0;
+	
 			while (resultSet.next()) {
 				VOadulto_mayor p = new VOadulto_mayor();
 				aux = resultSet.getInt(1);
+
 			}
 
 			con.commit();
 			statement.close();
 			con.close();
-			
 			DAOcuidador_has_adultomayor aa=new DAOcuidador_has_adultomayor();
-			aa.relacionAdultoCuidador(id_cuidador, aux);
+			aa.relacionAdultoCuidador(adult.getId_cuidador(), aux);
 
 		} catch (SQLException e) {
 			con.rollback();
 			e.printStackTrace();
 		}
 
-		return "Registrado con exito";
+		return estadoOp;
 	}
 
 	
+	//Metodo GET actualizar
+	
+		public String actualizar2(VOcuidador cui) throws SQLException {
+			Gson gson= new Gson();
+			String a="";
+			List<VOadulto_mayor> lista= new ArrayList<VOadulto_mayor>();
+			ResultSet resultSet = null;
+			String sql = null;
+			con = obtenerConexion();
+
+			try {
+
+				sql = "SELECT * FROM `adulto_mayor` WHERE id_cuidador= ?";
+				statement=con.prepareStatement(sql);
+				statement.setInt(1, cui.getId_cuidador());
+				resultSet = statement.executeQuery();
+				while (resultSet.next()) {
+					VOadulto_mayor p=new VOadulto_mayor();
+					p.setId_adulto_mayor(resultSet.getInt(1));
+					p.setNombre(resultSet.getString(2));
+					p.setApellido(resultSet.getString(3));
+					p.setNacimiento(resultSet.getString(4));
+					p.setDiagnostico(resultSet.getInt(5));
+					p.setId_cuidador(resultSet.getInt(6));
+					lista.add(p);
+					a= gson.toJson(lista);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				return a;	
+			}
+
+		}
+		
 
 
-}

@@ -2,8 +2,10 @@ $('document').ready(function(){
   $('.ui.dropdown').dropdown();
   $("#registroCuidador").hide();
   $("#menu").hide();
-  header("Access-Control-Allow-Origin: true");
+
   });
+ 
+
 
   $("#crearCuenta").on("click",function(event){
       event.preventDefault();
@@ -11,10 +13,13 @@ $('document').ready(function(){
       $("#registroCuidador").show(); 
     });  
 
+    $("#volverRegaInicio").click(function(){
+      $("#registroCuidador").hide();
+      $("#login").show();
+    });
 
-
-    $("#reg").on("click",function (event){
-      nombre=$("#nombreCuidador").val();
+    $("#reg").on("click",function (){
+    nombre=$("#nombreCuidador").val();
     correo=$("#emailRegistro").val();
     contra=$("#contrasena").val(); 
 
@@ -22,30 +27,25 @@ $('document').ready(function(){
       "email": correo,
       "nombre": nombre,
       "password": contra
-      
-    }
+    },
     console.log(datos)
-    var url = "http://localhost:8080/nonapp/services/Registro/Cuidador"; // URL a la cual enviar los datos
-    enviarDatos(datos, url); // Ejecutar cuando se quiera enviar los datos
+    enviarDatos(datos); // Ejecutar cuando se quiera enviar los datos
     });
 
+function enviarDatos(datos){
+  $.ajax({
+    url: "/Registro/Cuidador",
+    type: "POST",
+    dataType: "json",
+    data: JSON.stringify(datos),
+    beforeSend: function () {  
+    },
+    success: function (result) {
+console.log("melo")
+    }
+   
 
-
-function enviarDatos(datos, url){
-    $.ajax({
-            data: datos,
-            url: url,
-            method: 'POST',
-            crossOrigin: null,
-            mode: "cors",
-            success:  function (response) {
-                console.log(response); // Imprimir respuesta del archivo
-            },
-            error: function (error) {
-                console.log(error); // Imprimir respuesta de error
-            }
-            
-    });
+});
 
   /*
   console.log(JSON.stringify({"email": correo, "nombre": nombre, "password": password}))

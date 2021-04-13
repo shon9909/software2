@@ -37,16 +37,17 @@ public class DAOcuidador_has_adultomayor {
 			statement=con.prepareStatement(sql);
 			statement.setInt(1, id_cuidador);
 			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				VOadulto_mayor p=new VOadulto_mayor();
-				p.setId_adulto_mayor(resultSet.getInt(1));
-				p.setNombre(resultSet.getString(2));
-				p.setApellido(resultSet.getString(3));
-				p.setNacimiento(resultSet.getString(4));
-				p.setDiagnostico(resultSet.getInt(5));
-				lista.add(p);
-				a= gson.toJson(lista);
+				while (resultSet.next()) {
+					VOadulto_mayor p=new VOadulto_mayor();
+					p.setId_adulto_mayor(resultSet.getInt(1));
+					p.setNombre(resultSet.getString(2));
+					p.setApellido(resultSet.getString(3));
+					p.setNacimiento(resultSet.getString(4));
+					p.setDiagnostico(resultSet.getInt(5));
+					lista.add(p);
+					a= gson.toJson(lista);	
 			}
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,6 +55,7 @@ public class DAOcuidador_has_adultomayor {
 		
 			return a;	
 	}
+	
 	
 	
 	/*

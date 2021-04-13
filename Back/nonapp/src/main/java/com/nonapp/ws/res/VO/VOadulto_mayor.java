@@ -1,6 +1,7 @@
 package com.nonapp.ws.res.VO;
 
 public class VOadulto_mayor {
+	private int id_cuidador;
 	private int id_adulto_mayor;
 	private String nombre;
 	private String apellido;
@@ -35,6 +36,12 @@ public class VOadulto_mayor {
 	}
 	public void setDiagnostico(int diagnostico) {
 		this.diagnostico = diagnostico;
+	}
+	public int getId_cuidador() {
+		return id_cuidador;
+	}
+	public void setId_cuidador(int id_cuidador) {
+		this.id_cuidador = id_cuidador;
 	}
 	
 	

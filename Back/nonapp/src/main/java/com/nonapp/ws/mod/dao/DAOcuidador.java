@@ -91,7 +91,7 @@ public class DAOcuidador {
 		}if(a.isEmpty()==true){
 			String b="";
 			VOerror error2=new VOerror();
-			error2.setTipo("Error datos incorrectos, F");
+			error2.setTipo("Error datos incorrectos");
 			List lista2=new ArrayList();
 			lista2.add(error2);
 			b=gson.toJson(lista2);
@@ -101,11 +101,6 @@ public class DAOcuidador {
 		}	
 	}
 	
-	
-	public static void main(String[] args) throws SQLException {
-		DAOcuidador p=new DAOcuidador();
-		System.out.println(p.ingresoCuidador("1", "1"));
-	}
 	
 	
 	
