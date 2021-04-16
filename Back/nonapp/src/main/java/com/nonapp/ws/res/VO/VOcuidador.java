@@ -1,5 +1,7 @@
 package com.nonapp.ws.res.VO;
 
+import com.google.gson.Gson;
+
 public class VOcuidador {
 private int id_cuidador;
 private String email;
@@ -30,7 +32,10 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
-
+public String tojson(){
+	Gson a=new Gson();
+	return a.toJson(this);
+} 
 
 
 }

@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.res.VO.VOcuidador;
 
@@ -22,9 +23,8 @@ public class serviceAutomatico {
 	@Produces({MediaType.APPLICATION_JSON})
 	
 	public Response Cuidador(VOcuidador cuidador){
-		DAOcuidador cuid=new DAOcuidador();
 		try{
-			if(cuid.registrarCuidador(cuidador)!=false){
+			if(factory.getEntidad(DAOcuidador.class).registrar(cuidador.tojson())!=false){
 
 				return Response.status(Response.Status.CREATED).entity("{\"Status\": \"hecho\"}").build();
 			}

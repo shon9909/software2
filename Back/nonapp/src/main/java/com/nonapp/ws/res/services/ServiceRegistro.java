@@ -14,6 +14,9 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.codehaus.jettison.json.JSONTokener;
 
+import com.google.gson.Gson;
+import com.nonapp.ws.factory.entidad;
+import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
@@ -35,9 +38,10 @@ public class ServiceRegistro {
 	@Produces({MediaType.APPLICATION_JSON})
 	
 	public Response Cuidador(VOcuidador cuidador){
-		DAOcuidador cuid=new DAOcuidador();
+		Gson a=new Gson();
+		String k=a.toJson(cuidador);	
 		try{
-			if(cuid.registrarCuidador(cuidador)!=false){
+			if(factory.getEntidad(DAOcuidador.class).registrar(k)!=false){
 
 				return Response.status(Response.Status.CREATED).entity("{\"Status\": \"hecho\"}").build();
 			}
@@ -53,11 +57,10 @@ public class ServiceRegistro {
 	@Produces({MediaType.APPLICATION_JSON})
 	
 	public Response Adulto(VOadulto_mayor adulto){
-		DAOadulto_mayor adult=new DAOadulto_mayor();
-		
+		Gson a=new Gson();
+		String k=a.toJson(adulto);	
 		try{
-			if(adult.registrarAdultomayor(adulto)!=false){
-
+			if(factory.getEntidad(DAOadulto_mayor.class).registrar(k)!=false){
 				return Response.status(Response.Status.CREATED).entity("{\"Status\": \"hecho\"}").build();
 			}
 		}catch(SQLException e){
@@ -80,15 +83,12 @@ public class ServiceRegistro {
 	public String validarLogin(VOcuidador cuidador) throws SQLException, JSONException{
 
 		DAOcuidador daocuidador=new DAOcuidador();
-		String a=daocuidador.ingresoCuidador(cuidador.getEmail(), cuidador.getPassword());
-	
-		a=a.substring(1,a.length()-1);
-		
-		JSONObject aux = new JSONObject(a);
-		
+		String a=daocuidador.ingresoCuidador(cuidador.getEmail(), cuidador.getPassword());	
+		a=a.substring(1,a.length()-1);	
+		JSONObject aux = new JSONObject(a);	
 		DAOcuidador_has_adultomayor daorela=new DAOcuidador_has_adultomayor();
 		String b=daorela.ingresoCuidadorConsultaAdulto(aux.getInt("id_cuidador"));
-		return b;
+		return b;	
 	
 	}	
 	

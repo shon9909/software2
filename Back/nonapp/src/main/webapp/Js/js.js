@@ -1,13 +1,17 @@
 $('document').ready(function () {
   $('.ui.dropdown').dropdown();
+  $("#opc").hide(); 
   $("#registroCuidador").hide();
   $("#menu").hide();
   $("#opcionesInicio").hide();  
   $("#selectPersonaMayor").hide(); 
   $("#registroAdulto").hide(); 
+  $("#actiPsico").hide();
+  
   
 });
 var cuidadorlinea="";
+var adultolinea="";
 var jsonadultos="";
 
 
@@ -27,14 +31,37 @@ $("#loginIngresar").click(function(){
     "email": $("#correoElectronico").val(),
     "password": $("#contrasenaLogin").val()
   }
-  validar(datos);
+    datoscuidadorlinea();
+    validar(datos);
+
+
 
 });
 
+function datoscuidadorlinea(){
+$.ajax({
+  data: JSON.stringify(datos),
+  url: "services/Registro/ValidarLoginDATOS",
+  method: 'POST',
+  headers: { 
+      'Accept': 'application/json',
+      'Content-Type': 'application/json' 
+  },
+  success: function (response) {
+  cuidadorlinea=response[0];
+  },error: function (error) {
+    alert(error)
+ }
+});
+}
+
+
 $("#registrarAdultomayor").click(function(){
-  
+  console.log(cuidadorlinea)
   $("#diagnosticos").empty();
+  $("#diagnosticos").text("Elige el diagnostico");
   var texto='';
+ 
   $.ajax({
     data: JSON.stringify(datos),
     url: "services/Consultas/Diag",
@@ -48,7 +75,9 @@ $("#registrarAdultomayor").click(function(){
         for(var i=0;i<response.length;i++){
           
         
-          texto +=`<div class="item" id="${i+1}" >${response[i].nombre}</div>`
+       texto +=`<option value="${response[i].id_diagnostico}">${response[i].nombre}</option>`
+
+
           // ${response[i].id_adulto_mayor},\'${response[i].nombre}\',
           // \'${response[i].apellido}\',
           // \'${response[i].nacimiento}\',
@@ -69,21 +98,24 @@ $("#registrarAdultomayor").click(function(){
 });
 
 
+
 $("#regAdulto").click(function(){
+ 
+
   nombreA=$("#nombreAdulto").val();
   apellidoA=$("#apellidoAdulto").val();
   nacimientoA=$("#nacimientoAdulto").val();
   naciA=moment(nacimientoA).format('YYYY-MM-DD');
-  diagA=document.getElementsByClassName("item active selected");
-  
+  //diagA=document.getElementsByClassName("item active selected");
+  diagA=$("#diagnosticos").val();
   datos={
     "nombre": nombreA,
     "apellido": apellidoA,
     "nacimiento": naciA,
-    "diagnostico": diagA[0].id,
+    "diagnostico": diagA,
     "id_cuidador": cuidadorlinea.id_cuidador
-
   }
+  console.log(datos);
    registrarAdulto(datos);
    $("#selectPersonaMayor").hide(); 
 });
@@ -101,16 +133,16 @@ $("#volverRegaAdulSelecc").click(function(){
     },
     success:  function (response) {
     
-    
+      $("#diagnosticos").text("Elige el diagnostico");
     $("#adultos").empty();
     jsonadultos=response
     var texto='';
 
-    for(var i=0;i<response.length;i++){
+    for(var i=1;i<response.length;i++){
 
    
     
-      texto +=`<div class="item" onclick="seleccionAdulto(${response[i].id_adulto_mayor})" data-value="${i}">${response[i].nombre} ${response[i].apellido}</div>`
+      texto +=`<div class="item" onclick="seleccionAdulto(${response[i].id_adulto_mayor})">${response[i].nombre} ${response[i].apellido}</div>`
       // ${response[i].id_adulto_mayor},\'${response[i].nombre}\',
       // \'${response[i].apellido}\',
       // \'${response[i].nacimiento}\',
@@ -122,6 +154,9 @@ $("#volverRegaAdulSelecc").click(function(){
     
     $("#registroAdulto").hide();
     $("#selectPersonaMayor").show();
+    console.log(adultolinea);
+    console.log(cuidadorlinea);
+    
     
     },
     error: function (error) {
@@ -141,6 +176,16 @@ $("#aceptarAdulto").click(function(){
   $("#opcionesInicio").show();  
   $("#selectPersonaMayor").hide(); 
 });
+
+$("#cerrarUno").click(function(){
+    console.log(adultolinea);
+    console.log(cuidadorlinea);
+    $("#adultos").empty();
+	  $("#selectPersonaMayor").hide();
+	  $("#login").show();  
+	});
+
+cerrarUno
 
     $("#reg").on("click",function (){
       nombre=$("#nombreCuidador").val();
@@ -173,8 +218,27 @@ function registrarAdulto(datos){
       }
       
 });
+  
+}
 
+function registrarAdulto2(datos){
+  $.ajax({
+    data: JSON.stringify(datos),
+    url: "services/Registro/Adulto",
+    method: 'POST',
+    headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+    },
+    success:  function (response) {
+  
+    },
+    error: function (error) {
+        console.log(error); // Imprimir respuesta de error
+    }
     
+});
+
 }
 
 
@@ -220,6 +284,9 @@ $("#ingresarLogin").on("click",function (event){
 
 
 function validar(datos){
+
+  $("#seleccionAD").text("SELECCIONA...");
+
 	 $.ajax({
 	      data: JSON.stringify(datos),
 	      url: "services/Registro/ValidarLogin",
@@ -229,17 +296,17 @@ function validar(datos){
 	          'Content-Type': 'application/json' 
 	      },
 	      success:  function (response) {
-			  
+          $("#diagnosticos").text("Elige el diagnostico");
 
 				$("#adultos").empty();
 				jsonadultos=response
 				var texto='';
 	  
-				for(var i=0;i<response.length;i++){
+				for(var i=1;i<response.length;i++){
 
 				
 			  
-					texto +=`<div class="item" onclick="seleccionAdulto(${response[i].id_adulto_mayor})" data-value="${i}">${response[i].nombre} ${response[i].apellido}</div>`
+					texto +=`<div class="item" onclick="seleccionAdulto(${response[i].id_adulto_mayor})">${response[i].nombre} ${response[i].apellido}</div>`
 					// ${response[i].id_adulto_mayor},\'${response[i].nombre}\',
 					// \'${response[i].apellido}\',
 					// \'${response[i].nacimiento}\',
@@ -251,11 +318,43 @@ function validar(datos){
 			
 				$("#login").hide();
 				$("#selectPersonaMayor").show();
+        console.log(adultolinea);
+        console.log(cuidadorlinea);
 			  
 	      },
 	      error: function (error) {
-	         alert(error)
-	      }
+
+          if(error.statusText=="error"){
+          alert("Revisa tus datos!");
+
+          }else{
+            alert("No tienes ningun adulto mayor registrado, registralo!!!!");
+            nombreA="a";
+            apellidoA="a";
+            nacimientoA="2020-01-01";
+            naciA=moment(nacimientoA).format('YYYY-MM-DD');
+            diagA=1;
+          datos={
+            "nombre": nombreA,
+            "apellido": apellidoA,
+            "nacimiento": naciA,
+            "diagnostico": diagA,
+            "id_cuidador": cuidadorlinea.id_cuidador
+          }
+          console.log(cuidadorlinea.id_cuidador);
+          
+           registrarAdulto2(datos);
+           
+           $("#login").hide(); 
+           $("#selectPersonaMayor").show(); 
+           console.log(adultolinea);
+          console.log(cuidadorlinea);
+          }
+   
+	}
+
+
+
 	      
 	});
 
@@ -278,20 +377,46 @@ function validar(datos){
     
 
 function seleccionAdulto(id_adulto_mayor){
+  $("#seleccionAD").text("SELECCIONA...");
+  texto='';
 for (let j = 0; j < jsonadultos.length; j++) {
 	if(jsonadultos[j].id_adulto_mayor===id_adulto_mayor){
+    adultolinea=jsonadultos[j];
+      adultolinea.id_cuidador=cuidadorlinea.id_cuidador;
 			jsonadultos=jsonadultos[j]
+      $("#menucaja").empty();
+      texto +=` <div class="item">${cuidadorlinea.nombre}</div><div class="item">Perfil</div> <div class="item">Cambiar adulto Mayor</div><div class="item" onclick="cerrarmenu()">Cerrar sesión</div>`
+      $("#menucaja").append(texto);
 			$("#login").hide();
 			$("#selectPersonaMayor").hide();
 			$("#menu").show();
 			break
 	}
+  $("#opcionesInicio").show(); 
 	
 }
-	// id_adulto_mayor,nombre,apellido,nacimiento,diagnostico
-// console.log(id_adulto_mayor+" "+nombre+" "+apellido+" "+nacimiento+"
-// "+diagnostico)
+
+console.log(adultolinea);
+console.log(cuidadorlinea);
 }
+
+
+function cerrarmenu(){
+  console.log(adultolinea);
+  console.log(cuidadorlinea);
+  $("#adultos").empty();
+  $("#menu").hide();
+  $("#login").show();
+  $("#opcionesInicio").hide(); 
+}
+
+$("#psico").click(function(){
+  $("#actiPsico").show();
+  $("#opcionesInicio").hide();
+
+});
+
+
 
 /*
 $('.ui.form')
