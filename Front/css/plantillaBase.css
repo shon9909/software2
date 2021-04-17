@@ -119,3 +119,68 @@ header{
     width: 230px !important; 
     height: 250px !important;
 }
+/* estilos de la tabla*/
+.tabla{
+  
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+}
+
+
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td{
+	padding: 20px;
+}
+
+thead{
+	background-color: #a3a1a1;
+	border-bottom: solid 5px #6d6d6d;
+	color: white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #002345;
+	color: white;
+}
+.boton {
+	padding: 10px 30px;
+	cursor: pointer;
+	display: block;
+	margin-top: 100px !important;
+	background: linear-gradient(to right, #b55986, #7c568d);
+	border: 0;
+	border-radius: 30px;
+	color: rgba(219,219,219, 1);
+	outline:none !important;
+	z-index: 1;
+}
+#menuh{
+	margin-top: 120px;
+}
+
+.bti{
+margin: 0!important;
+ width: 150px !important;
+ padding-left: 0px !important;
+ padding-right: 0px !important;
+}
+#col-lg-3{
+	padding: 0px !important;
+	margin: 0px!important;
+}
+
+#menuh2{
+	margin-left: 100px;
+}
