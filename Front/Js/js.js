@@ -184,9 +184,6 @@ $("#cerrarUno").click(function(){
 	  $("#selectPersonaMayor").hide();
 	  $("#login").show();  
 	});
-
-cerrarUno
-
     $("#reg").on("click",function (){
       nombre=$("#nombreCuidador").val();
     correo=$("#emailRegistro").val();

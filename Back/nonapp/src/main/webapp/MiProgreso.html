@@ -19,6 +19,7 @@
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="Js/actividades.js"></script>
     <title>Tabla de actividades | NANOAPP</title>
 </head>
 
@@ -27,9 +28,18 @@
     <div class="container-xxl" style="height:50px">
         <div class="row">
             <div class="col align-self-start">
-                <button type="button" class="btn btn-outline-primary btn-lg" style="height:50px">
-                    <span class="bi bi-list"></span>
-                </button>
+            	<div class="btn-group">
+	                <button type="button" class="btn btn-outline-primary btn-lg dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="height:50px ">
+	                    <span class="bi bi-list"></span>
+	                </button>
+	                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					    <li><a class="dropdown-item" href="#">Inicio</a></li>
+					    <li><a class="dropdown-item" href="#">Mi progreso</a></li>
+					    <li><a class="dropdown-item" href="#">¿Que hay de nuevo?</a></li>
+					    <li><a class="dropdown-item" href="#">Perfil</a></li>
+					</ul>
+	            </div>
+
             </div>
             <div class="col align-self-center">
                 <div class="text-center">
@@ -41,7 +51,8 @@
             <div class="col order-5">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="text-right">
-                        <button type="button" class="btn btn-outline-primary btn-lg" style="height:50px;left: 100px">
+                        <button type="button" onclick=location.href='progreso.html' class="btn btn-outline-primary btn-lg" style="height:50px;left: 100px">
+                        	<!-- La funcion onclick debe conectar al html que muestre el perfil del usuario-->
                             <span class="bi bi-person"></span>
                         </button>
                     </div>
@@ -66,6 +77,101 @@
         </div>
       </div>
     </div>
-<body/>
+    <div class="container-xxl" style="height:50px">
+        <div class="row">
+            <div class="col align-self-start">
+                <p></p>
+                    <div class="font-weight-bold">
+                        <pre><button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#agregarActividad_Modal">Agregar nueva actividad</button></pre>
+                    </div>
+            </div>
+        </div>
+    </div>
 
+
+	<div class="modal fade" id="agregarActividad_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Nueva actividad</h5>
+	        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"></i></button>
+	      </div>
+	        <div class="modal-body">
+	        
+	      	    <div class="form-group">  
+	      	    	<label for="exampleFormControlTextarea1">Actividad</label>
+    				<textarea class="form-control" id="actividadtxt" rows="3"></textarea>
+			    </div>
+			    <div class="form-group">  
+	      	    	<label for="exampleFormControlTextarea2">Fecha</label>
+    				<textarea class="form-control" id="fechatxt" rows="3"></textarea>
+			    </div>
+			    <div class="form-group">  
+	      	    	
+    				<div class="form-check">
+				      <input class="form-check-input" type="checkbox" id="estadocheck">
+				      <label class="form-check-label" for="gridCheck">
+				        Estado
+				      </label>
+				    </div>
+			    </div>
+
+
+	        </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+	        <button type="button" id="Btn_crear" class="btn btn-primary">Crear</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
+
+
+    <div id="tabla actividades">
+	    <table class="table">
+	      <thead>
+	        <tr>
+	          <th scope="col">#Numero</th>
+	          <th scope="col">Fecha</th>
+	          <th scope="col">Actividad</th>
+	          <th scope="col">Estado</th>
+	        </tr>
+	      </thead>
+	      <tbody id="body_actividades">
+	        <tr>
+	          <th scope="row">1</th>
+	          <td>05/04/2021</td>
+	          <td>Caminata aire libre</td>
+	          <td>
+	            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+	          </td>
+	        </tr>
+	        <tr>
+	          <th scope="row">2</th>
+	          <td>15/04/2021</td>
+	          <td>Llamadas a familiares que no contacta frecuentemente</td>
+	          <td>
+	            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">            
+	          </td>
+	        </tr>
+	        <tr>
+	          <th scope="row">3</th>
+	          <td>25/04/2021</td>
+	          <td>Visita lugares recientemente creados o remodelados (ejemplo:centros comercilaes)</td>
+	           <td>
+	            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">            
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+	</div>
+
+
+
+
+<body/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="Js/js.js"></script>
 </html>
