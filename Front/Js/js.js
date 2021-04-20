@@ -1,101 +1,7 @@
-$('document').ready(function () {
+$('document').ready(function(){   
   $('.ui.dropdown').dropdown();
-  $("#opc").hide(); 
   $("#registroCuidador").hide();
   $("#menu").hide();
-  $("#opcionesInicio").hide();  
-  $("#selectPersonaMayor").hide(); 
-  $("#registroAdulto").hide(); 
-  $("#actiPsico").hide();
-  
-  
-});
-var cuidadorlinea="";
-var adultolinea="";
-var jsonadultos="";
-
-
-$("#crearCuenta").on("click", function (event) {
-  event.preventDefault();
-  $("#login").hide();
-  $("#registroCuidador").show();
-});
-
-$("#volverRegaCuidInicio").click(function () {
-  $("#registroCuidador").hide();
-  $("#login").show();
-});
-
-$("#loginIngresar").click(function(){
-  datos = {
-    "email": $("#correoElectronico").val(),
-    "password": $("#contrasenaLogin").val()
-  }
-    datoscuidadorlinea();
-    validar(datos);
-
-
-
-});
-
-function datoscuidadorlinea(){
-$.ajax({
-  data: JSON.stringify(datos),
-  url: "services/Registro/ValidarLoginDATOS",
-  method: 'POST',
-  headers: { 
-      'Accept': 'application/json',
-      'Content-Type': 'application/json' 
-  },
-  success: function (response) {
-  cuidadorlinea=response[0];
-  },error: function (error) {
-    alert(error)
- }
-});
-}
-
-
-$("#registrarAdultomayor").click(function(){
-  console.log(cuidadorlinea)
-  $("#diagnosticos").empty();
-  $("#diagnosticos").text("Elige el diagnostico");
-  var texto='';
- 
-  $.ajax({
-    data: JSON.stringify(datos),
-    url: "services/Consultas/Diag",
-    method: 'POST',
-    headers: { 
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' 
-    },
-    success:  function (response) {
-        // Imprimir respuesta del archivo
-        for(var i=0;i<response.length;i++){
-          
-        
-       texto +=`<option value="${response[i].id_diagnostico}">${response[i].nombre}</option>`
-
-
-          // ${response[i].id_adulto_mayor},\'${response[i].nombre}\',
-          // \'${response[i].apellido}\',
-          // \'${response[i].nacimiento}\',
-          // \'${response[i].diagnostico}\'
-        }
-        $("#diagnosticos").append(texto);
-        
-        
-         // Imprimir respuesta del archivo
-        $("#registroAdulto").show(); 
-        $("#selectPersonaMayor").hide(); 
-    },
-    error: function (error) {
-        console.log(error); // Imprimir respuesta de error
-    }
-
-});
-});
 
 
 
@@ -447,6 +353,60 @@ $('.ui.form')
   }
 });
 
+$('.ui.form')
+<<<<<<< HEAD
+    .form({
+        fields: {
+            correoElectronico: {
+                identifier: 'correoElectronico',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Por favor ingrese su correo electrónico'
+                }]
+            },
+            contraseña: {
+                identifier: 'contraseña',
+                rules: [{
+                        type: 'empty',
+                        prompt: 'Por favor ingrese su contraseña'
+                    },
+                    {
+                        type: 'minLength[6]',
+                        prompt: 'La contraseña debe ser de minimo {ruleValue} caracteres'
+                    }
+                ]
+            }
+        }
+    });
+=======
+  .form({
+    fields: {
+        correoElectronico: {
+            identifier: 'correoElectronico',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Por favor ingrese su correo electrónico'
+              }
+            ]
+          },
+      contraseña: {
+        identifier: 'contraseña',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Por favor ingrese su contraseña'
+          },
+          {
+            type   : 'minLength[6]',
+            prompt : 'La contraseña debe ser de minimo {ruleValue} caracteres'
+          }
+        ]
+      }  
+    }
+  });
+  
+>>>>>>> origin/shon
 $('select.dropdown')
 .dropdown();
 $( 'carouselExampleIndicators').ready(function(){
@@ -525,13 +485,18 @@ if (myInput.value.match(numbers)) {
     number.classList.add("invalid");
 }
 
-// Validate length
-if (myInput.value.length >= 8) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-} else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
+<<<<<<< HEAD
+function registro() {
+=======
+  // Validate length
+  if (myInput.value.length >= 8) {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+  } else {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+  }
 }
 }
 */
+>>>>>>> origin/shon

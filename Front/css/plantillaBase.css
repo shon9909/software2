@@ -129,6 +129,14 @@ header {
     margin-top: 160px !important;
     width: 800px;
     margin: 0 auto;
+<<<<<<< HEAD
+}
+#opcionesInicio-C{
+    margin-top: 80px !important;
+    width: 800px; 
+    margin: 0 auto; 
+=======
+>>>>>>> origin/shon
 }
 
 #car {

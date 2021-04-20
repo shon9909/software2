@@ -1,0 +1,34 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+<<<<<<< HEAD
+
+#container {
+=======
+#login{
+>>>>>>> origin/shon
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#perfil {
+    margin: 0px !important;
+}
+
+#perfil-icon {
+    margin-top: 7px;
+    color: #5394c9;
+    font-size: 32px;
+}
