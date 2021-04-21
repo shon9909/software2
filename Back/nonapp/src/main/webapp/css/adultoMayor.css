@@ -1,0 +1,109 @@
+    .blog-cardperfil {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem auto;
+        box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.6%;
+        background: #fff;
+        line-height: 1.4;
+        font-family: sans-serif;
+        border-radius: 10px;
+        overflow: hidden;
+        z-index: 0;
+    }
+    
+    .blog-cardperfil .perfil {
+        position: relative;
+        z-index: 0;
+        height: 200px;
+    }
+    
+    .blog-cardperfil .imagen {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.5s;
+    }
+    
+    .blog-cardperfil:hover .imagen {
+        transform: scale(1.2) rotate(3deg);
+    }
+    
+    .blog-cardperfil .descripcion {
+        padding: 3rem;
+        background: #fff;
+        position: relative;
+        z-index: 0;
+    }
+    
+    .blog-cardperfil .descripcion h1,
+    .blog-cardperfil .descripcion h2 {
+        font-family: Poppins, sans-serif;
+    }
+    
+    .blog-cardperfil .descripcion h1 {
+        line-height: 1;
+        margin: 0;
+        font-size: 1.7rem;
+    }
+    
+    .blog-cardperfil .descripcion h2 {
+        font-size: 1rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #a2a2a2;
+        margin-top: 10px;
+    }
+    
+    .blog-cardperfil p {
+        position: relative;
+        margin: 10rem 0 0;
+    }
+    
+    .blog-cardperfil p:first-of-type {
+        margin-top: 1.25rem;
+    }
+    
+    .blog-cardperfil p:first-of-type:before {
+        content: "";
+        position: absolute;
+        height: 5px;
+        background: #2a7aba;
+        width: 35px;
+        top: -0.75rem;
+        border-radius: 5px;
+    }
+    
+    .blog-cardperfil:hover .details {
+        left: 0%;
+    }
+    
+    @media (min-width: 900px) {
+        .blog-cardperfil {
+            flex-direction: row;
+            max-width: 1300px;
+        }
+        .blog-cardperfil .perfil {
+            flex-basis: 40%;
+            height: auto;
+        }
+        .blog-cardperfil .descripcion {
+            flex-basis: 60%;
+        }
+        .blog-cardperfil .descripcion:before {
+            content: "";
+            background: #2a7aba;
+            width: 20px;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+    }
+    
+

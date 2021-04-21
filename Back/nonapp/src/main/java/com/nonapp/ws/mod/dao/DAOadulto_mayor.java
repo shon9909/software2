@@ -5,14 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.nonapp.ws.factory.entidad;
 import com.nonapp.ws.mod.conexion.conexion;
+import com.nonapp.ws.res.VO.VOactividades;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOerror;
+import com.nonapp.ws.res.VO.VOprogreso;
 
 public class DAOadulto_mayor implements entidad {
 
@@ -127,5 +130,86 @@ public class DAOadulto_mayor implements entidad {
 		}
 		return a;
 	}
+
+	
+
+	public String consultarHistorial(int id_adulto_mayor) throws SQLException {
+		Gson gson = new Gson();
+		String a = "";
+		List<VOactividades> lista = new ArrayList<VOactividades>();
+		
+		ResultSet resultSet = null;
+		String sql = null;
+		con = obtenerConexion();
+
+		try {
+			sql = "SELECT * FROM actividades A, progreso P WHERE A.id_actividades = P.id_actividades AND P.id_adulto_mayor=?;";
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, id_adulto_mayor);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				VOactividades ac=new VOactividades();
+				
+				ac.setNombre(resultSet.getString(2));
+				ac.setDescripcion(resultSet.getString(3));
+				ac.setId_potencia(resultSet.getInt(4));
+				ac.setId_diagnostico(resultSet.getInt(5));
+				ac.setId_actividades(resultSet.getInt(7));
+				ac.setValoracion(resultSet.getInt(8));
+				ac.setFecha(resultSet.getString(9));
+				lista.add(ac);
+				a = gson.toJson(lista);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return a;
+	}
+
+
+
+
+	public String consultarHistorialPerfil(int id_adulto_mayor) throws SQLException {
+		Gson gson = new Gson();
+		String a = "";
+		List<VOactividades> lista = new ArrayList<VOactividades>();
+		
+		ResultSet resultSet = null;
+		String sql = null;
+		con = obtenerConexion();
+
+		try {
+			sql = "SELECT * FROM actividades A, progreso P WHERE A.id_actividades = P.id_actividades AND P.id_adulto_mayor=? order by valoracion DESC LIMIT 3;";
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, id_adulto_mayor);
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				VOactividades ac=new VOactividades();
+				ac.setId_actividades(resultSet.getInt(1));
+				ac.setNombre(resultSet.getString(2));
+				ac.setDescripcion(resultSet.getString(3));
+				ac.setId_potencia(resultSet.getInt(4));
+				ac.setId_diagnostico(resultSet.getInt(5));
+				ac.setValoracion(resultSet.getInt(8));
+				ac.setFecha(resultSet.getString(9));
+				
+				
+				lista.add(ac);
+				a = gson.toJson(lista);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return a;
+	}
+
+
+
+
+
 
 }

@@ -21,52 +21,8 @@ public class DAOprogreso {
 	private Connection obtenerConexion() throws SQLException {
 		return conexion.getConnection();
 	}
-	/*
-	 * Metodo POST registrar progreso que viene de actividades (psicoterapia,
-	 * medicacion o descanso)
-	 */
-
-	public String guardarProgreso(int id_adulto_mayor, int id_actividades, int valoracion) throws SQLException {
-		String seleccio = null;
-		boolean estadoOp = false;
-
-		Date objDate = new Date();
-		String strDateFormat = "YYYY-MM-dd";
-		SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
-		String aux = objSDF.format(objDate);
-
-		/*
-		 * Se abre conexion
-		 */
-		con = obtenerConexion();
-		try {
-			con.setAutoCommit(false);
-			/*
-			 * inyeccion sql tabla cuidador_has_adultomayor id_cuidador
-			 * id_adulto_mayor
-			 */
-			seleccio = "INSERT INTO `progreso` (`id_adulto_mayor`,`id_actividades`,`valoracion`,`fecha`)VALUES (?,?,?,?)";
-			statement = con.prepareStatement(seleccio);
-			statement.setInt(1, id_adulto_mayor);
-			statement.setInt(2, id_actividades);
-			statement.setInt(3, valoracion);
-			statement.setString(4, aux);
-			estadoOp = statement.executeUpdate() > 0;
-			/*
-			 * Se realiza el commit y se cierra conexion
-			 */
-			con.commit();
-			statement.close();
-			con.close();
-
-		} catch (SQLException e) {
-			con.rollback();
-			e.printStackTrace();
-		}
-
-		return "Registro de progreso con exito";
-
-	}
+	
+	
 
 	/*
 	 * Metodo GET para consultar progreso
@@ -100,5 +56,48 @@ public class DAOprogreso {
 
 		return a;
 	}
+	/*
+	 * Metodo POST registrar progreso que viene de actividades (psicoterapia,
+	 * medicacion o descanso)
+	 */
+
+	public String registrarNuevaActivi(int id_adulto_mayor, int id_actividades, int valoracion, String fecha) throws SQLException {
+		String seleccio = null;
+		boolean estadoOp = false;
+		/*
+		 * Se abre conexion
+		 */
+		con = obtenerConexion();
+		try {
+			con.setAutoCommit(false);
+			/*
+			 * inyeccion sql tabla cuidador_has_adultomayor id_cuidador
+			 * id_adulto_mayor
+			 */
+			seleccio = "INSERT INTO `progreso` (`id_adulto_mayor`,`id_actividades`,`valoracion`,`fecha`)VALUES (?,?,?,?)";
+			statement = con.prepareStatement(seleccio);
+			statement.setInt(1, id_adulto_mayor);
+			statement.setInt(2, id_actividades);
+			statement.setInt(3, valoracion);
+			statement.setString(4, fecha);
+			estadoOp = statement.executeUpdate() > 0;
+			/*
+			 * Se realiza el commit y se cierra conexion
+			 */
+			con.commit();
+			statement.close();
+			con.close();
+
+		} catch (SQLException e) {
+			con.rollback();
+			e.printStackTrace();
+		}
+
+		return "Registro de la actividad en progreso con exito";
+
+	}
+	
+	
+	
 
 }

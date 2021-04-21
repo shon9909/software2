@@ -2,16 +2,16 @@ html {
     width: 100%;
     height: 100%;
 }
-
+/*
 body {
-    background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+    background-image: url("img/3.png");
     color: rgba(0, 0, 0, 0.6);
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     line-height: 1.6em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
+}*/
 
 .overlay,
 .form-panel.one:before {
@@ -23,7 +23,6 @@ body {
     width: 100%;
     height: 100%;
 }
-
 .form {
     z-index: 15;
     position: relative;
@@ -61,7 +60,7 @@ body {
     left: 50%;
     width: 30px;
     height: 4px;
-    background: #4285f4;
+    background: #2a7aba;
     transform: translate(-50%, -50%);
 }
 
@@ -135,7 +134,7 @@ body {
 
 .form-group button {
     outline: none;
-    background: #337ab7;
+    background: #2a7aba;
     width: 100%;
     border: 0;
     border-radius: 4px;
@@ -244,7 +243,7 @@ body {
 
 .form-header h1 {
     padding: 4px 0;
-    color: #337ab7;
+    color: #2a7aba;
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
@@ -280,7 +279,7 @@ body {
 
 .cp-fab {
     background: #ffffff !important;
-    color: #002345!important;
+    color: #2a7aba!important;
 }
 
 #message {

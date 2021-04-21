@@ -1,12 +1,12 @@
 * {
     box-sizing: border-box;
 }
-
+/*
 body {
-    background: #f1f1f1;
+    background-image: url("img/3.png");
     margin: 2rem;
     width: 100%;
-}
+}*/
 
 .blog-card {
     display: flex;
@@ -19,9 +19,7 @@ body {
     font-family: sans-serif;
     border-radius: 10px;
     overflow: hidden;
-    z-index: 0;
 }
-
 .blog-card a {
     color: inherit;
 }
