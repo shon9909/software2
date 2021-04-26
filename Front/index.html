@@ -49,7 +49,7 @@
         </div>
     </header>
     <!--Opciones de inicio (Psicoterapia, Medicación y Descanso)-->
-    <div id="opcionesInicio" > 
+    <div id="opcionesInicio"  style="Display: none" > 
         <div class="ui relaxed grid">
             <div class="three column row">
                 <div class="column">
@@ -92,7 +92,7 @@
         </div>
     </div>
     <!--tabla-->
-    <div class="tabla" style="display: none">
+    <div class="tabla" >
 	    <div  id = "main-container" >
             <form>    
                 <table>
@@ -104,12 +104,10 @@
                             <th>Valoración</th>
                         </tr>
                     </thead>
-                    <tr v-for='u in datos'>
-                        <td>{{u.fecha}}</td>
-                        <td>{{u.Descripcion}}</td>
-                        <td>{{u.Nombre}}</td>
-                        <td>{{u.Valoracion}}</td>
-                    </tr>
+                    <tbody id="contenidoTabla">
+                        
+                    </tbody>
+                    
                 </table>
             </form>
 	    </div>
