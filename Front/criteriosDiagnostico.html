@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/plantillaBase.css">
+    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+
+    <title>Inicio de sesión | NANOAPP</title>
+    <link rel="shortcut icon" href="img/c.png" type="image/png">
+</head>
+
+<body>
+    <!--Encabezado con el menu desplegable y el menu del perfil -->
+    <header>
+        <div class="menuDesplegable">
+            <div class="btn-menu">
+                <label for="btn-menu">
+                    <i id="bar" class="bars icon"></i>
+                </label>
+            </div>
+            <div id="perfil" class="ui text menu">
+                <div class="ui right dropdown item">
+                    <label id="perfil-icon"><i class="user circle icon"></i></label>
+                    <div class="menu">
+                        <div class="item">Nombre_Usuario</div>
+                        <div class="item">Perfil</div>
+                        <div class="item">Cambiar adulto Mayor</div>
+                        <div class="item">Cerrar sesión</div>
+                    </div>
+                </div>
+            </div>
+            <input type="checkbox" id="btn-menu">
+            <div class="contenedor-menu">
+                <div class="contenido-menu">
+                    <nav>
+                        <a href="">Inicio</a>
+                        <a href="">Mi Progreso</a>
+                        <a href="">¿Que hay de nuevo?</a>
+                        <a href="">Perfil</a>
+                    </nav>
+                    <div class="btn-menu">
+                        <label for="btn-menu">
+                            <i id="bar" class="bars icon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="segundoEncabezado">
+            <p class="textoSegundoEn">"RECOMENDACIONES DE CUIDADO"</p>
+        </div>
+    </header>
+    <!--Actividades nuevas y actividades eliminadas-->
+    <div id="criterios">
+        <form class="ui form segment">
+            <table class="ui celled table" id="tablaCriterios">
+                <thead>
+                    <th>Criterios</th>
+                    <th>Puntaje inicial</th>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="ui icon green button" data-content="Añadir criterio" data-inverted="" id="añadirCriterio">
+                <i class="add icon"></i>
+            </div>
+            <div class="ui icon red button" data-content="Eliminar criterio" data-inverted="" id="eliminarCriterio"
+                onclick="eliminarFila()">
+                <i class="remove icon"></i>
+            </div>
+            <div class="ui primary submit button">Guardar</div>
+            <div class="ui error message"></div>
+        </form>
+    </div>
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Nuevo criterio
+        </div>
+        <div class="ui input">
+            <input type="text" id="termino" placeholder="Nombre del criterio">
+        </div>
+        <div class="actions">
+            <div class="ui positive button" onclick="agregarCriterio()">Guardar</div>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+    integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script src="Js/js.js"></script>
+
+</html>
