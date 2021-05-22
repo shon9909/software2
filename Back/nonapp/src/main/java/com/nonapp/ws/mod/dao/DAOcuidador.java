@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.composite.Composite;
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.factory.entidad;
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOcuidador;
@@ -17,15 +19,13 @@ public class DAOcuidador implements entidad {
 	private Connection con;
 	private PreparedStatement statement;
 
-	private Connection obtenerConexion() throws SQLException {
-		return conexion.getConnection();
+	private Connection obtenerConexion() throws SQLException{
+		return FachadaC.obtenerConexion();	
 	}
 	// Metodo POST REGISTRAR
 
 	public boolean registrar(String s) throws SQLException {
-		Gson a = new Gson();
-		VOcuidador cuidador = a.fromJson(s, VOcuidador.class);
-
+		VOcuidador cuidador = Composite.fromJsonVOcuidador(s);
 		String seleccio = null;
 		boolean estadoOp = false;
 		/*

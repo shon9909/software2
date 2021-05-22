@@ -10,14 +10,24 @@
 	<link rel="stylesheet" href="css/perfil.css">
 	<link rel="stylesheet" href="css/adultoMayor.css">
 	<link rel="stylesheet" href="css/semantic.min.css">
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<link rel="shortcut icon" href="https://www.jose-aguilar.com/blog/wp-content/themes/jaconsulting/favicon.ico" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
+	
+
+
+
 
 	<title>Inicio de sesión | NANOAPP</title>
 	<link rel="shortcut icon" href="img/c.png" type="image/png">
 </head>
 
 
-<body >
-	
+
+
+<body>
 	<!--Encabezado con el menu desplegable y el menu del perfil -->
 	<header id="menu">
 		<div class="menuDesplegable">
@@ -49,8 +59,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="segundoEncabezado">
-			<p class="textoSegundoEn">"RECOMENDACIONES DE CUIDADO"</p>
+		<div class="segundoEncabezado" id="recomen">
+
 		</div>
 	</header>
 	<!-- tres opciones de tratamiento-->
@@ -108,7 +118,7 @@
 
 	<!--Registro de cuidador-->
 	<div id="registroCuidador">
-		<div class="form">
+		<div class="form2">
 			<div class="form-panel">
 				<div class="form-header">
 					<h1>Registro de usuario</h1>
@@ -125,7 +135,7 @@
 					</div>
 					<div class="form-group">
 						<label for="contraseña">Confirmacion contraseña</label> <input type="password"
-							required="required" />
+							required="required" id="contrasena2" />
 					</div>
 					<div class="form-group">
 						<label for="email">Email Address</label> <input type="text" id="emailRegistro" name="email"
@@ -147,7 +157,7 @@
 
 	<!--Registro de adulto mayor-->
 	<div id="registroAdulto">
-		<div class="form">
+		<div class="form2">
 			<div class="form-panel">
 				<div class="form-header">
 					<h1>Registro del adulto mayor</h1>
@@ -284,17 +294,16 @@
 
 
 	<!--Actividades estratégicas y su puntuación-->
-	<br>
-	<br>
+
 	<div id="actiPsico">
 		<div class="opcionesInicio">
 			<table class="ui celled structured table">
 				<thead>
 					<tr>
-						<th rowspan="2">Tipo de tratamiento</th>
-						<th rowspan="2">Actividad</th>
-						<th rowspan="2">Descripcion</th>
-						<th rowspan="2">Detalles</th>
+						<th rowspan="2" class="t">Tipo de tratamiento</th>
+						<th rowspan="2" class="t">Nombre de la Actividad</th>
+						<th rowspan="2" class="t">Descripcion</th>
+						<th rowspan="2" class="t">Detalles</th>
 					</tr>
 				</thead>
 				<tbody id="uno">
@@ -310,7 +319,7 @@
 			<thead>
 				<tr>
 					<th class="center aligned single line">Tipo de tratamiento</th>
-					<th class="center aligned">Actividad</th>
+					<th class="center aligned" id="ac">Actividad</th>
 					<th class="center aligned">Descripción</th>
 					<th class="center aligned">Valoracion</th>
 					<th class="center aligned">¿Realizada?</th>
@@ -321,8 +330,7 @@
 		</table>
 	</div>
 
-	<br>
-	<br>
+
 	<div id="Miprogre">
 
 	</div>
@@ -341,9 +349,11 @@
 					<thead>
 						<tr>
 							<th>Fecha</th>
-							<th>Descripción</th>
 							<th>Nombre</th>
-							<th>Valoración</th>
+							<th>Descripción</th>
+							<th>Valoración Inicial</th>
+							<th>Valoración Final</th>
+							<th>Conclusiones!</th>
 						</tr>
 					</thead>
 					<tbody id="contenidoTabla">
@@ -375,9 +385,6 @@
 	</div>
 
 
-
-	<br>
-	<br>
 	<div id="actividadesCompletas">
 		<div class="ui centered card">
 			<div class="ui slide masked reveal image">
@@ -409,15 +416,184 @@
 
 
 
+	<div id="criterios" class="ui centered modal" style="text-align:center;">
+
+		<table class="ui centered celled table" id="tablaCriterios" ALIGN="center">
+			<thead>
+				<th class="center aligned">Criterios</th>
+				<th class="center aligned">Puntaje inicial<br>Donde:<br>1: Es muy malo.<br>4:Es muy bueno.</th>
+			</thead>
+			<tbody id="prime">
+
+			</tbody>
+		</table>
+		<div class="ui info message">
+			<i class="close icon"></i>
+			<div class="header">
+				¿Necesitas medir un criterio mas personalizado?
+			</div>
+			<ul class="list">
+				<li>Puedes ir al boton verde y agregarlo!</li>
+				<li>Puedes eliminar el ultimo criterio agregado mediante el boton rojo!</li>
+			</ul>
+		</div>
+		<div class="ui centered grid">
+			<div class="ui  icon green button" data-content="Añadir criterio" data-inverted="" id="añadirCriterio">
+				<i class="add icon"></i>
+			</div>
+			<div class="ui  icon red button" data-content="Eliminar criterio" data-inverted="" id="eliminarCriterio"
+				onclick="eliminarFila()">
+				<i class="remove icon"></i>
+			</div>
+			<div class="ui  primary submit button" onclick="guardarCriterios()">Guardar</div>
+
+			<div class="ui modal" id="agC">
+				<i class="close icon"></i>
+				<div class="header">
+					¡Recuerda los siguientes pasos para crear un criterio correcto!
+				</div>
+				<div class="ui info message">
+					<i class="close icon"></i>
+					<ul class="list">
+						<li>Identifica una accion cuantificable</li>
+						<li>Dicha accion debe ser medida de 1-4</li>
+						<li>Entre mas grande sea la valoracion, quiere decir que mejoro la situacion del criterio.</li>
+						<li>Entre mas pequeña sea la valoracion, quiere decir que empeoro la situacion del criterio.
+						</li>
+					</ul>
+				</div>
+				<div class="header">
+					Mira este ejemplo!
+				</div>
+				<div class="ui info message">
+					<i class="close icon"></i>
+					<ul class="list">
+						<li>Nivel de concentracion en actividades cotidianas</li>
+						<li>¡Como puedes ver, el criterio anterior entre mas grande la valoracion es mucho mejor!</li>
+					</ul>
+				</div>
+				<div class="ui centered input grid">
+					<input type="text" id="termino" placeholder="Nombre del criterio">
+				</div>
+				<div class="actions">
+					<div class="ui centered positive button" onclick="agregarCriterio()">Guardar</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="criteriosFin" class="ui centered modal" style="text-align:center;">
+		<div class="ui info message">
+			<i class="close icon"></i>
+			<div class="header">
+				Registra las valoraciones finales!
+			</div>
+			<ul class="list">
+				<li>Recuerda que los criterios que estan a continuacion fueron agregados en criterios inciales!</li>
+				<li>Recuerda que entre el valor de la valoracion sea mas alto, representa mejoria!</li>
+			</ul>
+		</div>
+		<table class="ui centered celled table" id="tablaCriteriosFinales" ALIGN="center">
+			<thead>
+				<th class="center aligned">Criterios</th>
+				<th class="center aligned">Puntaje Final<br>Donde:<br>1: Es muy malo.<br>4:Es muy bueno.</th>
+			</thead>
+			<tbody id="primeFinal">
+
+			</tbody>
+		</table>
+		<div class="actions">
+			<div class="ui centered positive button" onclick="guardarCriteriosFin()">Guardar</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+	<!--GRAFICOS-->
+	<div id="grafico">
+		<div class="ui relaxed grid" id="criteriosCon">
+			<div class="three column row" id="criteriosInt">
+				<div class="column" id="infoCriCon">
+					<div class="ui info message" >
+					<div class="header" id="Cini">
+						Criterios Iniciales y Finales:
+					</div>
+					
+						<i class="close icon"></i>
+						<ul class="list" id="conCIniciales">
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="column" id="concluNega">
+					
+
+				</div>
 
 
+				<div class="column" id="columnC">
+					<img src="https://i.ibb.co/RPNbq4V/conclu.png" id="cImg">
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="ui centered relaxed grid" id="grafico2">
+			<div class="two column row" id="gra2">
+				<div class="column">
+					<div class="ui link cards two wide column">
+						<canvas id="Inicio" width="800" height="800" style="margin: 40px;"></canvas>
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui link cards two wide column">
+						<canvas id="Fin" width="800" height="800" style="margin: 40px;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-
+	<div class="container" id="calen">		
+		<div class="row">
+			<div id="content" class="col-lg-12">
+				<div id="calendar"></div>
+				<div class="ui modal " id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="event-title"></h5>
+						
+					</div>
+					<div>
+						<div id="event-description"></div>
+					</div>
+					<br>
+					<br>
+					<div>
+						<button class="ui red button" id="eliminarev">Eliminar</button>
+						<button class="ui green button">Guardar cambios</button>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"></script>
 <script src="Js/js.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<script  src='Js/moment.min.js'></script>
+<script  src='Js/fullcalendar.min.js'></script>
+<script  src='Js/locale/es.js'></script>

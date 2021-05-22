@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.mod.conexion.conexion;
+import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOprogreso;
 import com.nonapp.ws.res.VO.VOrecomendacion;
 
@@ -17,8 +19,8 @@ public class DAOrecomendacion {
 	private Connection con;
 	private PreparedStatement statement;
 
-	private Connection obtenerConexion() throws SQLException {
-		return conexion.getConnection();
+	private Connection obtenerConexion() throws SQLException{
+		return FachadaC.obtenerConexion();	
 	}
 
 	/*
@@ -26,18 +28,22 @@ public class DAOrecomendacion {
 	 */
 	public String consultaRecomendaciones() throws SQLException {
 		Gson gson = new Gson();
-		String a = "";
 		List<VOrecomendacion> lista = new ArrayList<VOrecomendacion>();
+		String seleccio = null;
 		ResultSet resultSet = null;
-		String sql = null;
+		String a = "";
 		con = obtenerConexion();
-		int reco = (int) Math.floor(Math.random()*3+1);
-		
-
+		/*
+		 * Se abre conexion
+		 */
+		con = obtenerConexion();
 		try {
-			sql = "select * from recomendacion WHERE id=(?)";
-			statement = con.prepareStatement(sql);
-			statement.setInt(1, reco);
+			con.setAutoCommit(false);
+			/*
+			 * inyeccion sql tabla cuidador email nombre password (encriptada)
+			 */
+			seleccio = "SELECT * FROM recomendacion ORDER BY RAND() LIMIT 1;";
+			statement = con.prepareStatement(seleccio);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				VOrecomendacion p = new VOrecomendacion();
@@ -53,6 +59,7 @@ public class DAOrecomendacion {
 
 		return a;
 	}
+	
 	
 	/*
 	 * Main prueba aqui vamos xd

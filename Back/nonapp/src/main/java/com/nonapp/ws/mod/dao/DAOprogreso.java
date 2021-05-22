@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOprogreso;
 import java.util.Date;
@@ -18,10 +19,9 @@ public class DAOprogreso {
 	private Connection con;
 	private PreparedStatement statement;
 
-	private Connection obtenerConexion() throws SQLException {
-		return conexion.getConnection();
+	private Connection obtenerConexion() throws SQLException{
+		return FachadaC.obtenerConexion();	
 	}
-	
 	
 
 	/*
@@ -44,8 +44,9 @@ public class DAOprogreso {
 				VOprogreso p = new VOprogreso();
 				p.setId_adulto_mayor(resultSet.getInt(1));
 				p.setId_actividades(resultSet.getInt(2));
-				p.setValoracion(resultSet.getInt(3));
-				p.setFecha(resultSet.getString(4));
+				p.setValoracionIni(resultSet.getFloat(3));
+				p.setValoracionFin(resultSet.getFloat(4));
+				p.setFecha(resultSet.getString(5));
 				lista.add(p);
 				a = gson.toJson(lista);
 			}
@@ -61,7 +62,7 @@ public class DAOprogreso {
 	 * medicacion o descanso)
 	 */
 
-	public String registrarNuevaActivi(int id_adulto_mayor, int id_actividades, int valoracion, String fecha) throws SQLException {
+	public String registrarNuevaActivi(int id_adulto_mayor, int id_actividades, float valoracionIni,float valoracionFin, String fecha) throws SQLException {
 		String seleccio = null;
 		boolean estadoOp = false;
 		/*
@@ -74,12 +75,13 @@ public class DAOprogreso {
 			 * inyeccion sql tabla cuidador_has_adultomayor id_cuidador
 			 * id_adulto_mayor
 			 */
-			seleccio = "INSERT INTO `progreso` (`id_adulto_mayor`,`id_actividades`,`valoracion`,`fecha`)VALUES (?,?,?,?)";
+			seleccio = "INSERT INTO `progreso` (`id_adulto_mayor`,`id_actividades`,`valoracionIni`,`valoracionFin`,`fecha`)VALUES (?,?,?,?,?)";
 			statement = con.prepareStatement(seleccio);
 			statement.setInt(1, id_adulto_mayor);
 			statement.setInt(2, id_actividades);
-			statement.setInt(3, valoracion);
-			statement.setString(4, fecha);
+			statement.setFloat(3, valoracionIni);
+			statement.setFloat(4, valoracionFin);
+			statement.setString(5, fecha);
 			estadoOp = statement.executeUpdate() > 0;
 			/*
 			 * Se realiza el commit y se cierra conexion

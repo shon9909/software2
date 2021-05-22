@@ -15,13 +15,16 @@ import org.codehaus.jettison.json.JSONObject;
 import org.codehaus.jettison.json.JSONTokener;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.composite.Composite;
 import com.nonapp.ws.factory.entidad;
 import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
+import com.nonapp.ws.mod.dao.DAOprogreso2;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
+import com.nonapp.ws.res.VO.VOprogreso2;
 
 
 
@@ -30,7 +33,7 @@ import com.nonapp.ws.res.VO.VOcuidador;
 @Path("/Registro")
 
 
-public class ServiceRegistro {
+public class ServiceRegistro{
 	
 	@POST
 	@Path("/Cuidador")
@@ -38,8 +41,7 @@ public class ServiceRegistro {
 	@Produces({MediaType.APPLICATION_JSON})
 	
 	public Response Cuidador(VOcuidador cuidador){
-		Gson a=new Gson();
-		String k=a.toJson(cuidador);	
+		String k=Composite.ToJson(cuidador);
 		try{
 			if(factory.getEntidad(DAOcuidador.class).registrar(k)!=false){
 
@@ -57,8 +59,7 @@ public class ServiceRegistro {
 	@Produces({MediaType.APPLICATION_JSON})
 	
 	public Response Adulto(VOadulto_mayor adulto){
-		Gson a=new Gson();
-		String k=a.toJson(adulto);	
+		String k=Composite.ToJson(adulto);	
 		try{
 			if(factory.getEntidad(DAOadulto_mayor.class).registrar(k)!=false){
 				return Response.status(Response.Status.CREATED).entity("{\"Status\": \"hecho\"}").build();
@@ -118,5 +119,18 @@ public class ServiceRegistro {
 		return a;
 	
 	}
+
+	//Aqui se registran los datos traidos del formulario de criterios iniciales
+	@POST
+	@Path("/Criterios")
+	@Consumes({MediaType.APPLICATION_JSON})
+	public String RegCriterios(VOprogreso2 progreso2) throws SQLException, JSONException{
+		DAOprogreso2 daoprogreso2=new DAOprogreso2();
+		String a=daoprogreso2.RegistroCriterio(progreso2.getDescripcion(), progreso2.getValoracion(), progreso2.getId_adulto_mayor(), progreso2.getId_actividades(), progreso2.getCriterio());
+		return a;
+	
+	}
+	
+	
 	
 }

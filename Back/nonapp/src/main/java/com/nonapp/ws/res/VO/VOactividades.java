@@ -6,7 +6,22 @@ public class VOactividades {
 	private String descripcion;
 	private int id_potencia;
 	private int id_diagnostico;
-	private int valoracion;
+
+	private float valoracionIni;
+	private float valoracionFin;
+	
+	public float getValoracionIni() {
+		return valoracionIni;
+	}
+	public void setValoracionIni(float valoracionIni) {
+		this.valoracionIni = valoracionIni;
+	}
+	public float getValoracionFin() {
+		return valoracionFin;
+	}
+	public void setValoracionFin(float valoracionFin) {
+		this.valoracionFin = valoracionFin;
+	}
 	private String fecha;
 	public String getFecha() {
 		return fecha;
@@ -44,12 +59,7 @@ public class VOactividades {
 	public void setId_diagnostico(int id_diagnostico) {
 		this.id_diagnostico = id_diagnostico;
 	}
-	public int getValoracion() {
-		return valoracion;
-	}
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
-	}
+
 	
 
 

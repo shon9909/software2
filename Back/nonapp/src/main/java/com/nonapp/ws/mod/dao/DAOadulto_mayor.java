@@ -5,27 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.composite.Composite;
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.factory.entidad;
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOactividades;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
-import com.nonapp.ws.res.VO.VOerror;
-import com.nonapp.ws.res.VO.VOprogreso;
+
 
 public class DAOadulto_mayor implements entidad {
 
 	private Connection con;
 	private PreparedStatement statement;
 
-	private Connection obtenerConexion() throws SQLException {
-		return conexion.getConnection();
+	private Connection obtenerConexion() throws SQLException{
+		return FachadaC.obtenerConexion();	
 	}
-
+	
 	/*
 	 * Registra adulto mayor y llama la funcion de la clase
 	 * DAOcuidador_has_adulto mayor llamada relacionAdultoCuidador para crear
@@ -33,8 +34,7 @@ public class DAOadulto_mayor implements entidad {
 	 */
 	public boolean registrar(String a) throws SQLException {
 		// int id_cuidador, String nombre, String apellido, String nacimiento,
-		Gson gson = new Gson();
-		VOadulto_mayor adult = gson.fromJson(a, VOadulto_mayor.class);
+		VOadulto_mayor adult = Composite.fromJsonVOadulto_mayor(a);
 		String seleccio = null;
 		boolean estadoOp = false;
 		List<VOadulto_mayor> lista = new ArrayList<VOadulto_mayor>();
@@ -155,8 +155,9 @@ public class DAOadulto_mayor implements entidad {
 				ac.setId_potencia(resultSet.getInt(4));
 				ac.setId_diagnostico(resultSet.getInt(5));
 				ac.setId_actividades(resultSet.getInt(7));
-				ac.setValoracion(resultSet.getInt(8));
-				ac.setFecha(resultSet.getString(9));
+				ac.setValoracionIni(resultSet.getFloat(8));
+				ac.setValoracionFin(resultSet.getFloat(9));
+				ac.setFecha(resultSet.getString(10));
 				lista.add(ac);
 				a = gson.toJson(lista);
 			}
@@ -181,7 +182,7 @@ public class DAOadulto_mayor implements entidad {
 		con = obtenerConexion();
 
 		try {
-			sql = "SELECT * FROM actividades A, progreso P WHERE A.id_actividades = P.id_actividades AND P.id_adulto_mayor=? order by valoracion DESC LIMIT 3;";
+			sql = "SELECT * FROM actividades A, progreso P WHERE A.id_actividades = P.id_actividades AND P.id_adulto_mayor=? order by valoracionIni,valoracionFin DESC LIMIT 3;";
 			statement = con.prepareStatement(sql);
 			statement.setInt(1, id_adulto_mayor);
 			resultSet = statement.executeQuery();
@@ -192,8 +193,9 @@ public class DAOadulto_mayor implements entidad {
 				ac.setDescripcion(resultSet.getString(3));
 				ac.setId_potencia(resultSet.getInt(4));
 				ac.setId_diagnostico(resultSet.getInt(5));
-				ac.setValoracion(resultSet.getInt(8));
-				ac.setFecha(resultSet.getString(9));
+				ac.setValoracionIni(resultSet.getFloat(8));
+				ac.setValoracionFin(resultSet.getFloat(9));
+				ac.setFecha(resultSet.getString(10));
 				
 				
 				lista.add(ac);

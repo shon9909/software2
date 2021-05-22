@@ -3,8 +3,22 @@ package com.nonapp.ws.res.VO;
 public class VOprogreso {
 	private int id_adulto_mayor;
 	private int id_actividades;
-	private int valoracion;
+	private float valoracionIni;
+	private float valoracionFin;
 	private String fecha;
+	
+	public float getValoracionIni() {
+		return valoracionIni;
+	}
+	public void setValoracionIni(float valoracionIni) {
+		this.valoracionIni = valoracionIni;
+	}
+	public float getValoracionFin() {
+		return valoracionFin;
+	}
+	public void setValoracionFin(float valoracionFin) {
+		this.valoracionFin = valoracionFin;
+	}
 	public int getId_adulto_mayor() {
 		return id_adulto_mayor;
 	}
@@ -16,12 +30,6 @@ public class VOprogreso {
 	}
 	public void setId_actividades(int id_actividades) {
 		this.id_actividades = id_actividades;
-	}
-	public int getValoracion() {
-		return valoracion;
-	}
-	public void setValoracion(int valoracion) {
-		this.valoracion = valoracion;
 	}
 	public String getFecha() {
 		return fecha;

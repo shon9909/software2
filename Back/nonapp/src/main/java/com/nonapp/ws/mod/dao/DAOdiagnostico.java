@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOdiagnostico;
 import com.nonapp.ws.res.VO.VOprogreso;
@@ -16,8 +17,8 @@ public class DAOdiagnostico {
 	private Connection con;
 	private PreparedStatement statement;
 
-	private Connection obtenerConexion() throws SQLException {
-		return conexion.getConnection();
+	private Connection obtenerConexion() throws SQLException{
+		return FachadaC.obtenerConexion();	
 	}
 	
 	public String consultaDiagnosticos() throws SQLException {

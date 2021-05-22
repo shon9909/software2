@@ -8,18 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.nonapp.ws.fachada.FachadaC;
+
 import com.nonapp.ws.mod.conexion.conexion;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOcuidador_has_adultomayor;
 import com.nonapp.ws.res.VO.VOerror;
 
-public class DAOcuidador_has_adultomayor {
+public class DAOcuidador_has_adultomayor{
 	private Connection con;
 	private PreparedStatement statement;
-	
+
 	private Connection obtenerConexion() throws SQLException{
-		return conexion.getConnection();
+		return FachadaC.obtenerConexion();	
 	}
 /*
  * Metodo GET automatico despues de validar ingreso de Cuidador, devuelve todos los datos de los adulto mayor
