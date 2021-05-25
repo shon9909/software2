@@ -1,0 +1,11 @@
+{ "actividadesI": [
+    {"name":"Caminata","valoracion":5},
+    {"name":"Ajedrez","valoracion":4},
+    {"name":"Baile","valoracion":3},
+    {"name":"Bingo","valoracion":2},
+    {"name":"Lanzamiento aros","valoracion":2},
+    {"name":"Dardos","valoracion":2},
+    {"name":"Acertijos ","valoracion":2}
+]
+
+}

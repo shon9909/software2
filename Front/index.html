@@ -7,7 +7,9 @@
 </head>   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"></script>
+
+    <body>
     <!--Encabezado con el menu desplegable y el menu del perfil -->
     <header>
         <div class="menuDesplegable"> 
@@ -92,7 +94,7 @@
         </div>
     </div>
     <!--tabla-->
-    <div class="tabla" >
+    <div class="tabla"  style="Display: none"  >
 	    <div  id = "main-container" >
             <form>    
                 <table>
@@ -112,7 +114,50 @@
             </form>
 	    </div>
     </div>
+      <!--grafico-->
+    <div id="grafico"   > 
+        <div class="ui relaxed grid">
+            <div class="two column row">
+                <div class="column">
+                    <div class="ui link cards two wide column">
+                        <canvas id="InicioChart" width="400" height="400"></canvas>
+                    </div>  
+                </div>
+                <div class="column">
+                    <div class="ui link cards two wide column">
+                        <canvas id="FinChart" width="400" height="400"></canvas>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="densityChart" width="600" height="400"></canvas>
+
+    <!--ruleta-->
+    <div class="tabla"  style="Display: none"  >
+	    <div  id = "main-container" >
+            <form>    
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th> 
+                            <th>Descripción</th>
+                            <th>Nombre</th> 
+                            <th>Valoración</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contenidoTabla">
+                        
+                    </tbody>
+                    
+                </table>
+            </form>
+	    </div>
+    </div>
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="js/js.js"></script>
+<script src="js/graficos.js"></script>
 </html>

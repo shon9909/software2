@@ -183,3 +183,8 @@ margin: 0!important;
 #menuh2{
 	margin-left: 100px;
 }
+#grafico{
+    margin-top: 80px !important;
+    width: 800px; 
+    margin: 0 auto; 
+}
