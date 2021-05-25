@@ -1,0 +1,13 @@
+#canvasContainer {
+    background-image: url(img/Muerte.png);
+    background-repeat: no-repeat;  
+    background-position: center;   
+    width: 700px;                  
+    height: 700px;
+	cursor:pointer;
+}
+#ruleta{
+    margin-top: 80px !important;
+    width: 800px; 
+    margin: 0 auto; 
+}
