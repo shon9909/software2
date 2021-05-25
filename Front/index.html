@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="css/plantillaBase.css">
+    <link rel="stylesheet" href="css/ruleta.css">
+    <script src="js/Winwheel.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet" />
 </head>   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -134,10 +140,25 @@
     <canvas id="densityChart" width="600" height="400"></canvas>
 
     <!--ruleta-->
-    <div class="tabla"  style="Display: none"  >
-	    <div  id = "main-container" >
-            
-	    </div>
+	<div id="ruleta"  style=""  >
+        <div class="ui relaxed grid">
+            <div class="one column row">
+                <div class="column">
+                    <div>                
+                        <textarea id="ListaElementos" class="form-control" rows="13" style="display:none">
+                        </textarea>
+                        <input type="button" onclick="leerElementos()" class="btn btn-danger btn-lg btn-block" value="Generar Ruleta"/><br />
+                    </div>
+                    <br/>
+                    <input id="bigButton" class="btn-block btn-lg btn btn-success " onclick="objRuleta.startAnimation(); this.disabled=true;" value="Girar" type="button"/>
+                    <div id="canvasContainer" onclick="objRuleta.startAnimation();bigButton.disabled = true;">
+                        <canvas id='Ruleta' width='700' height='690'>
+                           
+                        </canvas> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -145,4 +166,5 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="js/js.js"></script>
 <script src="js/graficos.js"></script>
+<script src="js/ruleta.js"></script>
 </html>
