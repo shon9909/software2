@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.nonapp.ws.fachada.FachadaC;
 import com.nonapp.ws.mod.conexion.conexion;
 public class registro{
 	private Connection con;
@@ -40,7 +41,7 @@ public static void main(String[] args) throws SQLException {
  * Metodo para Obtener conexion (Cada que se haga una inyeccion, se abre y cierra conexion con la base de datos.)
  */
 private Connection obtenerConexion() throws SQLException{
-	return conexion.getConnection();
+	return FachadaC.obtenerConexion();	
 }
 /*
  * Metodos POST separados por tablas para hacer inyeccion de datos return ok si esta perfecto uwu.

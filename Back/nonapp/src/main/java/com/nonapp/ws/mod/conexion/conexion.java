@@ -7,7 +7,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 public class conexion {
 
 	private static BasicDataSource dataSource=null;
-	private static DataSource getDataSource() {
+	
+	public static DataSource getDataSource() {
 		if (dataSource==null) {
 
 			dataSource= new BasicDataSource();
@@ -17,14 +18,13 @@ public class conexion {
 			dataSource.setUrl("jdbc:mysql://localhost/proyecto");
 			dataSource.setInitialSize(20);
 			dataSource.setMaxIdle(15);
-			dataSource.setMaxTotal(20);
-			dataSource.setMaxWaitMillis(5000);
+			dataSource.setMaxTotal(10000);
+			dataSource.setMaxWaitMillis(8000);
 		}
 		return dataSource;
 	}
-	public static Connection getConnection() throws SQLException {
-		return getDataSource().getConnection();
-	}	
+	
+	
 }
 
 

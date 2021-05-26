@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/plantillaBase.css">
+	<link rel="stylesheet" href="css/registro.css">
+	<link rel="stylesheet" href="css/perfil.css">
+	<link rel="stylesheet" href="css/adultoMayor.css">
+	<link rel="stylesheet" href="css/semantic.min.css">
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<link rel="shortcut icon" href="https://www.jose-aguilar.com/blog/wp-content/themes/jaconsulting/favicon.ico" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
+	
+
+
+
+
+	<title>Inicio de sesión | NANOAPP</title>
+	<link rel="shortcut icon" href="img/c.png" type="image/png">
+</head>
+
+
+
+
+<body>
+	<!--Encabezado con el menu desplegable y el menu del perfil -->
+	<header id="menu">
+		<div class="menuDesplegable">
+			<div class="btn-menu">
+				<label for="btn-menu"> <i id="bar" class="bars icon"></i>
+				</label>
+			</div>
+			<div id="perfil" class="ui text menu">
+				<div class="ui right dropdown item">
+					<label id="perfil-icon"><i class="user circle icon"></i></label>
+					<div class="menu" id="menucaja">
+
+					</div>
+				</div>
+			</div>
+			<input type="checkbox" id="btn-menu">
+			<div class="contenedor-menu">
+				<div class="contenido-menu">
+					<nav>
+						<a onclick="inicio()">Inicio</a>
+						<a onclick="Miprogreso()">Mi Progreso</a>
+						<a>¿Que hay de nuevo?</a>
+						<a onclick="perfilA()">Perfil Adulto Mayor en linea</a>
+					</nav>
+					<div class="btn-menu">
+						<label for="btn-menu"> <i id="bar" class="bars icon"></i>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="segundoEncabezado" id="recomen">
+
+		</div>
+	</header>
+	<!-- tres opciones de tratamiento-->
+
+
+
+
+	<!--Login de cuidador-->
+	<div id="login">
+		<div class="ui relaxed grid">
+			<div class="two column row">
+				<!--Imagen-->
+				<div class="column">
+					<img src="https://www.frankcrum.com/hubfs/FrankCrum_2020/Images/Retirement-Plan-1.jpg">
+					<h4>
+						<i>"La depresión viene sigilosamente y muchas personas no
+							notan que ya llegó"</i>
+					</h4>
+				</div>
+				<!--Formulario de login-->
+				<div class="column">
+					<div class="row">
+						<div class="ui segment">
+							<div class="ui form">
+								<div class="field">
+									<div class="ui left icon input">
+										<i class="user icon"></i> <input type="text" name="correoElectronico"
+											id="correoElectronico" placeholder="Correo electrónico">
+									</div>
+								</div>
+								<div class="field">
+									<div class="ui left icon input">
+										<i class="lock icon"></i> <input type="password" name="contrasena"
+											id="contrasenaLogin" placeholder="contrasena">
+									</div>
+								</div>
+								<button class="ui button primary" type="submit" id="loginIngresar">INGRESAR</button>
+							</div>
+						</div>
+					</div>
+					<!--Boton para crear cuenta-->
+					<div class="row">
+						<div>
+							<div></div>
+							<div class="ui segment">
+								<button class="ui button primary" type="submit" id="crearCuenta">CREAR
+									CUENTA</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Registro de cuidador-->
+	<div id="registroCuidador">
+		<div class="form2">
+			<div class="form-panel">
+				<div class="form-header">
+					<h1>Registro de usuario</h1>
+				</div>
+				<div class="form-content">
+					<div class="form-group">
+						<label for="usuario">Nombre</label> <input type="text" id="nombreCuidador" name="usuario"
+							required="required" />
+					</div>
+					<div class="form-group">
+						<label for="contraseña">contrasena</label> <input type="password" id="contrasena"
+							required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+							title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más" />
+					</div>
+					<div class="form-group">
+						<label for="contraseña">Confirmacion contraseña</label> <input type="password"
+							required="required" id="contrasena2" />
+					</div>
+					<div class="form-group">
+						<label for="email">Email Address</label> <input type="text" id="emailRegistro" name="email"
+							required="required" />
+					</div>
+					<div class="form-group">
+						<button id="reg">Registrarse</button>
+					</div>
+					<div class="form-group">
+						<button id="volverRegaCuidInicio">Inicio</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="pen-footer"></div>
+	</div>
+
+
+	<!--Registro de adulto mayor-->
+	<div id="registroAdulto">
+		<div class="form2">
+			<div class="form-panel">
+				<div class="form-header">
+					<h1>Registro del adulto mayor</h1>
+				</div>
+				<div class="form-content">
+					<div class="form-group">
+						<label for="usuario">Nombre</label> <input type="text" id="nombreAdulto" name="nombre"
+							required="required" />
+					</div>
+					<div class="form-group">
+						<label for="usuario">Apellido</label> <input type="text" id="apellidoAdulto" name="apellido"
+							required="required" />
+					</div>
+					<div class="form-group">
+						<label for="usuario">Nacimiento</label> <input type="date" id="nacimientoAdulto"
+							name="nacimiento" required="required" />
+					</div>
+					<br>
+					<div class="form-group">
+						<label for="usuario">Elige tú situación/diagnostico</label>
+					</div>
+					<select class="ui dropdown" id="diagnosticos">
+
+					</select>
+
+					<br><br>
+
+					<div class="form-group">
+						<button id="regAdulto">Registrar</button>
+					</div>
+					<div class="form-group">
+						<button id="volverRegaAdulSelecc">Inicio</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="pen-footer"></div>
+	</div>
+
+
+
+
+	<!--Formulario para seleccionar persona 4ta edad-->
+
+	<div id="selectPersonaMayor">
+		<div id="c" class="ui segment">
+			<div class="ui two column centered grid">
+				<div class="column">
+
+					<h4>¿Hoy a quién tienes a cargo?</h4>
+					<div class="ui  selection dropdown" id="select">
+						<i class="dropdown icon"></i>
+						<div class="default text" id="seleccionAD">SELECCIONA...</div>
+
+						<div class="menu" id="adultos">
+
+						</div>
+					</div>
+				</div>
+				<br>
+				<br>
+				<br><br><br><br>
+				<div class="two column centered row">
+					<div class="ui centered grid">
+						<button class="ui button primary" type="submit" id="registrarAdultomayor">CREAR
+							PERFIL ADULTO MAYOR</button>
+					</div>
+					<br><br>
+					<div class="ui centered grid">
+						<button class="ui centered red button" id="cerrarUno">CERRAR SESION</button>
+					</div>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!--Opciones de inicio (Psicoterapia, Medicación y Descanso)-->
+	<div id="opcionesInicio">
+		<div class="ui relaxed grid">
+			<div class="three column row">
+				<div class="column">
+					<div id="car" class="ui link cards four wide column">
+						<div class="card" id="psico" value="1">
+							<div class="image">
+								<img class="imgC"
+									src="https://www.65ymas.com/uploads/s1/13/50/48/psiquiatra-psicolog.jpeg">
+							</div>
+							<div class="content">
+								<div class="header">Psicoterapia</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<div id="car" class="ui link cards four wide column">
+						<div class="card" id="medicacion">
+							<div class="image">
+								<img class="imgC"
+									src="https://statics-cuidateplus.marca.com/sites/default/files/styles/natural/public/organizar-medicamentos.jpg?itok=33anNJW3">
+							</div>
+							<div class="content">
+								<div class="header" value="2">Medicación</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="column">
+					<div id="car" class="ui link cards four wide column">
+						<div class="card" id="descanso">
+							<div class="image">
+								<img class="imgC"
+									src="https://adultosmayores.es/wp-content/uploads/2019/07/fotonoticia_20180618082933_640.jpg">
+							</div>
+							<div class="content">
+								<div class="header">Descanso</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<!--Actividades estratégicas y su puntuación-->
+
+	<div id="actiPsico">
+		<div class="opcionesInicio">
+			<table class="ui celled structured table">
+				<thead>
+					<tr>
+						<th rowspan="2" class="t">Tipo de tratamiento</th>
+						<th rowspan="2" class="t">Nombre de la Actividad</th>
+						<th rowspan="2" class="t">Descripcion</th>
+						<th rowspan="2" class="t">Detalles</th>
+					</tr>
+				</thead>
+				<tbody id="uno">
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="ui modal" id="detalles">
+		<table class="ui celled padded table">
+			<thead>
+				<tr>
+					<th class="center aligned single line">Tipo de tratamiento</th>
+					<th class="center aligned" id="ac">Actividad</th>
+					<th class="center aligned">Descripción</th>
+					<th class="center aligned">Valoracion</th>
+					<th class="center aligned">¿Realizada?</th>
+				</tr>
+			</thead>
+			<tbody id="actiSele">
+			</tbody>
+		</table>
+	</div>
+
+
+	<div id="Miprogre">
+
+	</div>
+
+
+	<!--tabla-->
+	<div class="tabla" id="historial">
+		<div id="main-container">
+			<div class="ui tag labels">
+				<a class="ui green label">
+					ACTIVIDADES REALIZADAS
+				</a>
+			</div>
+			<form>
+				<table>
+					<thead>
+						<tr>
+							<th>Fecha</th>
+							<th>Nombre</th>
+							<th>Descripción</th>
+							<th>Valoración Inicial</th>
+							<th>Valoración Final</th>
+							<th>Conclusiones!</th>
+						</tr>
+					</thead>
+					<tbody id="contenidoTabla">
+
+					</tbody>
+
+				</table>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="historialvacio">
+		<div class="ui centered card">
+			<div class="ui slide masked reveal image">
+				<img src="https://i.pinimg.com/236x/b8/ee/8b/b8ee8bf6f1f677f54fe3744a7e62b2d8--break-room-stock-photos.jpg"
+					class="visible content">
+				<img src="https://i.pinimg.com/236x/33/bf/33/33bf33f1ef7e02adae55742b8f851000--gifs.jpg"
+					class="hidden content">
+			</div>
+			<div class="content">
+				<a class="header">Tu historial esta vacio!</a>
+				<div class="meta">
+					<span class="date">Debes realizar actividades con tu adulto mayor</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="actividadesCompletas">
+		<div class="ui centered card">
+			<div class="ui slide masked reveal image">
+				<img src="https://st.depositphotos.com/1080148/3162/i/600/depositphotos_31622089-stock-photo-elderly-couple-against-sky.jpg"
+					class="visible content">
+				<img src="https://enlinea.santotomas.cl/wp-content/uploads/sites/2/2018/10/adulto-mayor-744x465.jpg"
+					class="hidden content">
+			</div>
+			<div class="content">
+				<a class="header">Completaste todas tus tareas!!!</a>
+				<div class="meta">
+					<span class="date">¡Felicitaciones!</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="blog-cardperfil" id="perfiladulto">
+		<div class="perfil">
+			<div class="imagen"
+				style="background-image: url(https://www.hd.com.do/wp-content/uploads/2019/08/Haroldfeature-1100x618.jpg)">
+			</div>
+		</div>
+		<div class="descripcion" id="perfilAa">
+		</div>
+	</div>
+
+
+
+
+	<div id="criterios" class="ui centered modal" style="text-align:center;">
+
+		<table class="ui centered celled table" id="tablaCriterios" ALIGN="center">
+			<thead>
+				<th class="center aligned">Criterios</th>
+				<th class="center aligned">Puntaje inicial<br>Donde:<br>1: Es muy malo.<br>4:Es muy bueno.</th>
+			</thead>
+			<tbody id="prime">
+
+			</tbody>
+		</table>
+		<div class="ui info message">
+			<i class="close icon"></i>
+			<div class="header">
+				¿Necesitas medir un criterio mas personalizado?
+			</div>
+			<ul class="list">
+				<li>Puedes ir al boton verde y agregarlo!</li>
+				<li>Puedes eliminar el ultimo criterio agregado mediante el boton rojo!</li>
+			</ul>
+		</div>
+		<div class="ui centered grid">
+			<div class="ui  icon green button" data-content="Añadir criterio" data-inverted="" id="añadirCriterio">
+				<i class="add icon"></i>
+			</div>
+			<div class="ui  icon red button" data-content="Eliminar criterio" data-inverted="" id="eliminarCriterio"
+				onclick="eliminarFila()">
+				<i class="remove icon"></i>
+			</div>
+			<div class="ui  primary submit button" onclick="guardarCriterios()">Guardar</div>
+
+			<div class="ui modal" id="agC">
+				<i class="close icon"></i>
+				<div class="header">
+					¡Recuerda los siguientes pasos para crear un criterio correcto!
+				</div>
+				<div class="ui info message">
+					<i class="close icon"></i>
+					<ul class="list">
+						<li>Identifica una accion cuantificable</li>
+						<li>Dicha accion debe ser medida de 1-4</li>
+						<li>Entre mas grande sea la valoracion, quiere decir que mejoro la situacion del criterio.</li>
+						<li>Entre mas pequeña sea la valoracion, quiere decir que empeoro la situacion del criterio.
+						</li>
+					</ul>
+				</div>
+				<div class="header">
+					Mira este ejemplo!
+				</div>
+				<div class="ui info message">
+					<i class="close icon"></i>
+					<ul class="list">
+						<li>Nivel de concentracion en actividades cotidianas</li>
+						<li>¡Como puedes ver, el criterio anterior entre mas grande la valoracion es mucho mejor!</li>
+					</ul>
+				</div>
+				<div class="ui centered input grid">
+					<input type="text" id="termino" placeholder="Nombre del criterio">
+				</div>
+				<div class="actions">
+					<div class="ui centered positive button" onclick="agregarCriterio()">Guardar</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="criteriosFin" class="ui centered modal" style="text-align:center;">
+		<div class="ui info message">
+			<i class="close icon"></i>
+			<div class="header">
+				Registra las valoraciones finales!
+			</div>
+			<ul class="list">
+				<li>Recuerda que los criterios que estan a continuacion fueron agregados en criterios inciales!</li>
+				<li>Recuerda que entre el valor de la valoracion sea mas alto, representa mejoria!</li>
+			</ul>
+		</div>
+		<table class="ui centered celled table" id="tablaCriteriosFinales" ALIGN="center">
+			<thead>
+				<th class="center aligned">Criterios</th>
+				<th class="center aligned">Puntaje Final<br>Donde:<br>1: Es muy malo.<br>4:Es muy bueno.</th>
+			</thead>
+			<tbody id="primeFinal">
+
+			</tbody>
+		</table>
+		<div class="actions">
+			<div class="ui centered positive button" onclick="guardarCriteriosFin()">Guardar</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+	<!--GRAFICOS-->
+	<div id="grafico">
+		<div class="ui relaxed grid" id="criteriosCon">
+			<div class="three column row" id="criteriosInt">
+				<div class="column" id="infoCriCon">
+					<div class="ui info message" >
+					<div class="header" id="Cini">
+						Criterios Iniciales y Finales:
+					</div>
+					
+						<i class="close icon"></i>
+						<ul class="list" id="conCIniciales">
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="column" id="concluNega">
+					
+
+				</div>
+
+
+				<div class="column" id="columnC">
+					<img src="https://i.ibb.co/RPNbq4V/conclu.png" id="cImg">
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="ui centered relaxed grid" id="grafico2">
+			<div class="two column row" id="gra2">
+				<div class="column">
+					<div class="ui link cards two wide column">
+						<canvas id="Inicio" width="800" height="800" style="margin: 40px;"></canvas>
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui link cards two wide column">
+						<canvas id="Fin" width="800" height="800" style="margin: 40px;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container" id="calen">		
+		<div class="row">
+			<div id="content" class="col-lg-12">
+				<div id="calendar"></div>
+				<div class="ui modal " id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="event-title"></h5>
+						
+					</div>
+					<div>
+						<div id="event-description"></div>
+					</div>
+					<br>
+					<br>
+					<div>
+						<button class="ui red button" id="eliminarev">Eliminar</button>
+						<button class="ui green button">Guardar cambios</button>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"></script>
+<script src="Js/js.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<script  src='Js/moment.min.js'></script>
+<script  src='Js/fullcalendar.min.js'></script>
+<script  src='Js/locale/es.js'></script>
