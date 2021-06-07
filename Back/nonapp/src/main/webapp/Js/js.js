@@ -1,6 +1,6 @@
 
 $('document').ready(function () {
- 
+
   $('.ui.dropdown').dropdown();
   $("#registroCuidador").hide();
   $("#menu").hide();
@@ -18,77 +18,20 @@ $('document').ready(function () {
   $("#criterios").hide();
   $("#grafico").hide();
   $("#calen").hide();
- 
+  $("#infoEventos").hide();
+  $("#ruleta").hide();
+
 
   document.getElementById("correoElectronico").value = '';
   document.getElementById("contrasenaLogin").value = '';
+  crearCalendario();
 
 });
-
-function crearCalendario(){
-  const fecha3 = new Date();
-  var año = fecha3.getFullYear();
-  var mes = fecha3.getMonth() + 1;
-  var dia = fecha3.getDate()+1;
-  var fecha2 = año + "-" + mes + "-" + dia;
-  fecha2 = fecha2.toString();
-  console.log(fecha2)
-  $('#calendar').fullCalendar({
-    
-      header: {
-          left: 'prev,next',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-      },
-      defaultDate: fecha2,
-      buttonIcons: true,
-      weekNumbers: false,
-      editable: true,
-      eventLimit: true,
-      dayClick: function (date, jsEvent, view) {
-          agregarEv(date.format())
-      }, 
-
-      eventClick: function (calEvent, jsEvent, view) {
-          idEv=calEvent._id
-          $('#event-title').text(calEvent.title);
-          $('#event-description').html(calEvent.description);
-          $("#modal-event").modal('show');
-      },  
-  });
-}
-
-$("#eliminarev").click(function () {
-
-var eventosGUar=$('#calendar').fullCalendar('clientEvents')
-for(var i=0;i<eventosGUar.length;i++){
-  if(eventosGUar[i]._id==idEv){
-    $('#calendar').fullCalendar( 'removeEvents', idEv)
-  }
-}
-$("#modal-event").modal('hide');
-});
-
-
-
-function agregarEv(fecha2){
-  console.log(fecha2)
-  events1=[
-    {
-      title: 'jesus te ama',
-              description: 'DESCRIPCION DEL EVENTO UWU',
-              start: fecha2,
-              color: '#3A87AD',
-              textColor: '#ffffff',
-    }
-  ]
-  $('#calendar').fullCalendar('addEventSource', events1);
-  var eventosGUar=$('#calendar').fullCalendar('clientEvents')
-  console.log(eventosGUar);
-}
-
-var idEv=""
-var events=[]
+var correolinea="";
+var fechaTemp = "";
+var text = ''
+var idEv = ""
+var events = []
 var cuidadorlinea = "";
 var adultolinea = "";
 var jsonadultos = "";
@@ -102,12 +45,14 @@ var table2 = document.getElementById("tablaCriteriosFinales");
 var rowCount = table.rows.length - 1;
 var cantidadtablas2 = table.rows.length - 1;
 var actiSeleccionada = 0;
+var NomActSeleccionada = "";
 var cantidadtablas = 0;
 var id_cInicial = 6;
 var cont = 0;
 var valoracionlinea = 0;
 var valorauxIni = 0;
 var valorauxFin = 0;
+var conth = 0;
 var valoracionlineaIni = 0;
 var valoracionlineaFin = 0;
 var gra = false;
@@ -115,7 +60,294 @@ var barChartIni = new Chart();
 var barChartFin = new Chart();
 var atras1 = false;
 var atras2 = false;
+var arregloeventos = [];
+var objRuleta;
+var winningSegment;
+var distnaciaX = 150;
+var distnaciaY = 50;
+var ctx;
+var response2=[]
+var auxActi=[]
+var hh=0
+var kk=0
 //Modal - Abre la ventana para insertar un nuevo criterio
+function crearCalendario() {
+
+
+
+
+
+
+
+
+  const fecha3 = new Date();
+  var año = fecha3.getFullYear();
+  var mes = fecha3.getMonth() + 1;
+  var dia = fecha3.getDate() + 1;
+  var fecha2 = año + "-" + mes + "-" + dia;
+  fecha2 = fecha2.toString();
+  $('#calendar').fullCalendar({
+
+    header: {
+      left: 'prev,next',
+      center: 'title',
+      right: 'month'
+    },
+    defaultDate: fecha2,
+    buttonIcons: true,
+    weekNumbers: false,
+    editable: true,
+    eventLimit: true,
+    dayClick: function (date, jsEvent, view) {
+      $("#Fechas").empty();
+      text = `
+        <label>Fecha Final</label>
+        <label id="fechaIniAsignacion">${date.format()}</label>
+        <label>Fecha Final</label>
+        <input type="date" id="FechaFinal" value=""  min="2021-01-01" max="2220-12-31">`
+      $("#Fechas").append(text);
+      $("#modCalendario").modal('show');
+      fechaTemp = date.format()
+      //agregarEv(date.format())
+    },
+
+    eventClick: function (calEvent, jsEvent, view) {
+      idEv = calEvent._id
+      $('#event-title').text(calEvent.title);
+      $('#event-description').html(calEvent.description);
+      $('#FIni').html(calEvent.start._i);
+      var fechaaux = calEvent.end._i.split("-");
+      fechaaux[2] = parseInt(fechaaux[2])
+      fechaaux[2] = fechaaux[2] - 1
+      fechaaux[2] = fechaaux[2].toString();
+      for (var i = 0; i < fechaaux.length; i++) {
+
+        if (i == (fechaaux.length - 1)) {
+          fechaaux[i] += ""
+        }
+        else {
+          fechaaux[i] += "-"
+        }
+      }
+      var fechaauxFin = fechaaux[0] + fechaaux[1] + fechaaux[2]
+
+      $('#FFin').html(fechaaux);
+      $("#modal-event").modal('show');
+    },
+  });
+  datos = {
+    "id_adulto_mayor": adultolinea.id_adulto_mayor
+  }
+
+  $.ajax({
+    data: JSON.stringify(datos),
+    url: "services/Consultas/HistorialEventos",
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+      for (var i = 0; i < response.length; i++) {
+        datos = [
+          {
+            title: response[i].title,
+            description: response[i].description,
+            start: response[i].start,
+            end: response[i].end,
+            color: response[i].color,
+            textColor: response[i].textColor,
+          }
+        ]
+
+        console.log(response[i])
+        $('#calendar').fullCalendar('addEventSource', datos);
+      }
+
+    }, error: function (error) {
+      alert(error)
+    }
+  });
+
+}
+
+
+
+
+$("#asigMedi").click(function () {
+  event.preventDefault();
+
+
+
+  var nom = document.getElementById("NombreMedicamento").value;
+  var des = document.getElementById("DescripcionMedicamento").value;
+  var FechaFin = document.getElementById("FechaFinal").value;
+  var fechaIniAsig = document.getElementById("fechaIniAsignacion").innerHTML
+  var fechaFinAsig = document.getElementById("FechaFinal").value;
+
+
+
+  console.log(fechaIniAsig)
+  console.log(fechaFinAsig)
+  if (fechaFinAsig >= fechaIniAsig) {
+
+    if (nom == "" || des == "" || FechaFin == "") {
+      toastr.error('Tienes que llenar todos los campos!');
+    }
+    else {
+
+
+      var fechaaux = FechaFin.split("-");
+      fechaaux[2] = parseInt(fechaaux[2])
+      fechaaux[2] = fechaaux[2] + 1
+      fechaaux[2] = fechaaux[2].toString();
+
+      for (var i = 0; i < fechaaux.length; i++) {
+
+        if (i == (fechaaux.length - 1)) {
+          fechaaux[i] += ""
+        }
+        else {
+          fechaaux[i] += "-"
+        }
+      }
+      var fechaauxFin = fechaaux[0] + fechaaux[1] + fechaaux[2]
+
+
+      //ENVIAR DATOS A LA BASE DE DATOS!!! CREAR TABLA DATOS PARA CALENDAERIO !!!!
+      events1 = [
+        {
+          title: nom,
+          description: des,
+          start: fechaTemp,
+          end: fechaauxFin,
+          color: '#99DFBB',
+          textColor: '#000000',
+        }
+      ]
+      eventosaux = {
+        "title": nom,
+        "description": des,
+        "start": fechaTemp,
+        "end": fechaauxFin,
+        "color": "#99DFBB",
+        "textColor": '#000000',
+        "id_adulto_mayor": adultolinea.id_adulto_mayor
+      }
+      $('#calendar').fullCalendar('addEventSource', events1);
+      $.ajax({
+        data: JSON.stringify(eventosaux),
+        url: "services/Registro/Eventos",
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+
+
+      $("#guardarEventos").hide();
+      $("#infoEventos").show();
+
+
+
+      $("#modCalendario").modal('hide');
+
+      toastr.success('Asignado con exito!');
+    }
+
+
+    limpFechas()
+  } else {
+    toastr.error('No puedes colocar una fecha anterior a la seleccionada como inicial!');
+
+  }
+
+
+
+});
+
+
+
+
+
+function limpFechas() {
+  document.getElementById("NombreMedicamento").value = "";
+  document.getElementById("DescripcionMedicamento").value = "";
+  document.getElementById("FechaFinal").value = "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+$("#eliminarev").click(function () {
+
+  var nom = document.getElementById("event-title").innerHTML;
+  var des = document.getElementById("event-description").innerHTML;
+  var FIni = document.getElementById("FIni").innerHTML;
+  var FF = document.getElementById("FFin").innerHTML;
+  var fechaaux = FF.split("-");
+  fechaaux[2] = parseInt(fechaaux[2])
+  fechaaux[2] = fechaaux[2] + 1
+  fechaaux[2] = fechaaux[2].toString();
+
+  for (var i = 0; i < fechaaux.length; i++) {
+
+    if (i == (fechaaux.length - 1)) {
+      fechaaux[i] += ""
+    }
+    else {
+      fechaaux[i] += "-"
+    }
+  }
+  var fechaauxFin = fechaaux[0] + fechaaux[1] + fechaaux[2]
+  var eventosGUar = $('#calendar').fullCalendar('clientEvents')
+  for (var i = 0; i < eventosGUar.length; i++) {
+    if (eventosGUar[i]._id == idEv) {
+      $('#calendar').fullCalendar('removeEvents', idEv)
+    }
+  }
+  eventosaux = {
+    "title": nom,
+    "description": des,
+    "start": FIni,
+    "end": fechaauxFin,
+    "id_adulto_mayor": adultolinea.id_adulto_mayor
+  }
+  console.log(eventosaux)
+  $.ajax({
+    data: JSON.stringify(eventosaux),
+    url: "services/Consultas/BorrarEvento",
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+      alert(response)
+    }, error: function (response) {
+      toastr.success('Medicamento eliminado con exito!');
+
+    }
+  });
+
+
+
+  $("#modal-event").modal('hide');
+
+
+});
+
+
+
 
 
 
@@ -155,7 +387,8 @@ function agregarCriterio() {
 //Elimina las filas de la tabla de cirterios!! depende de la variable rowCount
 function eliminarFila() {
   if (rowCount < 6) {
-    alert('No puedes eliminar los criterios base!');
+    toastr.error('No puedes eliminar los criterios base!');
+
   }
   else {
     table.deleteRow(rowCount);
@@ -180,6 +413,8 @@ function inicio() {
   $("#perfiladulto").hide();
   $("#historialPerfilVacio").hide();
   $("#grafico").hide();
+  $("#calen").hide();
+  $("#ruleta").hide();
   aleatorio();
 }
 
@@ -193,7 +428,10 @@ function perfilA() {
   $("#actividadesCompletas").hide();
   $("#historialPerfilVacio").hide();
   $("#grafico").hide();
+  $("#calen").hide();
   $("#perfilAa").empty();
+  $("#ruleta").hide();
+
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -344,6 +582,8 @@ function Miprogreso() {
   $("#actividadesCompletas").hide();
   $("#perfiladulto").hide();
   $("#grafico").hide();
+  $("#calen").hide();
+  $("#ruleta").hide();
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -372,7 +612,7 @@ function Miprogreso() {
               <h2 class="cuidainfo">  ${cuidadorlinea.email}</h2>
               <p class="cuidainfo">¡Eres un gran cuidador!</p>
               <p class="read-more">
-                  <a href="#"></a>
+              <a href="#"></a>  
               </p>
           </div>
 </div>
@@ -393,7 +633,7 @@ function Miprogreso() {
               <br>
               <button class="ui green button" onclick="historialadultoactivo()">Historial de actividades hechas.</button>
               <p class="read-more">
-                <a href="#">ver perfil</a>
+                <a href="#"></a>
               </p>
             </div>
           </div>
@@ -468,6 +708,7 @@ $("#volverRegaCuidInicio").click(function () {
 });
 
 $("#loginIngresar").click(function () {
+  correolinea=$("#correoElectronico").val();
   datos = {
     "email": $("#correoElectronico").val(),
     "password": $("#contrasenaLogin").val()
@@ -649,7 +890,8 @@ $("#reg").on("click", function () {
     document.getElementById("contrasena").value = '';
     document.getElementById("contrasena2").value = '';
   } else {
-    alert("Tus contraseñas no coinciden!");
+    toastr.error('Tus contraseñas no coinciden!');
+
   }
 
 });
@@ -664,8 +906,8 @@ function registrarAdulto(datos) {
       'Content-Type': 'application/json'
     },
     success: function (response) {
+      toastr.success('Registrado con exito!');
 
-      alert("Registrado con exito!")
 
     },
     error: function (error) {
@@ -710,7 +952,7 @@ function registrar(datos) {
     },
     success: function (response) {
       console.log(response); // Imprimir respuesta del archivo
-      alert("Registrado con exito!")
+      toastr.success('Registrado con exito!');
       $("#registroCuidador").hide();
       $("#login").show();
 
@@ -751,18 +993,26 @@ $("#medicacion").click(function () {
   aleatorio()
   $("#opcionesInicio").hide();
   id_potencialinea = 2;
+  $('#calendar').fullCalendar('destroy');
   crearCalendario();
-  //traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
-  //$("#actiPsico").show();
   $("#calen").show();
-  
+  $("#guardarEventos").show();
+  $("#infoEventos").hide();
+
+  traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
+  $("#actiPsico").show();
+
+
 });
 $("#descanso").click(function () {
-  aleatorio()
+  aleatorio();
   $("#opcionesInicio").hide();
   id_potencialinea = 3;
   traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
+ 
+
   $("#actiPsico").show();
+
 });
 
 function traerProgreso(id_adulto_mayor, id_diagnostico, id_potencialinea) {
@@ -876,6 +1126,7 @@ function traerProgreso(id_adulto_mayor, id_diagnostico, id_potencialinea) {
             for (var j = 0; j < response2.length; j++) {
               if (response2[j].id_actividades != null && response2[j].id_potencia == id_potencialinea) {
                 actiSeleccionada = response2[j].id_actividades;
+                NomActSeleccionada=response2[j].nombre;
                 console.log(response2[j])
                 if (aux == 1) {
                   s += JSON.stringify(response2[j]);
@@ -966,12 +1217,11 @@ function traerProgreso(id_adulto_mayor, id_diagnostico, id_potencialinea) {
 
 
 function botonAcSeleccion(id_actSele, valoracionIni, valoracionFin) {
+  enviarMsj(valoracionIni,valoracionFin);
   if (gra == false) {
-    alert("Aun no la puedes registrar! Debes valorar tus criterios primero!")
+    toastr.warning('Aun no la puedes registrar! Debes valorar tus criterios primero!');
   } else {
     const fecha = new Date();
-    console.log(valoracionIni + " se")
-    console.log(valoracionIni + " sex2")
     var año = fecha.getFullYear();
     var mes = fecha.getMonth() + 1;
     var dia = fecha.getDate();
@@ -1000,7 +1250,7 @@ function botonAcSeleccion(id_actSele, valoracionIni, valoracionFin) {
         $("#detalles").modal('hide')
           ;
         traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
-
+        
       }, error: function (error) {
         console.log(error)
       }
@@ -1027,7 +1277,7 @@ function guardarCriterios() {
       "criterio": 1
     }
     if (datos.valoracion == undefined) {
-      alert("Recuerda que debes valorar todos los criterios!");
+      toastr.warning('Recuerda que debes valorar todos los criterios!');
       $("#criterios").modal('show');
       break;
     } else {
@@ -1042,13 +1292,13 @@ function guardarCriterios() {
           console.log(response)
           cont = cont + 1;
           if (cont == cr.length - 1) {
-            alert("Registrado criterios inciales con exito!")
+            toastr.success('Registrado criterios inciales con exito!');
             $("#criterios").modal('hide');
           }
         }, error: function (r) {
           cont = cont + 1;
           if (cont == cr.length - 1) {
-            alert("Registrado criterios inciales con exito!")
+            toastr.success('Registrado criterios inciales con exito!');
             $("#criterios").modal('hide');
           }
         }
@@ -1078,7 +1328,7 @@ function guardarCriteriosFin() {
     }
     console.log(datos)
     if (datos.valoracion == undefined) {
-      alert("Recuerda que debes valorar todos los criterios!");
+      toastr.warning('Recuerda que debes valorar todos los criterios!');
       $("#criteriosFin").modal('show');
       break;
     } else {
@@ -1096,7 +1346,7 @@ function guardarCriteriosFin() {
           cont = cont + 1;
           if (cont == crfin.length - 1) {
             var text = '';
-            alert("Registrado criterios finales con exito!")
+            toastr.success('Registrado criterios finales con exito!');
             $("#criteriosFin").modal('hide');
             $("#detalles").modal('hide');
             gra = true;
@@ -1116,10 +1366,13 @@ function botonAc(id_actSele) {
   for (var i = 0; i < actividasnohechaslinea.length; i++) {
     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+      NomActSeleccionada=actividasnohechaslinea[i].nombre;
     } if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+      NomActSeleccionada=actividasnohechaslinea[i].nombre;
     } if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+      NomActSeleccionada=actividasnohechaslinea[i].nombre;
     }
   }
   datos = {
@@ -1144,6 +1397,7 @@ function botonAc(id_actSele) {
         for (var i = 0; i < actividasnohechaslinea.length; i++) {
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+            NomActSeleccionada=actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Psicoterapia
@@ -1169,6 +1423,7 @@ function botonAc(id_actSele) {
           }
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+            NomActSeleccionada=actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Medicacion
@@ -1194,6 +1449,7 @@ function botonAc(id_actSele) {
           }
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+            NomActSeleccionada=actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Descanso
@@ -1246,6 +1502,7 @@ function botonAc(id_actSele) {
               for (var i = 0; i < actividasnohechaslinea.length; i++) {
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned">
                 Psicoterapia
@@ -1270,6 +1527,7 @@ function botonAc(id_actSele) {
                 }
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned">
                 Medicacion
@@ -1294,6 +1552,7 @@ function botonAc(id_actSele) {
                 }
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned" >
                 Descanso
@@ -1371,6 +1630,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Psicoterapia
@@ -1414,6 +1674,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Medicacion
@@ -1455,6 +1716,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
+                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Descanso
@@ -1542,7 +1804,7 @@ function criteriosFina(criterio2) {
     },
     success: function (response) {
       if (response == 0) {
-        alert("Aun no registras criterios inciales, ¡Registralos!");
+        toastr.warning('Aun no registras criterios inciales, ¡Registralos!');
       } else {
         for (var i = 0; i < response.length; i++) {
           text += `<tr>
@@ -1733,10 +1995,10 @@ function validar(datos) {
     error: function (error) {
 
       if (error.statusText == "error") {
-        alert("Revisa tus datos!");
+        toastr.error('Revisa tus datos!');
 
       } else {
-        alert("No tienes ningun adulto mayor registrado, registralo!!!!");
+        toastr.warning('No tienes ningun adulto mayor registrado, registralo!');
         nombreA = "a";
         apellidoA = "a";
         nacimientoA = "2020-01-01";
@@ -1842,6 +2104,8 @@ function cambiarAdul() {
 
 
       $("#registroAdulto").hide();
+      $("#calen").hide();
+      $("#ruleta").hide();
       $("#selectPersonaMayor").show();
       console.log(adultolinea);
       console.log(cuidadorlinea);
@@ -1885,7 +2149,8 @@ function cerrarmenu() {
   $("#perfiladulto").hide();
   $("#historialPerfilVacio").hide();
   $("#grafico").hide();
-
+  $("#calen").hide();
+  $("#ruleta").hide();
 
   document.getElementById("correoElectronico").value = '';
   document.getElementById("contrasenaLogin").value = '';
@@ -2066,13 +2331,13 @@ function graficas(actividad) {
         auxFin = auxFin + valFin[i];
       }
 
-      auxIni = auxIni / (response.length/2);
-      auxFin = auxFin / (response.length/2);
-      auxIni=auxIni.toPrecision(3);
-      auxFin=auxFin.toPrecision(3);
-    if(auxFin<=auxIni){
-    var t='';
-    t=`<div class="ui centered negative message" >
+      auxIni = auxIni / (response.length / 2);
+      auxFin = auxFin / (response.length / 2);
+      auxIni = auxIni.toPrecision(3);
+      auxFin = auxFin.toPrecision(3);
+      if (auxFin <= auxIni) {
+        var t = '';
+        t = `<div class="ui centered negative message" >
     <i class="close icon"></i>
     <div class="header">
       Lamentablemente el promedio de los criterios iniciales es mayor que el promedio de los criterios finales
@@ -2081,10 +2346,10 @@ function graficas(actividad) {
     <p>Con esto sabemos que la dicha actividad no favorecio positivamente a la potencializacion del tratamiento del adulto mayor ${adultolinea.nombre} ${adultolinea.apellido}</p>
     <p>¡Intentalo con otra actividad!</p>
     </div>`;
-    $("#concluNega").append(t);
-    }else{
-      var t='';
-      t=`<div class="ui positive message">
+        $("#concluNega").append(t);
+      } else {
+        var t = '';
+        t = `<div class="ui positive message">
       <i class="close icon"></i>
       <div class="header">
         <b>¡Felicitaciones!</b> ¡La actividad realizada potencializo el tratamiento de tu adulto mayor!
@@ -2092,14 +2357,14 @@ function graficas(actividad) {
       <p>Con una valoracion en los criterios iniciles de ${auxIni} y una valoracion de los criterios finales de ${auxFin}</p>
       <p><b>¡Sorprendente!</b></p>
     </div>`;
-      $("#concluNega").append(t);
-    }
+        $("#concluNega").append(t);
+      }
 
     }, error: function (error) {
       alert(error)
     }
   });
-  
+
 
 
 
@@ -2300,6 +2565,37 @@ function elementosTablaIn(t, datos) {
   });
 
 }
+
+function enviarMsj(valoracionlineaIni,valoracionlineaFin){
+
+  var templateParams = {
+    from_name: correolinea,
+    to_name : correolinea,
+    subject : 'Prueba joven',
+    message: 'Nonapp! Siempre contigo. En la ultima actividad "'+NomActSeleccionada+'" realizada con tu adulto mayor '+adultolinea.nombre+' '+adultolinea.apellido+' obtuviste una valoracion inical de '+valoracionlineaIni+' y una final de '+valoracionlineaFin
+  };
+  
+  emailjs.send('service_iw0s74n', 'template_1t553vl', templateParams, 'user_fpbqWzxMEzVNP1iD0GkZa')
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
+}
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
 
 
 

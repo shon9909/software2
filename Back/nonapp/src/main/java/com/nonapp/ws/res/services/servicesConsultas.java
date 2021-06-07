@@ -20,11 +20,13 @@ import com.nonapp.ws.mod.dao.DAOadulto_mayor;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
 import com.nonapp.ws.mod.dao.DAOdiagnostico;
+import com.nonapp.ws.mod.dao.DAOeventos;
 import com.nonapp.ws.mod.dao.DAOprogreso;
 import com.nonapp.ws.res.VO.VOactividades;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOdiagnostico;
+import com.nonapp.ws.res.VO.VOeventos;
 import com.nonapp.ws.res.VO.VOprogreso;
 
 @Path("/Consultas")
@@ -104,4 +106,28 @@ public class servicesConsultas {
 			
 	}
 	
+	
+	@POST
+	@Path("/HistorialEventos")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public String ActividadesPerfil(VOeventos eventos) throws SQLException, JSONException{
+		DAOeventos daoeventos=new DAOeventos();
+		String a=daoeventos.consultarEventos(eventos.getId_adulto_mayor());	
+		if(a.isEmpty()){
+			return "1";
+		}else{
+			return a;
+		}
+			
+	}
+	
+	@POST
+	@Path("/BorrarEvento")
+	@Consumes({MediaType.APPLICATION_JSON})
+	public String BorrarEvent(VOeventos eventos) throws SQLException, JSONException{
+		DAOeventos daoeventos=new DAOeventos();
+		String a=daoeventos.eliminarEventos(eventos.getTitle(), eventos.getDescription(), eventos.getStart(), eventos.getEnd(), eventos.getId_adulto_mayor());			
+		return a;
+	}
 }

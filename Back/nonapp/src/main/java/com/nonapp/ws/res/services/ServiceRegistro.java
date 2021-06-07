@@ -21,9 +21,11 @@ import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
+import com.nonapp.ws.mod.dao.DAOeventos;
 import com.nonapp.ws.mod.dao.DAOprogreso2;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
 import com.nonapp.ws.res.VO.VOcuidador;
+import com.nonapp.ws.res.VO.VOeventos;
 import com.nonapp.ws.res.VO.VOprogreso2;
 
 
@@ -131,6 +133,17 @@ public class ServiceRegistro{
 	
 	}
 	
+	//Aqui se registran los datos traidos del formulario de criterios iniciales
+	@POST
+	@Path("/Eventos")
+	@Consumes({MediaType.APPLICATION_JSON})
+
+	public String evnetRegistrar(VOeventos eventos) throws SQLException, JSONException{
+		DAOeventos daoeventos=new DAOeventos();
+		String a=daoeventos.registrarEventos(eventos.getTitle(), eventos.getDescription(), eventos.getStart(), eventos.getEnd(), eventos.getColor(), eventos.getTextColor(), eventos.getId_adulto_mayor());
+		return a;
+	
+	}
 	
 	
 }

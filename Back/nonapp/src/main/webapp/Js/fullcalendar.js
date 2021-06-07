@@ -6281,7 +6281,7 @@ var DayTableMixin = /** @class */ (function (_super) {
                 ' data-date="' + date.format('YYYY-MM-DD') + '"' :
                 '') +
             (colspan > 1 ?
-                ' colspan="' + colspan + '"' :
+                ' colspan="' + colspan+1 + '"' :
                 '') +
             (otherAttrs ?
                 ' ' + otherAttrs :
@@ -14607,11 +14607,11 @@ var DayGridFillRenderer = /** @class */ (function (_super) {
             '</div>');
         trEl = skeletonEl.find('tr');
         if (startCol > 0) {
-            trEl.append('<td colspan="' + startCol + '"/>');
+            trEl.append('<td colspan="' + startCol+1 + '"/>');
         }
         trEl.append(seg.el.attr('colspan', endCol - startCol));
         if (endCol < colCnt) {
-            trEl.append('<td colspan="' + (colCnt - endCol) + '"/>');
+            trEl.append('<td colspan="' + (colCnt - endCol + 1) + '"/>');
         }
         this.component.bookendCells(trEl);
         return skeletonEl;

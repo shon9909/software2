@@ -218,7 +218,10 @@ hr.fc-divider {
   border-style: solid;
   border-width: 1px;
   padding: 0;
-  vertical-align: top; }
+  vertical-align: top; 
+
+}
+
 
 .fc td.fc-today {
   border-style: double;
@@ -258,7 +261,7 @@ a[data-goto]:hover {
   position: relative; }
 
 .fc-row .fc-bg {
-  z-index: 1; }
+  z-index: -1; }
 
 /* highlighting cells & background event skeleton */
 .fc-row .fc-bgevent-skeleton,
@@ -276,10 +279,10 @@ a[data-goto]:hover {
   border-color: transparent; }
 
 .fc-row .fc-bgevent-skeleton {
-  z-index: 2; }
+  z-index: 1; }
 
 .fc-row .fc-highlight-skeleton {
-  z-index: 3; }
+  z-index: 1; }
 
 /*
 row content (which contains day/week numbers and events) as well as "helper" (which contains
@@ -287,12 +290,12 @@ temporary rendered events).
 */
 .fc-row .fc-content-skeleton {
   position: relative;
-  z-index: 4;
+  z-index: 1;
   padding-bottom: 2px;
   /* matches the space above the events */ }
 
 .fc-row .fc-helper-skeleton {
-  z-index: 5; }
+  z-index: 1; }
 
 .fc .fc-row .fc-content-skeleton table,
 .fc .fc-row .fc-content-skeleton td,
@@ -369,12 +372,12 @@ temporary rendered events).
 
 .fc-event .fc-content {
   position: relative;
-  z-index: 2; }
+  z-index: 1; }
 
 /* resizer (cursor AND touch devices) */
 .fc-event .fc-resizer {
   position: absolute;
-  z-index: 4; }
+  z-index: 1; }
 
 /* resizer (touch devices) */
 .fc-event .fc-resizer {
@@ -838,7 +841,7 @@ NOTE: use percentage font sizes or else old IE chokes
 
 .fc-toolbar .fc-state-active,
 .fc-toolbar .ui-state-active {
-  z-index: 4; }
+  z-index: -1; }
 
 .fc-toolbar button:focus {
   z-index: 5; }
