@@ -14,11 +14,13 @@ import org.codehaus.jettison.json.JSONException;
 
 import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
+import com.nonapp.ws.mod.dao.DAOconsultaC;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOprogreso;
 import com.nonapp.ws.mod.dao.DAOprogreso2;
 import com.nonapp.ws.mod.dao.DAOrecomendacion;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
+import com.nonapp.ws.res.VO.VOconsultaC;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOprogreso;
 import com.nonapp.ws.res.VO.VOprogreso2;
@@ -135,6 +137,18 @@ public class serviceAutomatico {
 		}
 		return a;
 
+	}
+	
+	
+	@POST
+	@Path("/TotalAdultos")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public String totalAdultos(VOconsultaC consultaC) throws SQLException, JSONException{
+		DAOconsultaC daoconsultaC=new DAOconsultaC();
+		String a=daoconsultaC.ConsultaC(consultaC.getDiagnostico());	
+		return a;
+			
 	}
 	
 }

@@ -21,7 +21,7 @@ $('document').ready(function () {
   $("#infoEventos").hide();
   $("#ruleta").hide();
   $("#comunidad").hide();
-
+  $("#carruselComu").hide();
 
   $('.capa-data').hide();
   $('.container-data').hide();
@@ -425,6 +425,7 @@ function inicio() {
   $("#calen").hide();
   $("#ruleta").hide();
   $("#comunidad").hide();
+  $("#carruselComu").hide();
   aleatorio();
 }
 
@@ -442,6 +443,7 @@ function perfilA() {
   $("#perfilAa").empty();
   $("#ruleta").hide();
   $("#comunidad").hide();
+  $("#carruselComu").hide();
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -595,6 +597,7 @@ function Miprogreso() {
   $("#calen").hide();
   $("#ruleta").hide();
   $("#comunidad").hide();
+  $("#carruselComu").hide();
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -2118,6 +2121,7 @@ function cambiarAdul() {
       $("#calen").hide();
       $("#ruleta").hide();
       $("#comunidad").hide();
+      $("#carruselComu").hide();
       $("#selectPersonaMayor").show();
       console.log(adultolinea);
       console.log(cuidadorlinea);
@@ -2164,6 +2168,7 @@ function cerrarmenu() {
   $("#calen").hide();
   $("#ruleta").hide();
   $("#comunidad").hide();
+  $("#carruselComu").hide();
 
   document.getElementById("correoElectronico").value = '';
   document.getElementById("contrasenaLogin").value = '';
@@ -2309,7 +2314,7 @@ function graficas(actividad) {
   $("#concluNega").empty();
   $("#conCIniciales").empty();
   $("#historial").hide();
-
+  $("#calen").hide();
   var text = '';
   var valIni = [];
   var valFin = [];
@@ -2621,14 +2626,14 @@ function comunidadA() {
     headers: {
       'Content-Type': 'application/json'
     }, success: function (response) {
-      if(response==1){
+      if (response == 1) {
         $("#mainC").empty();
         var txt = `<h1>¡Comentarios comunidad de cuidadores!</h1>
                   <hr class="line">`
         $("#mainC").append(txt)
         toastr.warning('Aun nadie comenta, realiza uno!');
         $("#comunidad").show();
-      }else{
+      } else {
 
         $("#mainC").empty();
         var txt = `<h1>¡Comentarios comunidad de cuidadores!</h1>
@@ -2714,7 +2719,7 @@ function comunidadA() {
 
 
   $("#comunidad").show();
-
+  $("#carruselComu").show();
 
 }
 
@@ -2866,9 +2871,9 @@ function comentar2(id_comentario) {
   </div>
 
 </div>`
-          
-var div = document.getElementById(response[0].id_respuesta);
-insertAfter(div, el); 
+
+          var div = document.getElementById(response[0].id_respuesta);
+          insertAfter(div, el);
 
 
           $('.container-data').hide();
@@ -3084,8 +3089,116 @@ $(function () {
   }
 });
 
+$("#botonab").click(function () {
+  $('.shape').shape('flip up');
+});
 
 
+
+
+
+function actividadesF(id_diagnostico,nombre) {
+  $("#contediomodals").empty();
+  mostrar_elementosmodals(id_diagnostico, nombre);
+
+}
+
+function mostrar_elementosmodals(id_diagnostico, nombre) {
+
+  
+  datos = {
+    "diagnostico": id_diagnostico
+  }
+  $.ajax({
+    data: JSON.stringify(datos),
+    url: "services/Auto/TotalAdultos",
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+      
+      var texto=''
+      var ids = []
+      for (var i = 0; i < response.length; i++) {
+        ids[i] = response[i].id_adulto_mayor
+      }
+
+      let result = ids.filter((item,index)=>{
+        return ids.indexOf(item) === index;
+      })
+      console.log(result.length)
+
+
+
+      texto = `<div class="ui modal" id="modalDepre">
+      <div class="header"><i class="book icon"></i>${nombre}</div>
+      <div class="content">
+          <form class="ui form">
+              <h4 class="ui dividing header">Adultos mayores registrados con este tipo de depresion.</h4>
+              <div class="field">
+              <div class="ui label">
+              ${result.length}
+              </div>    
+              </div>
+              <h4 class="ui dividing header">Contenido</h4>
+              <div class="field">
+                  <table class="ui celled table">
+                      <thead>
+                        <tr>
+                        <th>Adulto mayor</th>
+                          <th>Actividades</th>
+                          <th>Valoración inicial promedio</th>
+                          <th>Valoración final promedio</th>
+                        </tr>
+                      </thead>
+                      <tbody>`
+              var aux1=1;
+              var aux=response[0].id_adulto_mayor
+              for(var i=0;i<response.length;i++){
+              if(aux!=response[i].id_adulto_mayor){
+                aux=response[i].id_adulto_mayor
+                aux1+=1
+                texto+=
+                `<tr>
+                <td >${aux1}</td>
+                <td >${response[i].nombreAc}</td>
+                <td >${response[i].valoracionIni}</td>
+                <td >${response[i].valoracionFin}</td>
+                </tr>`
+              }else{
+
+                texto+=
+                `<tr>
+                <td >${aux1}</td>
+                <td >${response[i].nombreAc}</td>
+                <td >${response[i].valoracionIni}</td>
+                <td >${response[i].valoracionFin}</td>
+                </tr>`
+              }
+
+              
+                }
+                 texto+= `</tbody>
+                      </table>
+              </div>
+          </form>
+      </div>
+    </div>`
+      $("#contediomodals").append(texto);
+      $('#modalDepre').modal('show');
+    }, error: function (response) {
+      toastr.warning('Aun nadie realiza una actividad con este diagnostico!');
+    }
+
+  });
+
+
+ 
+
+
+
+}
 
 
 

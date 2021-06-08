@@ -9,6 +9,19 @@ body{
     margin: 0 auto;
     
 }
+#carruselComu{
+    margin-top: 150px !important;
+    margin-left: 38% !important;
+}
+#cardf{
+    margin-top: 100px;
+    margin-left: 100px;
+}
+#botones{
+    margin-top: 30px;
+    margin-left: 20% !important;
+}
+
 #calendar{
 
     width: 860px !important;
@@ -257,12 +270,16 @@ header{
     width: 800px; 
     margin: 0 auto; 
 }
+#modalDepre{
+    overflow: scroll !important;
+    height: 570px !important;
+}
 
 
 #criterios{
     overflow: scroll !important;
     width: auto; 
-    height: 570px !important;
+    
 }
 #car{
     width: 1000px;
