@@ -20,6 +20,14 @@ $('document').ready(function () {
   $("#calen").hide();
   $("#infoEventos").hide();
   $("#ruleta").hide();
+  $("#comunidad").hide();
+
+
+  $('.capa-data').hide();
+  $('.container-data').hide();
+  $('.container-data2').hide();
+  $('#loadPhoto').hide();
+
 
 
   document.getElementById("correoElectronico").value = '';
@@ -27,7 +35,7 @@ $('document').ready(function () {
   crearCalendario();
 
 });
-var correolinea="";
+var correolinea = "";
 var fechaTemp = "";
 var text = ''
 var idEv = ""
@@ -66,10 +74,11 @@ var winningSegment;
 var distnaciaX = 150;
 var distnaciaY = 50;
 var ctx;
-var response2=[]
-var auxActi=[]
-var hh=0
-var kk=0
+var response2 = []
+var auxActi = []
+var hh = 0
+var kk = 0
+var comentarioSel = 0;
 //Modal - Abre la ventana para insertar un nuevo criterio
 function crearCalendario() {
 
@@ -415,6 +424,7 @@ function inicio() {
   $("#grafico").hide();
   $("#calen").hide();
   $("#ruleta").hide();
+  $("#comunidad").hide();
   aleatorio();
 }
 
@@ -431,7 +441,7 @@ function perfilA() {
   $("#calen").hide();
   $("#perfilAa").empty();
   $("#ruleta").hide();
-
+  $("#comunidad").hide();
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -584,6 +594,7 @@ function Miprogreso() {
   $("#grafico").hide();
   $("#calen").hide();
   $("#ruleta").hide();
+  $("#comunidad").hide();
   aleatorio();
   $.ajax({
     data: JSON.stringify(datos),
@@ -708,7 +719,7 @@ $("#volverRegaCuidInicio").click(function () {
 });
 
 $("#loginIngresar").click(function () {
-  correolinea=$("#correoElectronico").val();
+  correolinea = $("#correoElectronico").val();
   datos = {
     "email": $("#correoElectronico").val(),
     "password": $("#contrasenaLogin").val()
@@ -1009,7 +1020,7 @@ $("#descanso").click(function () {
   $("#opcionesInicio").hide();
   id_potencialinea = 3;
   traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
- 
+
 
   $("#actiPsico").show();
 
@@ -1126,7 +1137,7 @@ function traerProgreso(id_adulto_mayor, id_diagnostico, id_potencialinea) {
             for (var j = 0; j < response2.length; j++) {
               if (response2[j].id_actividades != null && response2[j].id_potencia == id_potencialinea) {
                 actiSeleccionada = response2[j].id_actividades;
-                NomActSeleccionada=response2[j].nombre;
+                NomActSeleccionada = response2[j].nombre;
                 console.log(response2[j])
                 if (aux == 1) {
                   s += JSON.stringify(response2[j]);
@@ -1217,7 +1228,7 @@ function traerProgreso(id_adulto_mayor, id_diagnostico, id_potencialinea) {
 
 
 function botonAcSeleccion(id_actSele, valoracionIni, valoracionFin) {
-  enviarMsj(valoracionIni,valoracionFin);
+  enviarMsj(valoracionIni, valoracionFin);
   if (gra == false) {
     toastr.warning('Aun no la puedes registrar! Debes valorar tus criterios primero!');
   } else {
@@ -1250,7 +1261,7 @@ function botonAcSeleccion(id_actSele, valoracionIni, valoracionFin) {
         $("#detalles").modal('hide')
           ;
         traerProgreso(adultolinea.id_adulto_mayor, adultolinea.diagnostico, id_potencialinea);
-        
+
       }, error: function (error) {
         console.log(error)
       }
@@ -1366,13 +1377,13 @@ function botonAc(id_actSele) {
   for (var i = 0; i < actividasnohechaslinea.length; i++) {
     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+      NomActSeleccionada = actividasnohechaslinea[i].nombre;
     } if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+      NomActSeleccionada = actividasnohechaslinea[i].nombre;
     } if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+      NomActSeleccionada = actividasnohechaslinea[i].nombre;
     }
   }
   datos = {
@@ -1397,7 +1408,7 @@ function botonAc(id_actSele) {
         for (var i = 0; i < actividasnohechaslinea.length; i++) {
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-            NomActSeleccionada=actividasnohechaslinea[i].nombre;
+            NomActSeleccionada = actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Psicoterapia
@@ -1423,7 +1434,7 @@ function botonAc(id_actSele) {
           }
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-            NomActSeleccionada=actividasnohechaslinea[i].nombre;
+            NomActSeleccionada = actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Medicacion
@@ -1449,7 +1460,7 @@ function botonAc(id_actSele) {
           }
           if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
             actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-            NomActSeleccionada=actividasnohechaslinea[i].nombre;
+            NomActSeleccionada = actividasnohechaslinea[i].nombre;
             texto = ` <tr>
         <td class="center aligned">
           Descanso
@@ -1502,7 +1513,7 @@ function botonAc(id_actSele) {
               for (var i = 0; i < actividasnohechaslinea.length; i++) {
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                  NomActSeleccionada = actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned">
                 Psicoterapia
@@ -1527,7 +1538,7 @@ function botonAc(id_actSele) {
                 }
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                  NomActSeleccionada = actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned">
                 Medicacion
@@ -1552,7 +1563,7 @@ function botonAc(id_actSele) {
                 }
                 if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
                   actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                  NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                  NomActSeleccionada = actividasnohechaslinea[i].nombre;
                   texto = ` <tr>
               <td class="center aligned" >
                 Descanso
@@ -1630,7 +1641,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 1) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                      NomActSeleccionada = actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Psicoterapia
@@ -1674,7 +1685,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 2) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                      NomActSeleccionada = actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Medicacion
@@ -1716,7 +1727,7 @@ function botonAc(id_actSele) {
                     if (actividasnohechaslinea[i].id_actividades == id_actSele && actividasnohechaslinea[i].id_potencia == 3) {
                       gra = true;
                       actiSeleccionada = actividasnohechaslinea[i].id_actividades;
-                      NomActSeleccionada=actividasnohechaslinea[i].nombre;
+                      NomActSeleccionada = actividasnohechaslinea[i].nombre;
                       texto = ` <tr>
               <td class="center aligned">
                 Descanso
@@ -2106,6 +2117,7 @@ function cambiarAdul() {
       $("#registroAdulto").hide();
       $("#calen").hide();
       $("#ruleta").hide();
+      $("#comunidad").hide();
       $("#selectPersonaMayor").show();
       console.log(adultolinea);
       console.log(cuidadorlinea);
@@ -2151,6 +2163,7 @@ function cerrarmenu() {
   $("#grafico").hide();
   $("#calen").hide();
   $("#ruleta").hide();
+  $("#comunidad").hide();
 
   document.getElementById("correoElectronico").value = '';
   document.getElementById("contrasenaLogin").value = '';
@@ -2566,31 +2579,510 @@ function elementosTablaIn(t, datos) {
 
 }
 
-function enviarMsj(valoracionlineaIni,valoracionlineaFin){
+function enviarMsj(valoracionlineaIni, valoracionlineaFin) {
 
   var templateParams = {
-    from_name: correolinea,
-    to_name : correolinea,
-    subject : 'Prueba joven',
-    message: 'Nonapp! Siempre contigo. En la ultima actividad "'+NomActSeleccionada+'" realizada con tu adulto mayor '+adultolinea.nombre+' '+adultolinea.apellido+' obtuviste una valoracion inical de '+valoracionlineaIni+' y una final de '+valoracionlineaFin
+    to_name: correolinea,
+    subject: 'Prueba joven',
+    message: 'Nonapp! Siempre contigo. En la ultima actividad "' + NomActSeleccionada + '" realizada con tu adulto mayor ' + adultolinea.nombre + ' ' + adultolinea.apellido + ' obtuviste una valoracion inical de ' + valoracionlineaIni + ' y una final de ' + valoracionlineaFin
   };
-  
+
   emailjs.send('service_iw0s74n', 'template_1t553vl', templateParams, 'user_fpbqWzxMEzVNP1iD0GkZa')
-    .then(function(response) {
-       console.log('SUCCESS!', response.status, response.text);
-    }, function(error) {
-       console.log('FAILED...', error);
+    .then(function (response) {
+      console.log('SUCCESS!', response.status, response.text);
+    }, function (error) {
+      console.log('FAILED...', error);
     });
 }
 
 
 
-     
+
+
+
+function comunidadA() {
+  $("#actiPsico").hide();
+  $("#detalles").hide();
+  $("#Miprogre").hide();
+  $("#historial").hide();
+  $("#historialvacio").hide();
+  $("#opcionesInicio").show();
+  $("#actividadesCompletas").hide();
+  $("#perfiladulto").hide();
+  $("#historialPerfilVacio").hide();
+  $("#grafico").hide();
+  $("#calen").hide();
+  $("#ruleta").hide();
+  $("#opcionesInicio").hide();
+
+  $.ajax({
+    url: "services/Consultas/ConsultarTotalComentarios",
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+      if(response==1){
+        $("#mainC").empty();
+        var txt = `<h1>¡Comentarios comunidad de cuidadores!</h1>
+                  <hr class="line">`
+        $("#mainC").append(txt)
+        toastr.warning('Aun nadie comenta, realiza uno!');
+        $("#comunidad").show();
+      }else{
+
+        $("#mainC").empty();
+        var txt = `<h1>¡Comentarios comunidad de cuidadores!</h1>
+                  <hr class="line">`
+        for (var i = 0; i < response.length; i++) {
+          if (response[i].id_respuesta == 0) {
+            txt += `
+            <div class="container-comments" id="${response[i].id_comentario}">
+            
+            <div class="comments">
+            
+              <div class="photo-perfil">
+                <img src="img/logousers.png" alt="">
+              </div>
+            
+              <div class="info-comments">
+            
+                <div class="header">
+                  <h4>${response[i].nombre}</h4>
+                  <h5>${response[i].fecha}</h5>
+                </div>
+            
+                <p class="comment">${response[i].comentario}</p>
+            
+                <div class="footer">
+            
+                  <h5 class="request" onclick="mostrarForComent(${response[i].id_comentario})">Responder</h5>
+            
+            
+                </div>
+              </div>
+            
+            </div>
+            </div>`
+          }
+        }
+        $("#mainC").append(txt)
+        for (var i = 0; i < response.length; i++) {
+          if (response[i].id_respuesta != 0) {
+            var el = document.createElement("div");
+            el.innerHTML = `
+            <div class="container-comments-request" id="${response[i].id_comentario}">
+  
+            <div class="comments-request">
+          
+              <div class="photo-perfil-request">
+                <img src="img/logousers.png" alt="">
+              </div>
+          
+              <div class="info-comments-request">
+          
+                <div class="header">
+                  <h4>${response[i].nombre}</h4>
+                  <h5>${response[i].fecha}</h5>
+                </div>
+          
+                <p class="commentR">${response[i].comentario}</p>
+          
+                <div class="footer">
+          
+                  <h5 class="request" onclick="mostrarForComent(${response[i].id_comentario})">Responder</h5>
+                </div>
+              </div>
+          
+            </div>       
+          </div>   
+            `;
+            var div = document.getElementById(response[i].id_respuesta);
+            insertAfter(div, el);
+          }
+        }
+      }
+    }, error: function (error) {
+      console.log(error)
+    }
+  });
 
 
 
 
 
+
+
+
+  $("#comunidad").show();
+
+
+}
+
+
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
+
+
+
+
+
+
+
+
+$('.container-data').css({
+
+  bottom: '-450px'
+
+});
+
+$('.container-data2').css({
+
+  bottom: '-450px'
+
+});
+
+
+function mostrarForComent(id_respuesta) {
+  comentarioSel = id_respuesta;
+  $("#nombreC2").empty();
+  var txt = ""
+  txt = `<div class="perfil-photo">
+  <img src="img/comment.png" id="photoSelect" alt="">
+  </div>
+  <a class="ui image label">
+  <img src="img/logousers.png">
+  ${cuidadorlinea.nombre}
+  </a>`
+  $("#nombreC2").append(txt);
+
+  $('.capa-data').fadeIn();
+  $('.container-data2').show();
+
+  $('.container-data2').animate({
+
+    bottom: '0px'
+
+  });
+
+
+
+
+}
+
+
+function comentarioFuera() {
+  $("#nombreC").empty();
+  var txt = ""
+  txt = `<div class="perfil-photo">
+  <img src="img/comment.png" id="photoSelect" alt="">
+  </div>
+  <a class="ui image label">
+  <img src="img/logousers.png">
+  ${cuidadorlinea.nombre}
+  </a>`
+  $("#nombreC").append(txt);
+
+  $('.capa-data').fadeIn();
+
+  $('.container-data').show();
+
+  $('.container-data').animate({
+
+    bottom: '0px'
+
+  });
+
+}
+
+function comentar2(id_comentario) {
+
+  txt = "";
+  const fecha3 = new Date();
+  var año = fecha3.getFullYear();
+  var mes = fecha3.getMonth() + 1;
+  var dia = fecha3.getDate();
+  var fecha2 = año + "-" + mes + "-" + dia;
+  fecha2 = fecha2.toString();
+  var text = $("#mensajeComentar2").val()
+  datos = {
+    "id_respuesta": comentarioSel,
+    "nombre": cuidadorlinea.nombre,
+    "fecha": fecha2,
+    "comentario": text
+  }
+  $.ajax({
+    data: JSON.stringify(datos),
+    url: "services/Registro/Comentarios",
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+      alert(response)
+    }, error: function (response) {
+
+
+
+
+      datos2 = {
+        "nombre": cuidadorlinea.nombre,
+        "comentario": text
+      }
+
+      $.ajax({
+        data: JSON.stringify(datos2),
+        url: "services/Consultas/ConsultarEvento",
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, success: function (response) {
+          var el = document.createElement("div");
+          el.innerHTML = `
+            <div class="container-comments-request" id="${response[0].id_comentario}">
+
+  <div class="comments-request">
+
+    <div class="photo-perfil-request">
+      <img src="img/logousers.png" alt="">
+    </div>
+
+    <div class="info-comments-request">
+
+      <div class="header">
+        <h4>${response[0].nombre}</h4>
+        <h5>${response[0].fecha}</h5>
+      </div>
+
+      <p class="commentR">${response[0].comentario}</p>
+
+      <div class="footer">
+
+        <h5 class="request" onclick="mostrarForComent(${response[0].id_comentario})">Responder</h5>
+      </div>
+    </div>
+
+  </div>
+
+</div>`
+          
+var div = document.getElementById(response[0].id_respuesta);
+insertAfter(div, el); 
+
+
+          $('.container-data').hide();
+          $('.capa-data').fadeOut();
+          $('.container-data').animate({
+
+            bottom: '-450px'
+
+          });
+          document.getElementById("mensajeComentar").value = '';
+        }
+      });
+      toastr.success('Comentario publicado con exito!');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+  });
+
+  $("#mainC").append(txt)
+
+  $('.container-data2').hide();
+  $('.capa-data').fadeOut();
+  $('.container-data2').animate({
+
+    bottom: '-450px'
+
+  });
+  document.getElementById("mensajeComentar2").value = '';
+
+
+}
+
+function comentar() {
+
+  txt = "";
+  const fecha3 = new Date();
+  var año = fecha3.getFullYear();
+  var mes = fecha3.getMonth() + 1;
+  var dia = fecha3.getDate();
+  var fecha2 = año + "-" + mes + "-" + dia;
+  fecha2 = fecha2.toString();
+
+  var text = $("#mensajeComentar").val()
+  datos = {
+    "id_respuesta": 0,
+    "nombre": cuidadorlinea.nombre,
+    "fecha": fecha2,
+    "comentario": text
+  }
+  $.ajax({
+    data: JSON.stringify(datos),
+    url: "services/Registro/Comentarios",
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }, success: function (response) {
+
+    }, error: function (response) {
+      datos2 = {
+        "nombre": cuidadorlinea.nombre,
+        "comentario": text
+      }
+
+      $.ajax({
+        data: JSON.stringify(datos2),
+        url: "services/Consultas/ConsultarEvento",
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, success: function (response) {
+
+          txt = `
+          <div class="container-comments" id="${response[0].id_comentario}">
+          
+          <div class="comments">
+          
+            <div class="photo-perfil">
+              <img src="img/logousers.png" alt="">
+            </div>
+          
+            <div class="info-comments">
+          
+              <div class="header">
+                <h4>${cuidadorlinea.nombre}</h4>
+                <h5>${fecha2}</h5>
+              </div>
+          
+              <p class="comment">${text}</p>
+          
+              <div class="footer">
+          
+                <h5 class="request" onclick="mostrarForComent(${response[0].id_comentario})">Responder</h5>
+          
+          
+              </div>
+            </div>
+          
+          </div>
+          </div>`
+          $("#mainC").append(txt)
+
+
+
+
+
+
+          $('.container-data').hide();
+          $('.capa-data').fadeOut();
+          $('.container-data').animate({
+
+            bottom: '-450px'
+
+          });
+          document.getElementById("mensajeComentar").value = '';
+        }
+      });
+
+
+
+
+      toastr.success('Comentario publicado con exito!');
+    }
+  });
+
+
+
+
+
+
+
+}
+
+$('.capa-data').on('click', function () {
+
+  $('.capa-data').fadeOut();
+
+  $('.container-data').animate({
+
+    bottom: '-450px'
+
+  });
+
+  $('.container-data2').animate({
+
+    bottom: '-450px'
+
+  });
+
+});
+
+
+
+$('.perfil-photo').on('click', function () {
+  $('#loadPhoto').click();
+})
+
+
+
+$(function () {
+  $('#loadPhoto').change(function (e) {
+    addImage(e);
+  });
+
+  function addImage(e) {
+    var file = e.target.files[0],
+      imageType = /image.*/;
+
+    if (!file.type.match(imageType))
+      return;
+
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);
+  }
+
+  function fileOnload(e) {
+    var result = e.target.result;
+    $('#photoSelect').attr("src", result);
+  }
+});
 
 
 

@@ -10,11 +10,13 @@
 	<link rel="stylesheet" href="css/perfil.css">
 	<link rel="stylesheet" href="css/adultoMayor.css">
 	<link rel="stylesheet" href="css/semantic.min.css">
-	<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.0.0-alpha/fullcalendar.print.min.css'
+		rel='stylesheet' media='print' />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
-	<link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />	
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+	<link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
+	<link href="https://file.myfontastic.com/tc26fJHv8scB3d4vHQRRsV/icons.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/estilos.css">
 
 
 
@@ -53,8 +55,8 @@
 					<nav>
 						<a onclick="inicio()">Inicio</a>
 						<a onclick="Miprogreso()">Mi Progreso</a>
-						<a>¿Que hay de nuevo?</a>
 						<a onclick="perfilA()">Perfil Adulto Mayor en linea</a>
+						<a onclick="comunidadA()">Comunidad</a>
 					</nav>
 					<div class="btn-menu">
 						<label for="btn-menu"> <i id="bar" class="bars icon"></i>
@@ -300,73 +302,76 @@
 				¡Organiza de manera optima tus medicamentos!
 			</div>
 			<ul class="list">
-			  <li>Puedes agregar un medicamento dando click en el dia que inicia, agregar sus datos, y fecha de finalizacion!</li>
-			  <li>Puedes eliminar cualquier medicamento agregado, da click sobre el y en el boton rojo de eliminar!</li>
+				<li>Puedes agregar un medicamento dando click en el dia que inicia, agregar sus datos, y fecha de
+					finalizacion!</li>
+				<li>Puedes eliminar cualquier medicamento agregado, da click sobre el y en el boton rojo de eliminar!
+				</li>
 			</ul>
-		  </div>
+		</div>
 		<div class="one column row">
 			<div id="content" class="col-lg-12">
 				<div id="calendar"></div>
-				<div class="ui modal " id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						
+				<div class="ui modal " id="modal-event" tabindex="-1" role="dialog" aria-labelledby="modal-eventLabel"
+					aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
 
-						<form class="ui form">
-							<div class="field">
-								<label>Nombre</label>
+
+							<form class="ui form">
 								<div class="field">
-									<h5 class="modal-title" id="event-title"></h5>
+									<label>Nombre</label>
+									<div class="field">
+										<h5 class="modal-title" id="event-title"></h5>
+									</div>
 								</div>
+								<div class="field">
+									<label>Descripción</label>
+									<div class="field">
+										<div id="event-description"></div>
+									</div>
+								</div>
+								<div class="field">
+									<label>Fecha Incial</label>
+									<div class="field">
+										<div id="FIni"></div>
+									</div>
+								</div>
+								<div class="field">
+									<label>Fecha Final</label>
+									<div class="field">
+										<div id="FFin"></div>
+									</div>
+								</div>
+
+							</form>
+
+
+
+
+
+
+							<div class="modal-header">
+
+
 							</div>
-							<div class="field">
-								<label>Descripción</label>
-								<div class="field">
-									<div id="event-description"></div>
-								</div>
-							</div>  
-							<div class="field">
-								<label>Fecha Incial</label>
-								<div class="field">
-									<div id="FIni"></div>
-								</div>
+							<div>
+
 							</div>
-							<div class="field">
-								<label>Fecha Final</label>
-								<div class="field">
-									<div id="FFin"></div>
-								</div>
+							<br>
+							<br>
+							<div>
+								<button class="ui red button" id="eliminarev">Eliminar</button>
 							</div>
-		
-						</form>	
+						</div>
 
 
 
 
-
-
-					<div class="modal-header">
-						
-						
 					</div>
-					<div>
-						
-					</div>
-					<br>
-					<br>
-					<div>
-						<button class="ui red button" id="eliminarev">Eliminar</button>
-					</div>
-					</div>
-
-
-
-
 				</div>
-				</div>
-				
+
 			</div>
-		</div>	
+		</div>
 		<br>
 		<br>
 	</div>
@@ -383,10 +388,10 @@
 					¡No olvides tus actividades para mejorar la respuesta al tratamiento!
 				</div>
 				<ul class="list">
-				  <li>Puedes medirlas y evaluarlas!</li>
-				  <li>Tambien puedes ver en el perfil del adulto mayor las actividades mas efectivas!</li>
+					<li>Puedes medirlas y evaluarlas!</li>
+					<li>Tambien puedes ver en el perfil del adulto mayor las actividades mas efectivas!</li>
 				</ul>
-			  </div>
+			</div>
 			<table class="ui celled structured table">
 				<thead>
 					<tr>
@@ -604,11 +609,11 @@
 		<div class="ui relaxed grid" id="criteriosCon">
 			<div class="three column row" id="criteriosInt">
 				<div class="column" id="infoCriCon">
-					<div class="ui info message" >
-					<div class="header" id="Cini">
-						Criterios Iniciales y Finales:
-					</div>
-					
+					<div class="ui info message">
+						<div class="header" id="Cini">
+							Criterios Iniciales y Finales:
+						</div>
+
 						<i class="close icon"></i>
 						<ul class="list" id="conCIniciales">
 
@@ -617,7 +622,7 @@
 				</div>
 
 				<div class="column" id="concluNega">
-					
+
 
 				</div>
 
@@ -647,66 +652,119 @@
 
 
 	<div>
-        <div class="ui modal" id="modCalendario">
-            <div class="header"><i class="calendar alternate outline icon"></i>Agendar Medicamento</div>
-            <div class="content">
-                <form class="ui form">
-                    <div class="field">
-                        <label>Nombre</label>
-                        <div class="field">
-                            <input type="text" id="NombreMedicamento" placeholder="Medicamento">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label>Descripción</label>
-                        <div class="field">
-                            <textarea id="DescripcionMedicamento" rows="4" cols="" placeholder="Descripción Medicamento"></textarea>
-                        </div>
-                    </div>  
-	 
+		<div class="ui modal" id="modCalendario">
+			<div class="header"><i class="calendar alternate outline icon"></i>Agendar Medicamento</div>
+			<div class="content">
+				<form class="ui form">
+					<div class="field">
+						<label>Nombre</label>
+						<div class="field">
+							<input type="text" id="NombreMedicamento" placeholder="Medicamento">
+						</div>
+					</div>
+					<div class="field">
+						<label>Descripción</label>
+						<div class="field">
+							<textarea id="DescripcionMedicamento" rows="4" cols=""
+								placeholder="Descripción Medicamento"></textarea>
+						</div>
+					</div>
+
 					<div class="field" id="Fechas">
-                        
-                    </div> 
-                   
+
+					</div>
+
 					<div class="center aligned">
 						<button class="ui right labeled icon button" id="asigMedi">
 							<i class="right arrow icon"></i>
 							Asignar
 						</button>
-						
+
 
 					</div>
-				</form>	
-                </div>
-            </div>
-        </div>
- 
+				</form>
+			</div>
+		</div>
+	</div>
 
- <!--ruleta-->
-    <div id="ruleta"  > 
-        <div class="ui relaxed grid">
-            <div class="one column row">
-                <div class="column">
-                    <div>                
-                        <textarea id="ListaElementos" class="form-control" rows="13" style="display:none">
+
+	<!--ruleta-->
+	<div id="ruleta">
+		<div class="ui relaxed grid">
+			<div class="one column row">
+				<div class="column">
+					<div>
+						<textarea id="ListaElementos" class="form-control" rows="13" style="display:none">
                         </textarea>
-                        <input type="button" onclick="leerElementos()" class="btn btn-danger btn-lg btn-block" value="Generar Ruleta"/><br />
-                    </div>
-                    <br/>
-                    <input id="bigButton" class="btn-block btn-lg btn btn-success " onclick="objRuleta.startAnimation(); this.disabled=true;" value="Girar" type="button"/>
-                    <div id="canvasContainer" onclick="objRuleta.startAnimation();bigButton.disabled = true;">
-                        <canvas id='Ruleta' width='1000' height='990'>
-                           
-                        </canvas> 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<input type="button" onclick="leerElementos()" class="btn btn-danger btn-lg btn-block"
+							value="Generar Ruleta" /><br />
+					</div>
+					<br />
+					<input id="bigButton" class="btn-block btn-lg btn btn-success "
+						onclick="objRuleta.startAnimation(); this.disabled=true;" value="Girar" type="button" />
+					<div id="canvasContainer" onclick="objRuleta.startAnimation();bigButton.disabled = true;">
+						<canvas id='Ruleta' width='1000' height='990'>
+
+						</canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- AQUI VA LA SECCION COMUNIDAD-->
+	<div id="comunidad">
+		<main>
+			<div id="mainC">
+
+
+				<h1>¡Comentarios comunidad de cuidadores!</h1>
+				<hr class="line">
 
 
 
-	
+
+
+			</div>
+
+			<br>
+			<div class="ui animated button" tabindex="0" onclick="comentarioFuera()">
+				<div class="visible content">Comentar!</div>
+				<div class="hidden content">
+					<i class="comments outline icon"></i>
+				</div>
+			</div>
+
+		</main>
+
+		<div class="capa-data"></div>
+		<div class="container-data">
+			<div class="photo-input" id="nombreC">
+
+
+			</div>
+
+			<textarea class="mensaje" name="" id="mensajeComentar" cols="30" rows="10"
+				placeholder="Escriba su mensaje"></textarea>
+
+			<button class="btn-comment" onclick="comentar()">Comentar</button>
+		</div>
+
+		<div class="container-data2">
+			<div class="photo-input" id="nombreC2">
+
+
+			</div>
+
+			<textarea class="mensaje" name="" id="mensajeComentar2" cols="30" rows="10"
+				placeholder="Escriba su mensaje"></textarea>
+
+			<button class="btn-comment" onclick="comentar2()">Comentar</button>
+		</div>
+
+
+	</div>
+
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -722,12 +780,11 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-<script  src='Js/moment.min.js'></script>
-<script  src='Js/fullcalendar.min.js'></script>
-<script  src='Js/locale/es.js'></script>
+<script src='Js/moment.min.js'></script>
+<script src='Js/fullcalendar.min.js'></script>
+<script src='Js/locale/es.js'></script>
 
 
 <script src="Js/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
 <script src="https://cdn.emailjs.com/dist/email.min.js" type="text/javascript"></script>
-

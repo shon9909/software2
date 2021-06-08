@@ -19,11 +19,13 @@ import com.nonapp.ws.composite.Composite;
 import com.nonapp.ws.factory.entidad;
 import com.nonapp.ws.factory.factory;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
+import com.nonapp.ws.mod.dao.DAOcomentarios;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
 import com.nonapp.ws.mod.dao.DAOeventos;
 import com.nonapp.ws.mod.dao.DAOprogreso2;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
+import com.nonapp.ws.res.VO.VOcomentarios;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOeventos;
 import com.nonapp.ws.res.VO.VOprogreso2;
@@ -141,6 +143,16 @@ public class ServiceRegistro{
 	public String evnetRegistrar(VOeventos eventos) throws SQLException, JSONException{
 		DAOeventos daoeventos=new DAOeventos();
 		String a=daoeventos.registrarEventos(eventos.getTitle(), eventos.getDescription(), eventos.getStart(), eventos.getEnd(), eventos.getColor(), eventos.getTextColor(), eventos.getId_adulto_mayor());
+		return a;
+	
+	}
+	
+	@POST
+	@Path("/Comentarios")
+	@Consumes({MediaType.APPLICATION_JSON})
+	public String comentRegistrar(VOcomentarios comentarios) throws SQLException, JSONException{
+		DAOcomentarios daocomentarios=new DAOcomentarios();
+		String a=daocomentarios.registrarComentario(comentarios.getId_respuesta(), comentarios.getNombre(), comentarios.getFecha(), comentarios.getComentario());
 		return a;
 	
 	}

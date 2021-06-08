@@ -17,6 +17,7 @@ import org.codehaus.jettison.json.JSONTokener;
 
 import com.nonapp.ws.mod.dao.DAOactividades;
 import com.nonapp.ws.mod.dao.DAOadulto_mayor;
+import com.nonapp.ws.mod.dao.DAOcomentarios;
 import com.nonapp.ws.mod.dao.DAOcuidador;
 import com.nonapp.ws.mod.dao.DAOcuidador_has_adultomayor;
 import com.nonapp.ws.mod.dao.DAOdiagnostico;
@@ -24,6 +25,7 @@ import com.nonapp.ws.mod.dao.DAOeventos;
 import com.nonapp.ws.mod.dao.DAOprogreso;
 import com.nonapp.ws.res.VO.VOactividades;
 import com.nonapp.ws.res.VO.VOadulto_mayor;
+import com.nonapp.ws.res.VO.VOcomentarios;
 import com.nonapp.ws.res.VO.VOcuidador;
 import com.nonapp.ws.res.VO.VOdiagnostico;
 import com.nonapp.ws.res.VO.VOeventos;
@@ -129,5 +131,28 @@ public class servicesConsultas {
 		DAOeventos daoeventos=new DAOeventos();
 		String a=daoeventos.eliminarEventos(eventos.getTitle(), eventos.getDescription(), eventos.getStart(), eventos.getEnd(), eventos.getId_adulto_mayor());			
 		return a;
+	}
+	
+	@POST
+	@Path("/ConsultarEvento")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public String ConsultarEvento(VOcomentarios comentarios) throws SQLException, JSONException{
+		DAOcomentarios daocomentarios=new DAOcomentarios();
+		String a=daocomentarios.consultarComentario(comentarios.getNombre(), comentarios.getComentario());
+		return a;
+	}
+	
+	@GET
+	@Path("/ConsultarTotalComentarios")
+	@Produces({MediaType.APPLICATION_JSON})
+	public String ConsultarTotalComents() throws SQLException, JSONException{
+		DAOcomentarios daocomentarios=new DAOcomentarios();
+		String a=daocomentarios.consultarTotalComentarios();
+		if(a.isEmpty()){
+			return "1";
+		}else{
+			return a;
+		}
 	}
 }
