@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2021 a las 06:06:47
+-- Tiempo de generación: 08-06-2021 a las 09:04:38
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -92,13 +92,37 @@ CREATE TABLE `adulto_mayor` (
 --
 
 INSERT INTO `adulto_mayor` (`id_adulto_mayor`, `nombre`, `apellido`, `nacimiento`, `diagnostico`, `id_cuidador`) VALUES
-(163, 'Juan', 'Perez', '2021-04-05', 2, 62),
-(164, 'Karol', 'Bermudez', '2021-04-08', 1, 62),
-(169, 'Carlos Julio', 'Marron Perez', '2020-09-08', 3, 62),
-(170, 'Camila ', 'Franco', '2021-05-02', 4, 62),
-(171, 'a', 'a', '2020-01-01', 1, 65),
-(172, 'asd', 'asd', '2021-04-29', 4, 65),
-(173, 'asd', 'asd', '2021-05-14', 2, 62);
+(176, 'a', 'a', '2020-01-01', 1, 67),
+(177, 'Pedro Ricardo ', 'Mendoza Alvarez', '1964-08-09', 1, 67),
+(179, 'María Camila', 'Miranda Chavez', '1960-10-12', 1, 67),
+(180, 'a', 'a', '2020-01-01', 1, 68),
+(181, 'a', 'a', '2020-01-01', 1, 69),
+(182, 'Sebastian ', 'Ramirez ', '2020-12-18', 1, 69),
+(183, 'El adulto de santi', 'Santi', '1974-06-22', 1, 68),
+(184, 'Josefina ', 'Mendoza Ramirez', '1959-04-24', 2, 67);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `id_respuesta` int(11) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `fecha` varchar(15) DEFAULT NULL,
+  `comentario` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id_comentario`, `id_respuesta`, `nombre`, `fecha`, `comentario`) VALUES
+(44, 0, 'Jorge Javier Mendoza Ramirez', '2021-6-8', 'Me gusta conocer mas de otros diagnósticos, y saber que no estamos solos!'),
+(45, 44, 'Santiago Gutierrez', '2021-6-8', 'Concuerdo contigo!'),
+(46, 45, 'Sebastian Bueno ', '2021-6-8', 'Totalmente!');
 
 -- --------------------------------------------------------
 
@@ -118,8 +142,9 @@ CREATE TABLE `cuidador` (
 --
 
 INSERT INTO `cuidador` (`id_cuidador`, `email`, `nombre`, `password`) VALUES
-(62, 'user', 'user', '12dea96fec20593566ab75692c9949596833adc9'),
-(65, 'asd', 'asd', 'f10e2821bbbea527ea02200352313bc059445190');
+(67, 'jorge_mendoza01@outlook.com', 'Jorge Javier Mendoza Ramirez', 'f1331034b2a878b02bd115ff9e224e3954c4458c'),
+(68, 'santiago.gutierrez02@correo.usa.edu.co', 'Santiago Gutierrez', '792d28329de7ed446c01b83f731a071248ffeaf4'),
+(69, 'juan.bueno01@correo.usa.edu.co', 'Sebastian Bueno ', 'db043b2055cb3a47b2eb0b5aebf4e114a8c24a5a');
 
 -- --------------------------------------------------------
 
@@ -137,13 +162,14 @@ CREATE TABLE `cuidador_has_adultomayor` (
 --
 
 INSERT INTO `cuidador_has_adultomayor` (`id_cuidador`, `id_adulto_mayor`) VALUES
-(62, 163),
-(62, 164),
-(62, 169),
-(62, 170),
-(65, 171),
-(65, 172),
-(62, 173);
+(67, 176),
+(67, 177),
+(67, 179),
+(68, 180),
+(69, 181),
+(69, 182),
+(68, 183),
+(67, 184);
 
 -- --------------------------------------------------------
 
@@ -166,8 +192,34 @@ INSERT INTO `diagnostico` (`id_diagnostico`, `nombre`, `descripcion`) VALUES
 (2, 'Trastorno depresivo recurrente.', 'Cuando hay una recurrencia de un episodio depresivo, hablamos de trastorno depresivo recurrente.'),
 (3, 'Distimia.', 'La distimia se caracteriza por sintomatología depresiva menos severa en comparación con la de un episodio depresivo o del trastorno depresivo recurrente. A pesar de esto, el trastorno se inicia normalmente en la adolescencia y es persistente, ya que los síntomas suelen durar desde al menos 2 años hasta décadas. Algunas personas con este trastorno, a veces sufren adicionalmente episodios depresivos. En estos casos donde aparece distimia + episodios depresivos, se diagnostica doble depresión.'),
 (4, 'Depresión Bipolar.', 'El trastorno afectivo bipolar (trastorno maniaco-depresivo) es un trastorno severo. Es menos frecuente que los trastornos unipolares.\r\nLos pacientes con trastorno bipolar sufren episodios tanto depresivos como maníacos. Los episodios maníacos pueden aparecer después de haber tenido diversos episodios depresivos.'),
-(5, 'Depresión psicótica ', 'Un tipo especial de depresión es la llamada depresión psicótica o delirante. La depresión psicótica se caracteriza por ideas o pensamientos falsos (delirios) y, a veces también por alucinaciones. Los delirios suelen estar centrados en sentimientos de culpa desproporcionados (por ejemplo, \"sólo soy una carga para mi familia\" o \"he cometido un error terrible\").'),
+(5, 'Depresión psicótica.', 'Un tipo especial de depresión es la llamada depresión psicótica o delirante. La depresión psicótica se caracteriza por ideas o pensamientos falsos (delirios) y, a veces también por alucinaciones. Los delirios suelen estar centrados en sentimientos de culpa desproporcionados (por ejemplo, \"sólo soy una carga para mi familia\" o \"he cometido un error terrible\").'),
 (6, 'Depresión atípica.', 'Los pacientes con este tipo de depresión tienen los mismos síntomas depresivos que los pacientes con depresión típica, con dos excepciones: mientras que los pacientes con depresión típica experimentan una falta de apetito (a menudo seguida de una pérdida de peso) y dificultades para dormirse, los pacientes con depresión atípica muestran incremento del apetito y la ingestión de alimentos e incremento de la necesidad de dormir (hipersomnolencia).');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id_evento` int(11) NOT NULL,
+  `title` varchar(60) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `start` varchar(11) DEFAULT NULL,
+  `end` varchar(11) DEFAULT NULL,
+  `color` varchar(1000) DEFAULT NULL,
+  `textColor` varchar(1000) DEFAULT NULL,
+  `id_adulto_mayor` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`id_evento`, `title`, `description`, `start`, `end`, `color`, `textColor`, `id_adulto_mayor`) VALUES
+(30, 'Bupropion.', 'Tableta 150mg, dos dosis cada 6 horas.', '2021-06-02', '2021-06-10', '#99DFBB', '#000000', 177),
+(33, 'Ibuprofeno.', 'ibuprofeno dosis 400 mg cada 8 horas.', '2021-06-01', '2021-06-6', '#99DFBB', '#000000', 184),
+(34, 'Ibuprofeno.', 'Ibuprofeno 400mg cada 6 horas.', '2021-06-01', '2021-06-25', '#99DFBB', '#000000', 182);
 
 -- --------------------------------------------------------
 
@@ -209,7 +261,18 @@ CREATE TABLE `progreso` (
 --
 
 INSERT INTO `progreso` (`id_adulto_mayor`, `id_actividades`, `valoracionIni`, `valoracionFin`, `fecha`) VALUES
-(164, 1, 2, 3.5, '2021-05-07');
+(177, 1, 2.17, 3.33, '2021-06-06'),
+(177, 11, 2, 4, '2021-06-06'),
+(182, 1, 1, 3.2, '2021-06-07'),
+(182, 11, 1.5, 3.17, '2021-06-07'),
+(182, 15, 1, 4, '2021-06-07'),
+(182, 17, 2.6, 3.6, '2021-06-07'),
+(183, 1, 1, 3.6, '2021-06-07'),
+(184, 12, 1.67, 3.17, '2021-06-08'),
+(183, 11, 2.4, 3.2, '2021-06-08'),
+(183, 15, 1.8, 3.2, '2021-06-08'),
+(182, 19, 2.78, 3.67, '2021-06-08'),
+(182, 18, 2.8, 3.4, '2021-06-08');
 
 -- --------------------------------------------------------
 
@@ -231,18 +294,140 @@ CREATE TABLE `progreso2` (
 --
 
 INSERT INTO `progreso2` (`id_criterio`, `descripcion`, `valoracion`, `id_adulto_mayor`, `id_actividades`, `criterio`) VALUES
-(979, '1. Estado de ánimo.', 3, 164, 1, 1),
-(980, '2. Nivel de conciencia emocional ante la situacion.', 2, 164, 1, 1),
-(981, '3. Nivel de Descanso', 1, 164, 1, 1),
-(982, '4. Nivel de interes ante trabajos u actividades.', 1, 164, 1, 1),
-(983, '5. Nivel de serenidad ante las situaciones negativas.', 3, 164, 1, 1),
-(984, '6. prueba x', 2, 164, 1, 1),
-(985, '1. Estado de ánimo.', 4, 164, 1, 2),
-(986, '2. Nivel de conciencia emocional ante la situacion.', 3, 164, 1, 2),
-(987, '3. Nivel de Descanso', 3, 164, 1, 2),
-(988, '4. Nivel de interes ante trabajos u actividades.', 4, 164, 1, 2),
-(989, '5. Nivel de serenidad ante las situaciones negativas.', 3, 164, 1, 2),
-(990, '6. prueba x', 4, 164, 1, 2);
+(1003, '1. Estado de ánimo.', 3, 177, 1, 1),
+(1004, '2. Nivel de conciencia emocional ante la situacion.', 2, 177, 1, 1),
+(1005, '3. Nivel de Descanso', 2, 177, 1, 1),
+(1006, '4. Nivel de interes ante trabajos u actividades.', 3, 177, 1, 1),
+(1007, '5. Nivel de serenidad ante las situaciones negativas.', 2, 177, 1, 1),
+(1008, '6. Nivel de concentracion', 1, 177, 1, 1),
+(1009, '3. Nivel de Descanso', 3, 177, 1, 2),
+(1010, '2. Nivel de conciencia emocional ante la situacion.', 4, 177, 1, 2),
+(1011, '1. Estado de ánimo.', 4, 177, 1, 2),
+(1012, '6. Nivel de concentracion', 3, 177, 1, 2),
+(1013, '5. Nivel de serenidad ante las situaciones negativas.', 3, 177, 1, 2),
+(1014, '4. Nivel de interes ante trabajos u actividades.', 3, 177, 1, 2),
+(1015, '2. Nivel de conciencia emocional ante la situacion.', 2, 177, 11, 1),
+(1016, '4. Nivel de interes ante trabajos u actividades.', 2, 177, 11, 1),
+(1017, '3. Nivel de Descanso', 2, 177, 11, 1),
+(1018, '5. Nivel de serenidad ante las situaciones negativas.', 2, 177, 11, 1),
+(1019, '1. Estado de ánimo.', 2, 177, 11, 1),
+(1020, '3. Nivel de Descanso', 4, 177, 11, 2),
+(1021, '2. Nivel de conciencia emocional ante la situacion.', 4, 177, 11, 2),
+(1022, '5. Nivel de serenidad ante las situaciones negativas.', 4, 177, 11, 2),
+(1023, '1. Estado de ánimo.', 4, 177, 11, 2),
+(1024, '4. Nivel de interes ante trabajos u actividades.', 4, 177, 11, 2),
+(1025, '1. Estado de ánimo.', 1, 182, 1, 1),
+(1026, '2. Nivel de conciencia emocional ante la situacion.', 1, 182, 1, 1),
+(1027, '3. Nivel de Descanso', 1, 182, 1, 1),
+(1028, '5. Nivel de serenidad ante las situaciones negativas.', 1, 182, 1, 1),
+(1029, '4. Nivel de interes ante trabajos u actividades.', 1, 182, 1, 1),
+(1030, '1. Estado de ánimo.', 3, 182, 1, 2),
+(1031, '2. Nivel de conciencia emocional ante la situacion.', 4, 182, 1, 2),
+(1032, '3. Nivel de Descanso', 3, 182, 1, 2),
+(1033, '4. Nivel de interes ante trabajos u actividades.', 2, 182, 1, 2),
+(1034, '5. Nivel de serenidad ante las situaciones negativas.', 4, 182, 1, 2),
+(1035, '1. Estado de ánimo.', 1, 182, 11, 1),
+(1036, '3. Nivel de Descanso', 1, 182, 11, 1),
+(1037, '2. Nivel de conciencia emocional ante la situacion.', 2, 182, 11, 1),
+(1038, '5. Nivel de serenidad ante las situaciones negativas.', 1, 182, 11, 1),
+(1039, '4. Nivel de interes ante trabajos u actividades.', 2, 182, 11, 1),
+(1040, '6. Nivel de concentracion.', 2, 182, 11, 1),
+(1041, '1. Estado de ánimo.', 3, 182, 11, 2),
+(1042, '2. Nivel de conciencia emocional ante la situacion.', 3, 182, 11, 2),
+(1043, '3. Nivel de Descanso', 3, 182, 11, 2),
+(1044, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 11, 2),
+(1045, '5. Nivel de serenidad ante las situaciones negativas.', 2, 182, 11, 2),
+(1046, '6. Nivel de concentracion.', 4, 182, 11, 2),
+(1047, '1. Estado de ánimo.', 1, 182, 15, 1),
+(1048, '2. Nivel de conciencia emocional ante la situacion.', 1, 182, 15, 1),
+(1049, '3. Nivel de Descanso', 1, 182, 15, 1),
+(1050, '4. Nivel de interes ante trabajos u actividades.', 1, 182, 15, 1),
+(1051, '5. Nivel de serenidad ante las situaciones negativas.', 1, 182, 15, 1),
+(1052, '1. Estado de ánimo.', 4, 182, 15, 2),
+(1053, '3. Nivel de Descanso', 4, 182, 15, 2),
+(1054, '2. Nivel de conciencia emocional ante la situacion.', 4, 182, 15, 2),
+(1055, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 15, 2),
+(1056, '5. Nivel de serenidad ante las situaciones negativas.', 4, 182, 15, 2),
+(1057, '1. Estado de ánimo.', 3, 182, 17, 1),
+(1058, '2. Nivel de conciencia emocional ante la situacion.', 3, 182, 17, 1),
+(1059, '3. Nivel de Descanso', 2, 182, 17, 1),
+(1060, '4. Nivel de interes ante trabajos u actividades.', 3, 182, 17, 1),
+(1061, '5. Nivel de serenidad ante las situaciones negativas.', 2, 182, 17, 1),
+(1062, '3. Nivel de Descanso', 3, 182, 17, 2),
+(1063, '1. Estado de ánimo.', 4, 182, 17, 2),
+(1064, '2. Nivel de conciencia emocional ante la situacion.', 4, 182, 17, 2),
+(1065, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 17, 2),
+(1066, '5. Nivel de serenidad ante las situaciones negativas.', 3, 182, 17, 2),
+(1067, '1. Estado de ánimo.', 1, 183, 1, 1),
+(1068, '2. Nivel de conciencia emocional ante la situacion.', 1, 183, 1, 1),
+(1069, '3. Nivel de Descanso', 1, 183, 1, 1),
+(1070, '4. Nivel de interes ante trabajos u actividades.', 1, 183, 1, 1),
+(1071, '5. Nivel de serenidad ante las situaciones negativas.', 1, 183, 1, 1),
+(1072, '1. Estado de ánimo.', 4, 183, 1, 2),
+(1073, '2. Nivel de conciencia emocional ante la situacion.', 3, 183, 1, 2),
+(1074, '5. Nivel de serenidad ante las situaciones negativas.', 4, 183, 1, 2),
+(1075, '4. Nivel de interes ante trabajos u actividades.', 3, 183, 1, 2),
+(1076, '3. Nivel de Descanso', 4, 183, 1, 2),
+(1077, '1. Estado de ánimo.', 1, 184, 12, 1),
+(1078, '2. Nivel de conciencia emocional ante la situacion.', 2, 184, 12, 1),
+(1079, '3. Nivel de Descanso', 2, 184, 12, 1),
+(1080, '4. Nivel de interes ante trabajos u actividades.', 1, 184, 12, 1),
+(1081, '5. Nivel de serenidad ante las situaciones negativas.', 1, 184, 12, 1),
+(1082, '6. Nivel de concentracion.', 3, 184, 12, 1),
+(1083, '1. Estado de ánimo.', 4, 184, 12, 2),
+(1084, '3. Nivel de Descanso', 3, 184, 12, 2),
+(1085, '2. Nivel de conciencia emocional ante la situacion.', 3, 184, 12, 2),
+(1086, '4. Nivel de interes ante trabajos u actividades.', 3, 184, 12, 2),
+(1087, '6. Nivel de concentracion.', 2, 184, 12, 2),
+(1088, '5. Nivel de serenidad ante las situaciones negativas.', 4, 184, 12, 2),
+(1089, '1. Estado de ánimo.', 3, 183, 11, 1),
+(1090, '2. Nivel de conciencia emocional ante la situacion.', 2, 183, 11, 1),
+(1091, '3. Nivel de Descanso', 2, 183, 11, 1),
+(1092, '4. Nivel de interes ante trabajos u actividades.', 2, 183, 11, 1),
+(1093, '5. Nivel de serenidad ante las situaciones negativas.', 3, 183, 11, 1),
+(1094, '1. Estado de ánimo.', 3, 183, 11, 2),
+(1095, '2. Nivel de conciencia emocional ante la situacion.', 3, 183, 11, 2),
+(1096, '5. Nivel de serenidad ante las situaciones negativas.', 4, 183, 11, 2),
+(1097, '4. Nivel de interes ante trabajos u actividades.', 3, 183, 11, 2),
+(1098, '3. Nivel de Descanso', 3, 183, 11, 2),
+(1099, '1. Estado de ánimo.', 2, 183, 15, 1),
+(1100, '2. Nivel de conciencia emocional ante la situacion.', 2, 183, 15, 1),
+(1101, '3. Nivel de Descanso', 2, 183, 15, 1),
+(1102, '4. Nivel de interes ante trabajos u actividades.', 1, 183, 15, 1),
+(1103, '5. Nivel de serenidad ante las situaciones negativas.', 2, 183, 15, 1),
+(1104, '3. Nivel de Descanso', 4, 183, 15, 2),
+(1105, '1. Estado de ánimo.', 3, 183, 15, 2),
+(1106, '5. Nivel de serenidad ante las situaciones negativas.', 3, 183, 15, 2),
+(1107, '4. Nivel de interes ante trabajos u actividades.', 3, 183, 15, 2),
+(1108, '2. Nivel de conciencia emocional ante la situacion.', 3, 183, 15, 2),
+(1109, '1. Estado de ánimo.', 2, 182, 19, 1),
+(1110, '3. Nivel de Descanso', 3, 182, 19, 1),
+(1111, '2. Nivel de conciencia emocional ante la situacion.', 2, 182, 19, 1),
+(1112, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 19, 1),
+(1113, '1. Estado de ánimo.', 2, 182, 19, 1),
+(1114, '2. Nivel de conciencia emocional ante la situacion.', 2, 182, 19, 1),
+(1115, '3. Nivel de Descanso', 3, 182, 19, 1),
+(1116, '5. Nivel de serenidad ante las situaciones negativas.', 3, 182, 19, 1),
+(1117, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 19, 1),
+(1118, '1. Estado de ánimo.', 3, 182, 19, 2),
+(1119, '2. Nivel de conciencia emocional ante la situacion.', 3, 182, 19, 2),
+(1120, '2. Nivel de conciencia emocional ante la situacion.', 4, 182, 19, 2),
+(1121, '1. Estado de ánimo.', 4, 182, 19, 2),
+(1122, '3. Nivel de Descanso', 4, 182, 19, 2),
+(1123, '3. Nivel de Descanso', 3, 182, 19, 2),
+(1124, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 19, 2),
+(1125, '4. Nivel de interes ante trabajos u actividades.', 4, 182, 19, 2),
+(1126, '5. Nivel de serenidad ante las situaciones negativas.', 4, 182, 19, 2),
+(1127, '1. Estado de ánimo.', 3, 182, 18, 1),
+(1128, '2. Nivel de conciencia emocional ante la situacion.', 3, 182, 18, 1),
+(1129, '3. Nivel de Descanso', 4, 182, 18, 1),
+(1130, '4. Nivel de interes ante trabajos u actividades.', 2, 182, 18, 1),
+(1131, '5. Nivel de serenidad ante las situaciones negativas.', 2, 182, 18, 1),
+(1132, '1. Estado de ánimo.', 4, 182, 18, 2),
+(1133, '3. Nivel de Descanso', 3, 182, 18, 2),
+(1134, '2. Nivel de conciencia emocional ante la situacion.', 4, 182, 18, 2),
+(1135, '4. Nivel de interes ante trabajos u actividades.', 3, 182, 18, 2),
+(1136, '5. Nivel de serenidad ante las situaciones negativas.', 3, 182, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -290,6 +475,12 @@ ALTER TABLE `adulto_mayor`
   ADD KEY `diagnostico` (`diagnostico`);
 
 --
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`);
+
+--
 -- Indices de la tabla `cuidador`
 --
 ALTER TABLE `cuidador`
@@ -307,6 +498,13 @@ ALTER TABLE `cuidador_has_adultomayor`
 --
 ALTER TABLE `diagnostico`
   ADD PRIMARY KEY (`id_diagnostico`);
+
+--
+-- Indices de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id_evento`),
+  ADD KEY `id_adulto_mayor` (`id_adulto_mayor`);
 
 --
 -- Indices de la tabla `potencia`
@@ -355,19 +553,31 @@ ALTER TABLE `actualizacion`
 -- AUTO_INCREMENT de la tabla `adulto_mayor`
 --
 ALTER TABLE `adulto_mayor`
-  MODIFY `id_adulto_mayor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id_adulto_mayor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `cuidador`
 --
 ALTER TABLE `cuidador`
-  MODIFY `id_cuidador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_cuidador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `diagnostico`
 --
 ALTER TABLE `diagnostico`
   MODIFY `id_diagnostico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `potencia`
@@ -379,7 +589,7 @@ ALTER TABLE `potencia`
 -- AUTO_INCREMENT de la tabla `progreso2`
 --
 ALTER TABLE `progreso2`
-  MODIFY `id_criterio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=991;
+  MODIFY `id_criterio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1137;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`
@@ -410,6 +620,12 @@ ALTER TABLE `adulto_mayor`
 ALTER TABLE `cuidador_has_adultomayor`
   ADD CONSTRAINT `cuidador_has_adultomayor_ibfk_1` FOREIGN KEY (`id_cuidador`) REFERENCES `cuidador` (`id_cuidador`),
   ADD CONSTRAINT `cuidador_has_adultomayor_ibfk_2` FOREIGN KEY (`id_adulto_mayor`) REFERENCES `adulto_mayor` (`id_adulto_mayor`);
+
+--
+-- Filtros para la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `eventos_ibfk_1` FOREIGN KEY (`id_adulto_mayor`) REFERENCES `adulto_mayor` (`id_adulto_mayor`);
 
 --
 -- Filtros para la tabla `progreso`
